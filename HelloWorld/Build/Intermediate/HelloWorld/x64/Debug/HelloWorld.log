@@ -1,0 +1,30 @@
+﻿  Creature.cpp
+  GameManager.cpp
+  GameState.cpp
+  MainGame.cpp
+  SplashState.cpp
+\\mac\Home\Documents\CGCode\playbuffer\HelloWorld\SplashState.cpp(116,24): warning C5054: operator '==': deprecated between enumerations of different types
+\\mac\Home\Documents\CGCode\playbuffer\HelloWorld\GameManager.cpp(40,3): warning C5205: delete of an abstract class 'GameState' that has a non-virtual destructor results in undefined behavior
+      \\mac\Home\Documents\CGCode\playbuffer\HelloWorld\GameState.h(7,7):
+      see declaration of 'GameState'
+  
+\\mac\Home\Documents\CGCode\playbuffer\HelloWorld\MainGame.cpp(58,1): warning C4702: unreachable code
+MainGame.obj : error LNK2005: "int DISPLAY_WIDTH" (?DISPLAY_WIDTH@@3HA) already defined in GameManager.obj
+MainGame.obj : error LNK2005: "int DISPLAY_HEIGHT" (?DISPLAY_HEIGHT@@3HA) already defined in GameManager.obj
+MainGame.obj : error LNK2005: "int DISPLAY_SCALE" (?DISPLAY_SCALE@@3HA) already defined in GameManager.obj
+MainGame.obj : error LNK2005: "int DISPLAY_TILE" (?DISPLAY_TILE@@3HA) already defined in GameManager.obj
+MainGame.obj : error LNK2005: "float SPLASH_TIMELIMIT" (?SPLASH_TIMELIMIT@@3MA) already defined in GameManager.obj
+MainGame.obj : error LNK2005: "float PLAY_TIMETAKEN" (?PLAY_TIMETAKEN@@3MA) already defined in GameManager.obj
+GameState.obj : error LNK2005: "int DISPLAY_WIDTH" (?DISPLAY_WIDTH@@3HA) already defined in GameManager.obj
+GameState.obj : error LNK2005: "int DISPLAY_HEIGHT" (?DISPLAY_HEIGHT@@3HA) already defined in GameManager.obj
+GameState.obj : error LNK2005: "int DISPLAY_SCALE" (?DISPLAY_SCALE@@3HA) already defined in GameManager.obj
+GameState.obj : error LNK2005: "int DISPLAY_TILE" (?DISPLAY_TILE@@3HA) already defined in GameManager.obj
+GameState.obj : error LNK2005: "float SPLASH_TIMELIMIT" (?SPLASH_TIMELIMIT@@3MA) already defined in GameManager.obj
+GameState.obj : error LNK2005: "float PLAY_TIMETAKEN" (?PLAY_TIMETAKEN@@3MA) already defined in GameManager.obj
+SplashState.obj : error LNK2005: "int DISPLAY_WIDTH" (?DISPLAY_WIDTH@@3HA) already defined in GameManager.obj
+SplashState.obj : error LNK2005: "int DISPLAY_HEIGHT" (?DISPLAY_HEIGHT@@3HA) already defined in GameManager.obj
+SplashState.obj : error LNK2005: "int DISPLAY_SCALE" (?DISPLAY_SCALE@@3HA) already defined in GameManager.obj
+SplashState.obj : error LNK2005: "int DISPLAY_TILE" (?DISPLAY_TILE@@3HA) already defined in GameManager.obj
+SplashState.obj : error LNK2005: "float SPLASH_TIMELIMIT" (?SPLASH_TIMELIMIT@@3MA) already defined in GameManager.obj
+SplashState.obj : error LNK2005: "float PLAY_TIMETAKEN" (?PLAY_TIMETAKEN@@3MA) already defined in GameManager.obj
+\\Mac\Home\Documents\CGCode\playbuffer\HelloWorld\Build\x64\Debug\HelloWorld.exe : fatal error LNK1169: one or more multiply defined symbols found
