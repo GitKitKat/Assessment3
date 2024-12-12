@@ -202,13 +202,13 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Play.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="NPC.h" />
+    <ClInclude Include="Play.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

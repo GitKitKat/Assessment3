@@ -2,9 +2,7 @@
 
 Player::Player() {
 
-	//playerFile = "player1";
-	playerXpos = 200;
-	playerYpos = 200;
+	playerPos = { 0.0f, 0.0f };
 
 }
 
@@ -14,16 +12,34 @@ Player::~Player() {
 
 }
 
-void Player::SetPosition(int xPos, int yPos) {
+void Player::SetPosition(Play::Point2D userPos) {
 
-	playerXpos = xPos;
-	playerYpos = yPos;
+	playerPos = userPos;
 
 }
 
-/*void Player::HandleControls() {
+void Player::SetColour(Play::Colour arr[], int newColour) {
 
-//	GameObject& obj_player = Play::GetGameObjectByType(TYPE_PLAYER);
+	playerColour[0] = arr[newColour];
+
+}
+
+void Player::DrawPlayer() {
+
+	//Play::DrawSprite("player1_still", playerPos, 0);
+	Play::DrawRect(playerPos, { playerPos.x + float(DISPLAY_TILE), playerPos.y + float(DISPLAY_TILE) }, playerColour[0], true);
+	for (int i = 10; i > 0; i--) {
+
+		Play::DrawCircle({ playerPos.x + float(DISPLAY_TILE * 0.5), playerPos.y + float(DISPLAY_TILE * 0.5) }, i, Play::cBlack);
+
+	}
+	
+
+}
+
+/*void HandleControls() {
+
+	GameObject& obj_player = Play::GetGameObjectByType(TYPE_PLAYER);
 
 	if (Play::KeyDown(Play::KEY_SHIFT)) {
 

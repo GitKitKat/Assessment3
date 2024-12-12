@@ -14,7 +14,7 @@
 [End]
 
 [Trophy]
-(Name)[]
-(Sprite)[]
-(Desc)
+(Name)[Rookie Puzzler]
+(Desc)Achieved after completing the game on EASY mode.
 [End]
+

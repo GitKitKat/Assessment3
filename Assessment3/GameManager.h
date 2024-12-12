@@ -84,9 +84,9 @@ private:
 	
 	bool visibleCutscenes; // true = on
 	GameDifficulty currentDifficulty;
-	int currentPlaySprite;
-	std::string playerSprite[3] = { "player1_portrait", "player2_portrait", "player3_portrait" }; // rotate between player sprites
-	// variable or function to adjust volume
+	int currentPlayerColour;
+	Play::Colour playerColours[3] = { Play::cCyan, Play::cMagenta, Play::cOrange }; // rotate between player sprites
+	float gameVolume;
 
 	std::vector<std::string> MainMenu = { "NEW GAME", "OPTIONS", "TROPHIES", "EXIT" };
 	std::vector<std::string> OptionMenu = { "VOLUME", "CUTSCENES", "DIFFICULTY", "PLAYER" };

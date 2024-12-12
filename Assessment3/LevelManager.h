@@ -13,7 +13,7 @@ public:
 	LevelManager();
 	~LevelManager();
 
-	void GetLevel();
+	Play::Point2D GetLevel();
 	void LoadLevel();
 
 	void SetLevel(int newLevel);
@@ -28,7 +28,7 @@ private:
 	// This variable stores each whole line read from the text file.
 	std::string newLine = "";
 
-	Play::Point2D startPos = { 0.0f, 0.0f };
+	Play::Point2D startPos;
 
 	std::string TextFile = "Data\\Textfiles\\Levels.txt";
 	bool levelFound = false;

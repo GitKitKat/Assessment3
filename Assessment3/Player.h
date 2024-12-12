@@ -13,17 +13,17 @@ public:
 	Player();
 	~Player();
 
-	//void SetPosition(int xPos, int yPos);
+	void SetPosition(Play::Point2D userPos);
+	void SetColour(Play::Colour arr[], int newColour);
+
+	void DrawPlayer();
 
 	//void HandleControls();
 
 private: 
 
-	int playerXpos;
-	int playerYpos;
-	
-
-	Play::CreateGameObject(TYPE_PLAYER, { 115,600 }, 50, 'player1');
+	Play::Point2D playerPos;
+	Play::Colour playerColour[1] = { Play::cWhite };
 
 };
 

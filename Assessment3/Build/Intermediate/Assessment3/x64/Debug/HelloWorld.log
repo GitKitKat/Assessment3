@@ -1,0 +1,9 @@
+﻿  Creature.cpp
+  Enemy.cpp
+  GameManager.cpp
+  LevelManager.cpp
+  MainGame.cpp
+  NPC.cpp
+  Player.cpp
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\MainGame.cpp(40,1): warning C4715: 'MainGameUpdate': not all control paths return a value
+  HelloWorld.vcxproj -> C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe

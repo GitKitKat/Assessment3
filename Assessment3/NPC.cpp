@@ -14,13 +14,19 @@ NPC::~NPC() {
 
 }
 
-void NPC::loadDialogue() {
+void NPC::SetName() {
 
 
 
 }
 
-void NPC::printDialogue() {
+void NPC::LoadDialogue() {
+
+
+
+}
+
+void NPC::PrintDialogue() {
 
 
 

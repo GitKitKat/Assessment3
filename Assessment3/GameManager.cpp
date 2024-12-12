@@ -11,10 +11,11 @@ GameManager::GameManager() {
 	screenTimer = 0;
 	carouselIndex = 0;
 	inactiveGame = false;
+	gameVolume = 1.0f;
 
 	visibleCutscenes = true;
 	currentDifficulty = EASY;
-	currentPlaySprite = 1;
+	currentPlayerColour = 1;
 
 	currentGameScreen = SPLASH;
 	currentMainMenuOption = START;
@@ -33,10 +34,13 @@ GameManager::~GameManager() {
 
 void GameManager::PlayGame(float elapsedTime) {
 
-	currentLevel->GetLevel();
+	Play::Point2D userPos = currentLevel->GetLevel();
 	screenTimer += elapsedTime;
 
-	currentPlayer->
+	currentPlayer->SetPosition(userPos);
+	currentPlayer->DrawPlayer();
+
+	Play::PresentDrawingBuffer();
 
 }
 
@@ -108,18 +112,16 @@ void GameManager::ScreenTips(float elapsedTime) {
 int GameManager::MenuInteraction(int optionValue, int maxValue) {
 
 	float j = 50 * (4 / 2);
-	Play::DrawFontText("32px", "---->", { (DISPLAY_WIDTH / 2) - 50.0f, (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
+	Play::DrawFontText("72px", "+", { (DISPLAY_WIDTH / 2) - 50.0f, (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
 
 	if (Play::KeyPressed(Play::KEY_W) && optionValue != 0) {
 
 		optionValue--;
-		//currentOptionMenuOption = OptionScreen(i);
 
 	}
 	else if (Play::KeyPressed(Play::KEY_S) && optionValue != maxValue) {
 
 		optionValue++;
-		//currentOptionMenuOption = OptionScreen(i);
 
 	}
 
@@ -130,7 +132,7 @@ int GameManager::MenuInteraction(int optionValue, int maxValue) {
 void GameManager::MenuInteraction(int optionValue, int maxValue, GameScreen newScreen) {
 
 	float j = 50 * (4 / 2);
-	Play::DrawFontText("32px", "---->", { (DISPLAY_WIDTH / 2) - 50.0f, (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
+	Play::DrawFontText("72px", "+", { (DISPLAY_WIDTH / 2) - 50.0f, (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
 
 	if (Play::KeyPressed(Play::KEY_W) && currentMainMenuOption != 0) {
 
@@ -217,6 +219,8 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 		Play::DrawFontText("72px", "OPTIONS", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 200 }, Play::CENTRE);
 		DrawOptions(OptionMenu);
 		Play::DrawRect({ (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 2), (DISPLAY_HEIGHT / 2) - (DISPLAY_TILE * PLAYER) }, { (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 3), (DISPLAY_HEIGHT / 2) - (DISPLAY_TILE * PLAYER) + DISPLAY_TILE }, Play::cWhite, false);
+		currentPlayer->SetPosition({ (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 2), (DISPLAY_HEIGHT / 2) - (DISPLAY_TILE * PLAYER) });
+		currentPlayer->DrawPlayer();
 
 		currentOptionMenuOption = OptionScreen(MenuInteraction(int(currentOptionMenuOption), int(OPTION_BACK)));
 
@@ -226,7 +230,16 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
-				// volume adjust
+				if (gameVolume > 0.25f) {
+
+					gameVolume -= 0.25f;
+
+				}
+				else {
+
+					gameVolume = 1.0f;
+
+				}
 
 			}
 
@@ -275,16 +288,18 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
-				if (currentPlaySprite < 3) {
+				if (currentPlayerColour < 3) {
 
-					currentPlaySprite++;
+					currentPlayerColour++;
 
 				}
 				else {
 
-					currentPlaySprite = 1;
+					currentPlayerColour = 1;
 
 				}
+
+				currentPlayer->SetColour(playerColours, currentPlayerColour);
 
 			}
 
@@ -334,7 +349,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 		PlayGame(elapsedTime);
 
-		if (Play::KeyPressed(Play::KEY_SPACE)) {
+		if (Play::KeyPressed(Play::KEY_ESCAPE)) {
 			
 			Play::ClearDrawingBuffer(Play::cBlack);
 
@@ -343,7 +358,10 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 			screenTimer = 0.0f;
 
 			delete currentLevel;
+			delete currentPlayer;
 			currentLevel = nullptr;
+			currentPlayer = nullptr;
+			inactiveGame = true;
 
 		}
 

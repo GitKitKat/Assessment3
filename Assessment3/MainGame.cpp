@@ -28,26 +28,16 @@ void MainGameEntry(PLAY_IGNORE_COMMAND_LINE) {
 bool MainGameUpdate(float elapsedTime) {
 
 	bool inactiveCheck = newGame->ScreenUpdate(elapsedTime);
-	if (inactiveCheck == true) {
+	if (inactiveCheck) {
 
 		return true;
 
 	}
 
 // Program is closed when ESC key is pressed
-	return Play::KeyDown(KEY_ESCAPE);
+	//return Play::KeyDown(KEY_ESCAPE);
 
 }
-
-// consider encapsulation (Game object, Player object, Trap object, Enemy object)
-	// Grid is drawn
-
-	// Handles player input
-	// note player inputs (up, down, left, right)	
-
-	// Player is drawn
-	// note player X & Y
-
 
 // Gets called once when the player quits the game 
 int MainGameExit(void) {

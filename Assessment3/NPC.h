@@ -9,8 +9,10 @@ public:
 	NPC();
 	~NPC();
 
-	void loadDialogue();
-	void printDialogue();
+	void LoadDialogue();
+
+	void SetName();
+	void PrintDialogue();
 
 private:
 

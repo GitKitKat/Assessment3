@@ -7,16 +7,11 @@ LevelManager::LevelManager() {
 	levelIndex = "1";
 	difficulty = 1;
 	levelTiles.push_back("");
+	startPos = { 0.0f, 0.0f };
 
 }
 
 LevelManager::~LevelManager() {
-
-
-
-}
-
-void LevelManager::GetStartPosition() {
 
 
 
@@ -106,8 +101,8 @@ void LevelManager::PrintLevel() {
 			}
 			else if (str.at(j) == 'X') {
 
-				//startPos[0] = 0 + (DISPLAY_TILE * j);
 				//entrance
+				startPos = { float((0 + (DISPLAY_TILE * j))), float((0 + (DISPLAY_TILE * i))) };
 				Play::DrawRect({ 0 + (DISPLAY_TILE * j), 0 + (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cBlue, true);
 
 			}
@@ -141,13 +136,13 @@ void LevelManager::PrintLevel() {
 
 }
 
-void LevelManager::GetLevel() {
+Play::Point2D LevelManager::GetLevel() {
 
 	Play::ClearDrawingBuffer(Play::cBlack);
 
 	LoadLevel();
 	PrintLevel();
 
-	Play::PresentDrawingBuffer();
+	return startPos;
 
 }

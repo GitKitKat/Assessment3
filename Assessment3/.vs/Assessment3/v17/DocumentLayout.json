@@ -1,12 +1,243 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:GameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\MainGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:MainGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\NPC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:NPC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\LevelManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:LevelManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\LevelManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:LevelManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Play.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:Play.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Creature.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:Creature.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Creature.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:Creature.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Config.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAEC8BC2-BFFE-4FA7-B7E2-66D1227EBD13}|HelloWorld.vcxproj|solutionrelative:Config.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 11,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Config.h",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Config.h",
+              "RelativeDocumentMoniker": "Config.h",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Config.h",
+              "RelativeToolTip": "Config.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T14:42:03.569Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Play.h",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Play.h",
+              "RelativeDocumentMoniker": "Play.h",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Play.h",
+              "RelativeToolTip": "Play.h",
+              "ViewState": "AgIAAEkPAAAAAAAAAAAAAFEPAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T17:41:20.551Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Player.h",
+              "RelativeDocumentMoniker": "Player.h",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Player.h",
+              "RelativeToolTip": "Player.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T17:38:24.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Player.cpp",
+              "RelativeDocumentMoniker": "Player.cpp",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Player.cpp",
+              "RelativeToolTip": "Player.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T17:38:36.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "NPC.h",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\NPC.h",
+              "RelativeDocumentMoniker": "NPC.h",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\NPC.h",
+              "RelativeToolTip": "NPC.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T18:30:12.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NPC.cpp",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\NPC.cpp",
+              "RelativeDocumentMoniker": "NPC.cpp",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\NPC.cpp",
+              "RelativeToolTip": "NPC.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T17:38:35.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Creature.cpp",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Creature.cpp",
+              "RelativeDocumentMoniker": "Creature.cpp",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Creature.cpp",
+              "RelativeToolTip": "Creature.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T17:38:26.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Creature.h",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Creature.h",
+              "RelativeDocumentMoniker": "Creature.h",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\Creature.h",
+              "RelativeToolTip": "Creature.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T17:38:17.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LevelManager.h",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\LevelManager.h",
+              "RelativeDocumentMoniker": "LevelManager.h",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\LevelManager.h",
+              "RelativeToolTip": "LevelManager.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T14:57:28.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LevelManager.cpp",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\LevelManager.cpp",
+              "RelativeDocumentMoniker": "LevelManager.cpp",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\LevelManager.cpp",
+              "RelativeToolTip": "LevelManager.cpp",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAAAGgAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T14:57:25.131Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GameManager.h",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\GameManager.h",
+              "RelativeDocumentMoniker": "GameManager.h",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\GameManager.h",
+              "RelativeToolTip": "GameManager.h",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAFcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-12T17:38:20.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameManager.cpp",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\GameManager.cpp",
+              "RelativeDocumentMoniker": "GameManager.cpp",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\GameManager.cpp",
+              "RelativeToolTip": "GameManager.cpp",
+              "ViewState": "AgIAAFABAAAAAAAAAAAAAGEBAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T14:41:59.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainGame.cpp",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\MainGame.cpp",
+              "RelativeDocumentMoniker": "MainGame.cpp",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\CGCode\\Assessment3\\Assessment3\\MainGame.cpp",
+              "RelativeToolTip": "MainGame.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-12T17:38:34.543Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
