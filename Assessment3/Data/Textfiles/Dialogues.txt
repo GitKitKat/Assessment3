@@ -1,0 +1,205 @@
+[Dialogue]
+(NPC)[Duck]
+(ID)[0]
+(Line)You're finally here.
+(Line)I've been waiting.
+(Choice)Who are you?
+(Choice)...
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[1]
+(Stat)+
+(Line)I am the Empire's Tenth Shadow, Guardian of the White World.
+(Line)The one who requested you.
+(Choice)I saw 'Duck' on the request form.
+(Choice)...
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[1]
+(Line)You may refer to me as such.
+(Line)If you are curious, I can explain the intricacies behind this moniker.
+(Line)However, it will take many hours.
+(Choice)I've got time.
+(Choice)Nevermind.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[1]
+(Line)I was joking.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[1]
+(Line)However, there is a small problem...
+(Line)One of the ritual's core components was stolen.
+(Line)It will take time to retrieve, and even longer to replace if it is unwhole. 
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[2]
+(Line)As such, I will not hold you.
+(Line)Rest assured I will pay the cancellation fee properly.
+(Choice)Goodbye then.
+(Choice)Wait, I'll help you.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[2]
+(Line)May the Empire's light pave your way.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[2]
+(Line)Very well.
+(Line)For the cost of your time, you will be rewarded in addition what we agreed on.
+(Line)I will append this to our contract promptly, so you may prepare in the meanwhile.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[2]
+(Line)The new request is simply to retrieve the component.
+(Line)According to my tracking spell, it is currently in the depths of this ruin.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[2]
+(Line)There may be others in your path. Adventurers, researchers, fugitives...
+(Choice)Is that all?
+(Choice)I understand.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[2]
+(Line)No, there's more.
+(Line)Although the Rock-Crested Ruins have been explored many a time, no one has uncovered every inch.
+(Line)Some troublesome traps may still be active.
+(Line)Beware of colourful flooring.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[2]
+(Line)The Empire awaits your success.
+[End]
+
+[Dialogue]
+(NPC)[Betting Guard]
+(ID)[0]
+(Line)Hold it right there.
+(Line)I've got an odd feeling about you. Why's that?
+(Choice)We've met before.
+(Choice)I want to pass.
+[End]
+
+[Dialogue]
+(NPC)[Betting Guard]
+(ID)[1.1]
+(Line)Uh-huh, and I'm Robin Hood.
+[End]
+
+[Dialogue]
+(NPC)[Betting Guard]
+(ID)[1.2]
+(Line)No can do.
+[End]
+
+[Dialogue]
+(NPC)[Betting Guard]
+(ID)[2.1]
+(Line)Scram.
+[End]
+
+[Dialogue]
+(NPC)[Betting Guard]
+(ID)[2.2]
+(Line)Hm.
+(Line)Hmm...
+[End]
+
+[Dialogue]
+(NPC)[Betting Guard]
+(ID)[2.2]
+(Line)Your coin pouch looks a little heavy...
+(Line)Lemme help with that.
+(Choice)Gamble with the guard.
+(Choice)Leave.
+[End]
+
+[Dialogue]
+(NPC)[King Pompu]
+(ID)[0]
+(Line)Guhahahaha!
+(Line)The crystallization of chaos is mine!
+(Choice)Who are you?!
+(Choice)Return the orb!
+[End]
+
+[Dialogue]
+(NPC)[King Pompu]
+(ID)[0]
+(Line)You didn't even notice you were being followed by the great Pompu.
+(Line)The Empire must be getting soft!
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[0]
+(Line)It is you who is softening, 'king' Pompu.
+(Line)That is not the orb you seek.
+(Choice)What do you mean?
+(Choice)Then what of the request?
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[0]
+(Line)Do not worry. Your efforts will not go unrecognized.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[0]
+(Line)As I said, 'that' is not what you thought.
+(Line)It is a device made to restrain dangerous individuals.
+[End]
+
+[Dialogue]
+(NPC)[King Pompu]
+(ID)[0]
+(Line)You tricked me! You shameless liar!
+(Line)Release me this instant!!
+(Choice)The pot calls the kettle black...
+(Choice)Pants on fire!
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[0]
+(Line)It's no use, so cease your struggles.
+(Line)As for you, mercenary, I have cleared a path to the exit.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[0]
+(Line)May the Empire's light pave your way.
+[End]
+
+[Dialogue]
+(NPC)[Duck]
+(ID)[0]
+(Line)You have not won here, shadow.
+(Line)This is not the end!
+[End]

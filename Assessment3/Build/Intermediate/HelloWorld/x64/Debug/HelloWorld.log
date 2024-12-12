@@ -1,0 +1,119 @@
+﻿  Creature.cpp
+  Enemy.cpp
+  GameManager.cpp
+  LevelManager.cpp
+  MainGame.cpp
+  NPC.cpp
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,8): error C2039: 'CreateGameObject': is not a member of 'Play'
+  (compiling source file 'GameManager.cpp')
+      C:\Mac\Home\Documents\CGCode\Assess3\Play.h(1757,11):
+      see declaration of 'Play'
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,25): error C2059: syntax error: 'constant'
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,28): error C2143: syntax error: missing ')' before '{'
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,8): warning C4183: 'CreateGameObject': missing return type; assumed to be a member function returning 'int'
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,39): error C2059: syntax error: ','
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,45): error C2015: too many characters in constant
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,54): error C2059: syntax error: ')'
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,55): error C2238: unexpected token(s) preceding ';'
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,38): error C2143: syntax error: missing ';' before '}'
+  (compiling source file 'GameManager.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\GameManager.cpp(41,1): error C2059: syntax error: '}'
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\GameManager.cpp(43,56): error C2039: 'myVector': is not a member of 'Player'
+      C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(10,7):
+      see declaration of 'Player'
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\LevelManager.cpp(19,20): error C2039: 'GetStartPosition': is not a member of 'LevelManager'
+      C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\LevelManager.h(10,7):
+      see declaration of 'LevelManager'
+  
+  Player.cpp
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,25): error C2059: syntax error: 'constant'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,28): error C2143: syntax error: missing ')' before '{'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,8): error C2838: 'CreateGameObject': illegal qualified name in member declaration
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,30): error C2059: syntax error: 'constant'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,38): error C2143: syntax error: missing ';' before '}'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,38): error C2238: unexpected token(s) preceding ';'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,39): error C2059: syntax error: ','
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,45): error C2015: too many characters in constant
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,54): error C2059: syntax error: ')'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(28,1): error C2059: syntax error: '}'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(28,1): error C2143: syntax error: missing ';' before '}'
+  (compiling source file 'MainGame.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,8): error C2039: 'CreateGameObject': is not a member of 'Play'
+  (compiling source file 'Player.cpp')
+      C:\Mac\Home\Documents\CGCode\Assess3\Play.h(1757,11):
+      see declaration of 'Play'
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,25): error C2059: syntax error: 'constant'
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,28): error C2143: syntax error: missing ')' before '{'
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,8): warning C4183: 'CreateGameObject': missing return type; assumed to be a member function returning 'int'
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,39): error C2059: syntax error: ','
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,45): error C2015: too many characters in constant
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,54): error C2059: syntax error: ')'
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,55): error C2238: unexpected token(s) preceding ';'
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(26,38): error C2143: syntax error: missing ';' before '}'
+  (compiling source file 'Player.cpp')
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.cpp(17,14): error C2039: 'SetPosition': is not a member of 'Player'
+      C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.h(10,7):
+      see declaration of 'Player'
+  
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.cpp(19,2): error C2065: 'playerXpos': undeclared identifier
+C:\Mac\Home\Documents\CGCode\Assess3\HelloWorld\Player.cpp(20,2): error C2065: 'playerYpos': undeclared identifier

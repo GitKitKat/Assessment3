@@ -1,0 +1,20 @@
+[Character]
+(Name)[Duck]
+(Sprite)[]
+[End]
+
+[Character]
+(Name)[Betting Guard]
+(Sprite)[]
+[End]
+
+[Character]
+(Name)[King Pompu]
+(Sprite)[]
+[End]
+
+[Trophy]
+(Name)[]
+(Sprite)[]
+(Desc)
+[End]
