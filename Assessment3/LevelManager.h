@@ -13,7 +13,8 @@ public:
 	LevelManager();
 	~LevelManager();
 
-	Play::Point2D GetLevel();
+	std::vector<Play::Point2D> GetLevel();
+	std::vector<Play::Point2D> GetBoundaries();
 	void LoadLevel();
 
 	void SetLevel(int newLevel);
@@ -25,17 +26,15 @@ private:
 
 	std::string levelIndex;
 	int difficulty;
-	// This variable stores each whole line read from the text file.
-	std::string newLine = "";
 
 	Play::Point2D startPos;
+	Play::Point2D endPos;
+	std::vector<Play::Point2D> openTiles;
 
 	std::string TextFile = "Data\\Textfiles\\Levels.txt";
 	bool levelFound = false;
 	bool isNew = true;
 	std::vector<std::string> levelTiles;
-
-//	int test;
 
 };
 

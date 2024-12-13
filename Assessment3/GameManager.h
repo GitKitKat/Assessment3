@@ -66,6 +66,7 @@ public:
 	~GameManager();
 
 	void PlayGame(float elapsedTime);
+	void LoadInfo(int min, int max);
 
 	void DrawOptions(std::vector<std::string> myVector);
 	bool ScreenUpdate(float elapsedTime);
@@ -81,7 +82,8 @@ private:
 	float screenTimer;
 	bool inactiveGame;
 	int carouselIndex;
-	
+	bool levelStart;
+
 	bool visibleCutscenes; // true = on
 	GameDifficulty currentDifficulty;
 	int currentPlayerColour;
@@ -90,12 +92,11 @@ private:
 
 	std::vector<std::string> MainMenu = { "NEW GAME", "OPTIONS", "TROPHIES", "EXIT" };
 	std::vector<std::string> OptionMenu = { "VOLUME", "CUTSCENES", "DIFFICULTY", "PLAYER" };
-	std::vector<std::string> TrophyMenu = { "Rookie Puzzler", "Aspiring Adventurer", "Maze Whisperer", "Slow and Steady wins the race", "Speed, I am speed" };
-	std::vector<bool> TrophyGet = { false, false, false, false, false };
+	std::vector<std::string> TrophyMenu;
+	std::vector<bool> TrophyGet;
 
-	//std::map<TrophyScreen, std::vector<std::string>> TrophyMap;
+	std::map<std::string, std::vector<std::string>> TrophyMap;
 	std::vector<std::string> currentOptionValues = { " ", "ON", "EASY", " ", " " };
-
 	std::vector<std::string> gameDifficultyOptions = { "EASY", "NORMAL", "HARD" };
 	std::vector<std::string> carousel = { "TIP 1", "TIP 2", "TIP 3", "TIP 4", "TIP 5" };
 	

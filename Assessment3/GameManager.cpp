@@ -5,6 +5,7 @@
 #include "LevelManager.h"
 #include <string>
 #include <vector>
+#include <fstream>
 
 GameManager::GameManager() {
 
@@ -12,6 +13,11 @@ GameManager::GameManager() {
 	carouselIndex = 0;
 	inactiveGame = false;
 	gameVolume = 1.0f;
+	levelStart = true;
+
+	TrophyMenu.push_back("");
+	TrophyMap[""] = TrophyMenu;
+	LoadInfo(0, TROPHY_BACK);
 
 	visibleCutscenes = true;
 	currentDifficulty = EASY;
@@ -21,8 +27,6 @@ GameManager::GameManager() {
 	currentMainMenuOption = START;
 	currentOptionMenuOption = VOLUME;
 	currentTrophyMenuOption = TROPHY1;
-
-	//TrophyMap.insert({ TROPHY1, });
 
 }
 
@@ -34,22 +38,132 @@ GameManager::~GameManager() {
 
 void GameManager::PlayGame(float elapsedTime) {
 
-	Play::Point2D userPos = currentLevel->GetLevel();
-	screenTimer += elapsedTime;
+	std::vector<Play::Point2D> userPos = currentLevel->GetLevel();
 
-	currentPlayer->SetPosition(userPos);
+	if (levelStart) {
+
+		currentPlayer->SetPosition(userPos);
+		levelStart = false;
+
+	}
+
+	currentPlayer->SetBoundaries(currentDifficulty, currentLevel->GetBoundaries());
+	currentPlayer->HandleControls();
 	currentPlayer->DrawPlayer();
 
+	screenTimer += elapsedTime;
 	Play::PresentDrawingBuffer();
+
+}
+
+void GameManager::LoadInfo(int min, int max) {
+
+	std::ifstream inFile("Data\\Textfiles\\ItemList.txt");
+	std::string keyword = "[Trophy]";
+	std::string newLine;
+	std::string holdItemName;
+	std::vector<std::string> holdItemDesc = { "" };
+	bool itemFound = false;
+
+	if (!inFile.is_open()) {
+
+		return;
+
+	}
+	else {
+
+		// This loop reads and relays a specified level.
+		while (std::getline(inFile, newLine)) {
+
+			if (newLine.rfind(keyword, 0) == 0) {
+
+				itemFound = true;
+
+			}
+
+			if (itemFound == true) {
+
+				TrophyMap.erase("");
+
+				if (newLine.rfind("(Name)", 0) == 0) {
+
+					holdItemName = newLine.substr(6);
+
+					if (TrophyMenu[0] == "") {
+
+						TrophyMenu[0] = holdItemName;
+
+					}
+					else {
+
+						TrophyMenu.push_back(holdItemName);
+
+					}
+
+				}
+
+				else if (newLine.rfind("(Desc)", 0) == 0) {
+
+					if (holdItemDesc[0] == "") {
+
+						holdItemDesc[0] = newLine.substr(6);
+
+					}
+					else {
+
+						holdItemDesc.push_back(newLine.substr(6));
+
+					}
+
+				}
+
+				else if (newLine.rfind("(Get)", 0) == 0) {
+
+					if (newLine.substr(5) == "F") {
+
+						TrophyGet.push_back(false);
+
+					}
+					else {
+
+						TrophyGet.push_back(true);
+
+					}
+
+				}
+
+				else if (newLine == "[End]") {
+
+					TrophyMap.insert({ holdItemName, holdItemDesc });
+					holdItemDesc.clear();
+					holdItemDesc = { "" };
+					min++;
+
+					if (min == max) {
+
+						itemFound = false;
+
+						break;
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
 
 }
 
 void GameManager::DrawOptions(std::vector<std::string> myVector) {
 
 	float j = DISPLAY_TILE * (4 / 2);
-	//Play::DrawRect({ (DISPLAY_WIDTH / 2) , (DISPLAY_HEIGHT / 2) + j }, { (DISPLAY_WIDTH / 2) + DISPLAY_TILE, (DISPLAY_HEIGHT / 2) + j + DISPLAY_TILE }, Play::cGrey, false);
 
 	for (int i = 0; i < myVector.size(); i++) {
+
+		int b = 1;
 
 		if (currentGameScreen == TROPHY_MENU) {
 
@@ -58,8 +172,24 @@ void GameManager::DrawOptions(std::vector<std::string> myVector) {
 				myVector[i] = "???";
 
 			}
+			if (currentTrophyMenuOption != TROPHY_BACK) {
 
-			//Play::DrawRect({ (DISPLAY_WIDTH / 2) + DISPLAY_TILE, (DISPLAY_HEIGHT / 2) + j - 4 }, { (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 2), (DISPLAY_HEIGHT / 2) + j + DISPLAY_TILE - 4 }, Play::cWhite, false);
+				if (TrophyGet[currentTrophyMenuOption] == true) {
+
+					std::vector<std::string> tempStr = TrophyMap.at(myVector[currentTrophyMenuOption]);
+					for (int a = 0; a < tempStr.size() - 1; a++) {
+
+						Play::DrawFontText("32px", tempStr[a], {DISPLAY_TILE * 2, (DISPLAY_HEIGHT / 2 + DISPLAY_TILE) - (DISPLAY_TILE * b)}, Play::LEFT);
+						b++;
+
+					}
+
+					int a = tempStr.size() - 1;
+					const char* charPtr = tempStr[a].c_str();
+					Play::DrawDebugText({ DISPLAY_TILE * 2, (DISPLAY_HEIGHT / 2 + DISPLAY_TILE) - (DISPLAY_TILE * b) }, charPtr, Play::cWhite, false);
+
+				}
+			}
 
 		}
 
@@ -72,6 +202,15 @@ void GameManager::DrawOptions(std::vector<std::string> myVector) {
 		Play::DrawFontText("32px", myVector[i], { DISPLAY_WIDTH / 2, (DISPLAY_HEIGHT / 2) + j }, Play::LEFT);
 
 		j -= DISPLAY_TILE;
+
+	}
+
+	if (currentGameScreen == OPTION_MENU) {
+
+		Play::Point2D tempPos = { (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 3), (DISPLAY_HEIGHT / 2) + DISPLAY_TILE * (- PLAYER + 1.5f) };
+		Play::DrawRect(tempPos, { tempPos.x + DISPLAY_TILE, tempPos.y + DISPLAY_TILE }, Play::cWhite, false);
+		currentPlayer->SetPosition(tempPos);
+		currentPlayer->DrawPlayer();
 
 	}
 
@@ -112,7 +251,7 @@ void GameManager::ScreenTips(float elapsedTime) {
 int GameManager::MenuInteraction(int optionValue, int maxValue) {
 
 	float j = 50 * (4 / 2);
-	Play::DrawFontText("72px", "+", { (DISPLAY_WIDTH / 2) - 50.0f, (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
+	Play::DrawFontText("72px", "+", { (DISPLAY_WIDTH / 2) - (DISPLAY_TILE * 0.5f), (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
 
 	if (Play::KeyPressed(Play::KEY_W) && optionValue != 0) {
 
@@ -132,7 +271,7 @@ int GameManager::MenuInteraction(int optionValue, int maxValue) {
 void GameManager::MenuInteraction(int optionValue, int maxValue, GameScreen newScreen) {
 
 	float j = 50 * (4 / 2);
-	Play::DrawFontText("72px", "+", { (DISPLAY_WIDTH / 2) - 50.0f, (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
+	Play::DrawFontText("72px", "+", { (DISPLAY_WIDTH / 2) - (DISPLAY_TILE * 0.5f), (DISPLAY_HEIGHT / 2) + j - (optionValue * 50) }, Play::CENTRE);
 
 	if (Play::KeyPressed(Play::KEY_W) && currentMainMenuOption != 0) {
 
@@ -218,9 +357,6 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 		Play::DrawFontText("72px", "OPTIONS", { DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 + 200 }, Play::CENTRE);
 		DrawOptions(OptionMenu);
-		Play::DrawRect({ (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 2), (DISPLAY_HEIGHT / 2) - (DISPLAY_TILE * PLAYER) }, { (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 3), (DISPLAY_HEIGHT / 2) - (DISPLAY_TILE * PLAYER) + DISPLAY_TILE }, Play::cWhite, false);
-		currentPlayer->SetPosition({ (DISPLAY_WIDTH / 2) + (DISPLAY_TILE * 2), (DISPLAY_HEIGHT / 2) - (DISPLAY_TILE * PLAYER) });
-		currentPlayer->DrawPlayer();
 
 		currentOptionMenuOption = OptionScreen(MenuInteraction(int(currentOptionMenuOption), int(OPTION_BACK)));
 
@@ -288,14 +424,14 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
-				if (currentPlayerColour < 3) {
+				if (currentPlayerColour < 2) {
 
 					currentPlayerColour++;
 
 				}
 				else {
 
-					currentPlayerColour = 1;
+					currentPlayerColour = 0;
 
 				}
 
@@ -325,21 +461,13 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 		currentTrophyMenuOption = TrophyScreen(MenuInteraction(int(currentTrophyMenuOption), int(TROPHY_BACK)));
 
-		switch (currentTrophyMenuOption) {
-
-		case TROPHY1:
-
-
-			break;
-		case TROPHY_BACK:
+		if (currentTrophyMenuOption == TROPHY_BACK) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
 				currentGameScreen = MAIN_MENU;
 
 			}
-
-			break;
 
 		}
 

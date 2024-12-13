@@ -3,6 +3,8 @@
 Player::Player() {
 
 	playerPos = { 0.0f, 0.0f };
+	posIncrease = 0.0f;
+	newPos = { 0.0f, 0.0f };
 
 }
 
@@ -12,9 +14,70 @@ Player::~Player() {
 
 }
 
+void Player::CheckCollision() {
+
+	bool colliderCheck = true;
+
+	for (int i = 0; i < tempBoundaries.size(); i++) {
+
+		if (newPos.y <= (DISPLAY_TILE * i) && newPos.y > (DISPLAY_TILE * i) - DISPLAY_TILE) {
+
+			for (Play::Point2D j : tempBoundaries[i]) {
+
+				if (newPos.x >= j.x && newPos.x < j.x + DISPLAY_TILE) {
+
+					colliderCheck = false;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	if (!colliderCheck) {
+
+		SetPosition(newPos);
+
+	}
+
+}
+
+void Player::SetBoundaries(int levelLength, std::vector<Play::Point2D> levelBounds) {
+
+	levelLength = levelBounds.size();
+	std::vector<Play::Point2D> tempVector;
+
+	for (int i = 0; i < levelLength; i++) {
+
+		for (int j = 0; j < levelLength; j++) {
+
+			if (levelBounds[j].y <= (DISPLAY_TILE * i) + DISPLAY_TILE && levelBounds[j].y > (DISPLAY_TILE * i)) {
+
+				levelBounds[j].y -= DISPLAY_TILE;
+				tempVector.push_back(levelBounds[j]);
+
+			}
+
+		}
+
+		tempBoundaries.insert({ i, tempVector });
+		tempVector.clear();
+
+	}
+}
+
 void Player::SetPosition(Play::Point2D userPos) {
 
 	playerPos = userPos;
+
+}
+
+void Player::SetPosition(std::vector<Play::Point2D> levelExits) {
+
+	playerPos = levelExits[0];
+	endPos = levelExits[1];
 
 }
 
@@ -26,7 +89,6 @@ void Player::SetColour(Play::Colour arr[], int newColour) {
 
 void Player::DrawPlayer() {
 
-	//Play::DrawSprite("player1_still", playerPos, 0);
 	Play::DrawRect(playerPos, { playerPos.x + float(DISPLAY_TILE), playerPos.y + float(DISPLAY_TILE) }, playerColour[0], true);
 	for (int i = 10; i > 0; i--) {
 
@@ -37,53 +99,44 @@ void Player::DrawPlayer() {
 
 }
 
-/*void HandleControls() {
-
-	GameObject& obj_player = Play::GetGameObjectByType(TYPE_PLAYER);
+void Player::HandleControls() {
 
 	if (Play::KeyDown(Play::KEY_SHIFT)) {
 
-		Play::SetSprite(obj_player, "player1_fast", 0);
+		posIncrease = 0.5f;
 
 	}
-
-	if (Play::KeyDown(Play::KEY_UP)) {
-
-		obj_player.velocity = { 0, 4 };
-		Play::SetSprite(obj_player, "player1_walk", 0);
-
-	}
-	else if (Play::KeyDown(Play::KEY_DOWN)) {
-
-		obj_player.velocity = { 0, -2 };
-		Play::SetSprite(obj_player, "player1_walk", 0);
-
-	}
-	else if (Play::KeyDown(Play::KEY_LEFT)) {
-
-		obj_player.velocity = { -2, 0 };
-		Play::SetSprite(obj_player, "player1_walk", 0);
-
-	}
-	else if (Play::KeyDown(Play::KEY_RIGHT)) {
-
-		obj_player.velocity = { 4, 0 };
-		Play::SetSprite(obj_player, "player1_walk", 0);
-
-	}
-
 	else {
 
-		Play::SetSprite(obj_player, "player1_still", 0);
+		posIncrease = 1.0f;
 
 	}
 
-	Play::UpdateGameObject(obj_player);
+	if (Play::KeyPressed(Play::KEY_UP)) {
 
-	if (Play::IsLeavingDisplayArea(obj_player)) {
+		newPos = { playerPos.x, playerPos.y + (posIncrease * DISPLAY_TILE) };
+		CheckCollision();
 
-		obj_player.pos = obj_player.oldPos;
+	}
+	else if (Play::KeyPressed(Play::KEY_DOWN)) {
+
+		newPos = { playerPos.x, playerPos.y - (posIncrease * DISPLAY_TILE) };
+		CheckCollision();
+
+	}
+	else if (Play::KeyPressed(Play::KEY_LEFT)) {
+
+		newPos = { playerPos.x - (posIncrease * DISPLAY_TILE), playerPos.y };
+		CheckCollision();
+
+	}
+	else if (Play::KeyPressed(Play::KEY_RIGHT)) {
+
+		newPos = { playerPos.x + (posIncrease * DISPLAY_TILE), playerPos.y };
+		CheckCollision();
 
 	}
 
-}*/
+	DrawPlayer();
+
+}

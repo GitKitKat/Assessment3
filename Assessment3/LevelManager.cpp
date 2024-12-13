@@ -8,12 +8,22 @@ LevelManager::LevelManager() {
 	difficulty = 1;
 	levelTiles.push_back("");
 	startPos = { 0.0f, 0.0f };
+	endPos = { 0.0f, 0.0f };
 
 }
 
 LevelManager::~LevelManager() {
 
 
+
+}
+
+std::vector<Play::Point2D> LevelManager::GetBoundaries() {
+
+	std::vector<Play::Point2D> tempVector = openTiles;
+	openTiles.clear();
+
+	return tempVector;
 
 }
 
@@ -33,11 +43,10 @@ void LevelManager::LoadLevel() {
 
 	std::string newLevel = "(ID)[" + levelIndex + "]";
 	std::ifstream inFile(TextFile);
+	std::string newLine;
 
 	if (!inFile.is_open()) {
 
-		// This is printed if the file loading fails.
-		//std::cout << "The text adventure, " << TextFile << ", couldn't be opened." << std::endl;
 		return;
 
 	}
@@ -93,30 +102,36 @@ void LevelManager::PrintLevel() {
 
 		for (int j = 0; j < str.length(); j++) {
 
-			if (str.at(j) == 'Y') {
-
-				//exit
-				Play::DrawRect({ 0 + (DISPLAY_TILE * j), 0 + (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGreen, true);
-
-			}
-			else if (str.at(j) == 'X') {
-
-				//entrance
-				startPos = { float((0 + (DISPLAY_TILE * j))), float((0 + (DISPLAY_TILE * i))) };
-				Play::DrawRect({ 0 + (DISPLAY_TILE * j), 0 + (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cBlue, true);
-
-			}
-			else if (str.at(j) == '0') {
-
-				//empty space
-				Play::DrawRect({ 0 + (DISPLAY_TILE * j), 0 + (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
-
-			}
-			else if (str.at(j) == '1') {
+			if (str.at(j) == '1') {
 
 				//wall
-				Play::DrawRect({ 0 + (DISPLAY_TILE * j), 0 + (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGrey, true);
-				//Play::DrawRect({ (DISPLAY_WIDTH / 2) + 150, (DISPLAY_HEIGHT / 2) - 45 }, { (DISPLAY_WIDTH / 2) + 180, (DISPLAY_HEIGHT / 2) - 15 }, Play::cBlue, true);
+				Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGrey, true);
+
+			}
+			else {
+
+				if (str.at(j) == 'Y') {
+
+					//exit
+					endPos = { float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) };
+					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGreen, true);
+
+				}
+				else if (str.at(j) == 'X') {
+
+					//entrance
+					startPos = { float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i - 1)) };
+					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cBlue, true);
+
+				}
+				else if (str.at(j) == '0') {
+
+					//empty space
+					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
+
+				}
+				
+				openTiles.push_back({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) });
 
 			}
 
@@ -126,7 +141,6 @@ void LevelManager::PrintLevel() {
 
 	for (int z = DISPLAY_TILE; z < DISPLAY_WIDTH; z += DISPLAY_TILE) {
 
-		//Play::DrawLine(int startX, int startY, int endX, int endY, Pixel pix);
 		Play::DrawLine({ z, 0 }, { z, DISPLAY_HEIGHT }, Play::cGrey);
 		Play::DrawLine({ 0, z }, { DISPLAY_WIDTH, z }, Play::cGrey);
 
@@ -136,13 +150,15 @@ void LevelManager::PrintLevel() {
 
 }
 
-Play::Point2D LevelManager::GetLevel() {
+std::vector<Play::Point2D> LevelManager::GetLevel() {
 
 	Play::ClearDrawingBuffer(Play::cBlack);
 
 	LoadLevel();
 	PrintLevel();
 
-	return startPos;
+	std::vector<Play::Point2D> levelExits = { startPos, endPos };
+
+	return levelExits;
 
 }
