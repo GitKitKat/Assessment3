@@ -4,7 +4,7 @@
 
 LevelManager::LevelManager() {
 
-	levelIndex = "1";
+	levelIndex = 1;
 	difficulty = 1;
 	levelTiles.push_back("");
 	startPos = { 0.0f, 0.0f };
@@ -29,7 +29,13 @@ std::vector<Play::Point2D> LevelManager::GetBoundaries() {
 
 void LevelManager::SetLevel(int newLevel) {
 
-	levelIndex = std::to_string(newLevel);
+	levelIndex = newLevel;
+
+}
+
+void LevelManager::SetLevel() {
+
+	levelIndex++;
 
 }
 
@@ -41,7 +47,7 @@ void LevelManager::SetMode(int newDifficulty) {
 
 void LevelManager::LoadLevel() {
 
-	std::string newLevel = "(ID)[" + levelIndex + "]";
+	std::string newLevel = "(ID)[" + std::to_string(levelIndex) + "]";
 	std::ifstream inFile(TextFile);
 	std::string newLine;
 

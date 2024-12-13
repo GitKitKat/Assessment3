@@ -18,13 +18,14 @@ public:
 	void LoadLevel();
 
 	void SetLevel(int newLevel);
+	void SetLevel();
 	void SetMode(int newDifficulty);
 	
 	void PrintLevel();
 
 private: 
 
-	std::string levelIndex;
+	int levelIndex;
 	int difficulty;
 
 	Play::Point2D startPos;

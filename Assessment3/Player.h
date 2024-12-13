@@ -18,13 +18,13 @@ public:
 	void SetPosition(Play::Point2D userPos);
 	void SetPosition(std::vector<Play::Point2D> levelExits);
 
-	void SetColour(Play::Colour arr[], int newColour);
-	void SetBoundaries(int levelLength, std::vector<Play::Point2D> levelBounds);
+	void SetColour(std::vector<Play::Colour> colourList, int newColour);
+	void SetBoundaries(std::vector<Play::Point2D> levelBounds);
 
 	void CheckCollision();
 	void DrawPlayer();
 
-	void HandleControls();
+	bool HandleControls(std::vector<Play::KeyboardButton> gameControls);
 
 private: 
 

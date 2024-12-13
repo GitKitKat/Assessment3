@@ -23,6 +23,7 @@ enum GameScreen {
 
 enum MainMenuScreen {
 
+	CONTINUE,
 	START,
 	OPTIONS,
 	TROPHIES,
@@ -35,6 +36,7 @@ enum OptionScreen {
 	VOLUME,
 	CUTSCENES,
 	DIFFICULTY,
+	CONTROLS,
 	PLAYER,
 	OPTION_BACK
 
@@ -66,9 +68,10 @@ public:
 	~GameManager();
 
 	void PlayGame(float elapsedTime);
-	void LoadInfo(int min, int max);
+	void LoadInfo(std::string keyword, int max, std::vector<std::string>& existingVector, std::map<std::string, std::vector<std::string>>& existingMap, std::vector<bool> myVector = { true });
 
 	void DrawOptions(std::vector<std::string> myVector);
+	void DrawAdditional(std::vector<std::string> tempStr);
 	bool ScreenUpdate(float elapsedTime);
 	void ScreenTips(float elapsedTime);
 
@@ -83,22 +86,26 @@ private:
 	bool inactiveGame;
 	int carouselIndex;
 	bool levelStart;
+	std::vector<bool> defVector;
 
 	bool visibleCutscenes; // true = on
+	bool currentControls;
 	GameDifficulty currentDifficulty;
 	int currentPlayerColour;
-	Play::Colour playerColours[3] = { Play::cCyan, Play::cMagenta, Play::cOrange }; // rotate between player sprites
+	std::vector<Play::Colour> playerColours; // rotate between player sprites
 	float gameVolume;
+	std::vector<Play::KeyboardButton> gameControls;
 
-	std::vector<std::string> MainMenu = { "NEW GAME", "OPTIONS", "TROPHIES", "EXIT" };
-	std::vector<std::string> OptionMenu = { "VOLUME", "CUTSCENES", "DIFFICULTY", "PLAYER" };
+	std::vector<std::string> MainMenu;
+	std::vector<std::string> OptionMenu;
 	std::vector<std::string> TrophyMenu;
 	std::vector<bool> TrophyGet;
 
 	std::map<std::string, std::vector<std::string>> TrophyMap;
-	std::vector<std::string> currentOptionValues = { " ", "ON", "EASY", " ", " " };
-	std::vector<std::string> gameDifficultyOptions = { "EASY", "NORMAL", "HARD" };
-	std::vector<std::string> carousel = { "TIP 1", "TIP 2", "TIP 3", "TIP 4", "TIP 5" };
+	std::vector<std::string> currentOptionValues;
+	std::vector<std::string> gameDifficultyOptions;
+	std::vector<std::string> tipCarousel;
+	std::map<std::string, std::vector<std::string>> TipMap;
 	
 	GameScreen currentGameScreen;
 	MainMenuScreen currentMainMenuOption;

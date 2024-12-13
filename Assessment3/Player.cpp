@@ -18,7 +18,7 @@ void Player::CheckCollision() {
 
 	bool colliderCheck = true;
 
-	for (int i = 0; i < tempBoundaries.size(); i++) {
+	for (float i = 0.0f; i < tempBoundaries.size(); i++) {
 
 		if (newPos.y <= (DISPLAY_TILE * i) && newPos.y > (DISPLAY_TILE * i) - DISPLAY_TILE) {
 
@@ -44,14 +44,13 @@ void Player::CheckCollision() {
 
 }
 
-void Player::SetBoundaries(int levelLength, std::vector<Play::Point2D> levelBounds) {
+void Player::SetBoundaries(std::vector<Play::Point2D> levelBounds) {
 
-	levelLength = levelBounds.size();
 	std::vector<Play::Point2D> tempVector;
 
-	for (int i = 0; i < levelLength; i++) {
+	for (int i = 0; i < levelBounds.size(); i++) {
 
-		for (int j = 0; j < levelLength; j++) {
+		for (int j = 0; j < levelBounds.size(); j++) {
 
 			if (levelBounds[j].y <= (DISPLAY_TILE * i) + DISPLAY_TILE && levelBounds[j].y > (DISPLAY_TILE * i)) {
 
@@ -70,27 +69,33 @@ void Player::SetBoundaries(int levelLength, std::vector<Play::Point2D> levelBoun
 
 void Player::SetPosition(Play::Point2D userPos) {
 
+	if (userPos.y < 0) {
+		userPos.y = 0;
+	}
 	playerPos = userPos;
 
 }
 
 void Player::SetPosition(std::vector<Play::Point2D> levelExits) {
 
-	playerPos = levelExits[0];
+	SetPosition(levelExits[0]);
+	levelExits[1].y -= DISPLAY_TILE;
 	endPos = levelExits[1];
+
+	tempBoundaries.clear();
 
 }
 
-void Player::SetColour(Play::Colour arr[], int newColour) {
+void Player::SetColour(std::vector<Play::Colour> colourList, int newColour) {
 
-	playerColour[0] = arr[newColour];
+	playerColour[0] = colourList[newColour];
 
 }
 
 void Player::DrawPlayer() {
 
 	Play::DrawRect(playerPos, { playerPos.x + float(DISPLAY_TILE), playerPos.y + float(DISPLAY_TILE) }, playerColour[0], true);
-	for (int i = 10; i > 0; i--) {
+	for (int i = 3; i > 0; i--) {
 
 		Play::DrawCircle({ playerPos.x + float(DISPLAY_TILE * 0.5), playerPos.y + float(DISPLAY_TILE * 0.5) }, i, Play::cBlack);
 
@@ -99,7 +104,7 @@ void Player::DrawPlayer() {
 
 }
 
-void Player::HandleControls() {
+bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
 
 	if (Play::KeyDown(Play::KEY_SHIFT)) {
 
@@ -112,31 +117,40 @@ void Player::HandleControls() {
 
 	}
 
-	if (Play::KeyPressed(Play::KEY_UP)) {
+	if (Play::KeyPressed(gameControls[1])) {
 
 		newPos = { playerPos.x, playerPos.y + (posIncrease * DISPLAY_TILE) };
 		CheckCollision();
 
 	}
-	else if (Play::KeyPressed(Play::KEY_DOWN)) {
+	else if (Play::KeyPressed(gameControls[3])) {
 
 		newPos = { playerPos.x, playerPos.y - (posIncrease * DISPLAY_TILE) };
 		CheckCollision();
 
 	}
-	else if (Play::KeyPressed(Play::KEY_LEFT)) {
+	else if (Play::KeyPressed(gameControls[0])) {
 
 		newPos = { playerPos.x - (posIncrease * DISPLAY_TILE), playerPos.y };
 		CheckCollision();
 
 	}
-	else if (Play::KeyPressed(Play::KEY_RIGHT)) {
+	else if (Play::KeyPressed(gameControls[2])) {
 
 		newPos = { playerPos.x + (posIncrease * DISPLAY_TILE), playerPos.y };
 		CheckCollision();
 
 	}
 
-	DrawPlayer();
+	if (endPos == playerPos) {
+
+		return true;
+
+	}
+	else {
+
+		return false;
+
+	}
 
 }

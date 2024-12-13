@@ -10,6 +10,30 @@
 (Name)[King Pompu]
 [End]
 
+[Tip]
+(Name)Controls
+(Desc)Lefty or Righty?
+(Desc)In the OPTIONS menu, change controls to WASD or ARROW keys. Select with SPACE key.
+[End]
+
+[Tip]
+(Name)Aesthetics
+(Desc)If I was an M&M...
+(Desc)In the OPTIONS menu, you can change the colour of your character.
+[End]
+
+[Tip]
+(Name)Dialogue
+(Desc)Who said that?
+(Desc)In the OPTIONS menu, decide whether or not to display character dialogues.
+[End]
+
+[Tip]
+(Name)Volume
+(Desc)Gotta go fast!
+(Desc)During gameplay, your character will move more slowly if you hold the SHIFT key.
+[End]
+
 [Trophy]
 (Name)[Rookie Puzzler]
 (Desc)You've taken your first steps!
