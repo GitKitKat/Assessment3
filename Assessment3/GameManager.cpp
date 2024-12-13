@@ -69,6 +69,7 @@ void GameManager::PlayGame(float elapsedTime) {
 
 		currentLevel->SetLevel();
 		levelStart = true;
+		levelEnd = false;
 
 	}
 
@@ -164,7 +165,7 @@ void GameManager::LoadInfo(std::string keyword, int max, std::vector<std::string
 void GameManager::DrawAdditional(std::vector<std::string> tempStr) {
 
 	int b = 1;
-	int z;
+	float z;
 	if (currentGameScreen == MAIN_MENU) {
 
 		z = (DISPLAY_HEIGHT * 0.5f + DISPLAY_TILE) - ( 3 * DISPLAY_TILE * b);

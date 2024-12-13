@@ -6,9 +6,10 @@ LevelManager::LevelManager() {
 
 	levelIndex = 1;
 	difficulty = 1;
-	levelTiles.push_back("");
+	//levelTiles.push_back("");
 	startPos = { 0.0f, 0.0f };
 	endPos = { 0.0f, 0.0f };
+	//LoadLevel();
 
 }
 
@@ -24,6 +25,26 @@ std::vector<Play::Point2D> LevelManager::GetBoundaries() {
 	openTiles.clear();
 
 	return tempVector;
+
+}
+
+void LevelManager::CreateObstacles() {
+
+	if (trapPos.size() > 0) {
+
+
+
+	}
+
+	if (enemyPos.size() > 0) {
+
+		for (int i = 0; i < enemyPos.size(); i++) {
+
+			levelEnemy->SetPositions(enemyPos);
+
+		}
+
+	}
 
 }
 
@@ -48,8 +69,11 @@ void LevelManager::SetMode(int newDifficulty) {
 void LevelManager::LoadLevel() {
 
 	std::string newLevel = "(ID)[" + std::to_string(levelIndex) + "]";
+	std::string newMode = "(ID)[" + std::to_string(difficulty) + "]";
 	std::ifstream inFile(TextFile);
 	std::string newLine;
+	bool levelFound = false;
+	bool modeFound = false;
 
 	if (!inFile.is_open()) {
 
@@ -61,32 +85,41 @@ void LevelManager::LoadLevel() {
 		// This loop reads and relays a specified level.
 		while (std::getline(inFile, newLine)) {
 
-			
+			if (newLine.rfind(newMode, 0) == 0) {
+
+				modeFound = true;
+
+			}
 			if (newLine.rfind(newLevel, 0) == 0) {
 
 				levelFound = true;
 
 			}
 
-			else if (newLine.rfind("(Tile)", 0) == 0 && levelFound == true) {
+			if (modeFound && levelFound) {
 
-				if (isNew == false) {
+				if (newLine.rfind("(Tile)", 0) == 0) {
 
-					levelTiles.clear();
-					isNew = true;
+					if (isNew == false) {
+
+						levelTiles.clear();
+						trapPos.clear();
+						enemyPos.clear();
+						isNew = true;
+
+					}
+
+					levelTiles.push_back(newLine.substr(6));
 
 				}
 
-				levelTiles.push_back(newLine.substr(6));
+				else if (newLine == "[End]") {
 
-			}
+					modeFound = false;
+					levelFound = false;
+					break;
 
-			// Each scene in the text file ends with the [EndScene] line. 
-			// Here, that scene data is passed to the myAdventure object and the pointer is emptied.
-			else if (newLine == "[End]" && levelFound == true) {
-
-				levelFound = false;
-				break;
+				}
 
 			}
 
@@ -126,18 +159,32 @@ void LevelManager::PrintLevel() {
 				else if (str.at(j) == 'X') {
 
 					//entrance
-					startPos = { float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i - 1)) };
+					startPos = { float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i)) };
 					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cBlue, true);
+
+				}
+				else if (str.at(j) == 'E') {
+
+					//location of an enemy
+					enemyPos.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i)) });
+					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cRed, true);
+
+				}
+				else if (str.at(j) == 'T') {
+
+					//location of a trap
+					trapPos.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i)) });
+					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGreen, true);
 
 				}
 				else if (str.at(j) == '0') {
 
 					//empty space
-					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
+					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
 
 				}
 				
-				openTiles.push_back({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) });
+				openTiles.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) });
 
 			}
 

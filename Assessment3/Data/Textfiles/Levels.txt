@@ -1,16 +1,16 @@
 [Level]
-(Mode)[EASY]
+(Mode)[1]
 (ID)[1]
 (Tile)11X111
 (Tile)110111
-(Tile)110111
+(Tile)11E111
 (Tile)110111
 (Tile)11000Y
 (Tile)111111
 [End]
 
 [Level]
-(Mode)[EASY]
+(Mode)[1]
 (ID)[2]
 (Tile)11111X111
 (Tile)111100001
@@ -24,7 +24,7 @@
 [End]
 
 [Level]
-(Mode)[EASY]
+(Mode)[1]
 (ID)[3]
 (Tile)111111111
 (Tile)100000001
@@ -38,7 +38,7 @@
 [End]
 
 [Level]
-(Mode)[EASY]
+(Mode)[1]
 (ID)[4]
 (Tile)X101111100
 (Tile)0100111001
