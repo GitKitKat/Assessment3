@@ -1,28 +1,30 @@
+/* Includes: 
+* This file's header */
 #include "LevelManager.h"
 
+/* Header files */
 #include "Play.h"
 
 LevelManager::LevelManager() {
-
+	/* Definitions */
+	// 
 	levelIndex = 1;
 	difficulty = 1;
-	//levelTiles.push_back("");
 	startPos = { 0.0f, 0.0f };
 	endPos = { 0.0f, 0.0f };
-	//LoadLevel();
+	encounter = false;
+	secondsTimer = 0.0f;
 
 }
 
 LevelManager::~LevelManager() {
-
-
-
+	// Destructor
 }
 
 std::vector<Play::Point2D> LevelManager::GetBoundaries() {
 
 	std::vector<Play::Point2D> tempVector = openTiles;
-	openTiles.clear();
+	//openTiles.clear();
 
 	return tempVector;
 
@@ -40,7 +42,40 @@ void LevelManager::CreateObstacles() {
 
 		for (int i = 0; i < enemyPos.size(); i++) {
 
-			levelEnemy->SetPositions(enemyPos);
+			Enemy* roamingEnemy = new Enemy();
+			roamingEnemy->SetBoundaries(GetBoundaries());
+			roamingEnemy->SetPosition(enemyPos[i]);
+			allEnemies.push_back(roamingEnemy);
+
+		}
+
+	}
+
+}
+
+void LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
+	bool enemyMoved = false;
+	secondsTimer += elapsedTime;
+
+	if (allEnemies.size() > 0) {
+
+		for (int i = 0; i < allEnemies.size(); i++) {
+
+			if (secondsTimer >= 1.0f) {
+				while (enemyMoved == false) {
+					if (allEnemies[i]->HandleControls(allEnemies[i]->GetDirection()) == true) {
+						bool enemyMoved = true;
+						break;
+					}
+				}
+				secondsTimer = 0.0f;
+			}
+			if (allEnemies[i]->GetPosition() == playerPos) {
+
+				encounter = true;
+
+			}
+			allEnemies[i]->DrawCharacter();
 
 		}
 
@@ -105,6 +140,7 @@ void LevelManager::LoadLevel() {
 						levelTiles.clear();
 						trapPos.clear();
 						enemyPos.clear();
+						openTiles.clear();
 						isNew = true;
 
 					}
@@ -167,7 +203,7 @@ void LevelManager::PrintLevel() {
 
 					//location of an enemy
 					enemyPos.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i)) });
-					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cRed, true);
+					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
 
 				}
 				else if (str.at(j) == 'T') {
@@ -210,8 +246,6 @@ std::vector<Play::Point2D> LevelManager::GetLevel() {
 	LoadLevel();
 	PrintLevel();
 
-	std::vector<Play::Point2D> levelExits = { startPos, endPos };
-
-	return levelExits;
+	return std::vector<Play::Point2D> { startPos, endPos };
 
 }

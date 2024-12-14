@@ -1,13 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Creature.h"
-#include "Play.h"
+/* Includes: 
+Header files */
 #include "Config.h"
 
-#include <string>
-#include <vector>
-#include <map>
+/* Base class */
+#include "Creature.h"
 
 class Player : public Creature {
 
@@ -15,27 +14,27 @@ public:
 	Player();
 	~Player();
 
+	Play::Point2D GetPosition();
+
 	void SetPosition(Play::Point2D userPos);
 	void SetPosition(std::vector<Play::Point2D> levelExits);
 
 	void SetColour(std::vector<Play::Colour> colourList, int newColour);
-	void SetBoundaries(std::vector<Play::Point2D> levelBounds);
+	//void SetBoundaries(std::vector<Play::Point2D> levelBounds);
 
-	void CheckCollision();
-	void DrawPlayer();
+	// Check whether or not the player bumps into a wall
+	void CheckCollision() override;
+	void DrawCharacter() override;
 
 	bool HandleControls(std::vector<Play::KeyboardButton> gameControls);
 
 private: 
 
-	Play::Point2D playerPos;
+	//Play::Point2D playerPos;
 	Play::Point2D endPos;
-	Play::Point2D newPos;
-	std::map<float, std::vector<Play::Point2D>> tempBoundaries;
-	
+	Play::Point2D playerDirection;
 	Play::Colour playerColour[1] = { Play::cWhite };
-	float posIncrease;
-
+	
 };
 
 

@@ -31,7 +31,7 @@
 [Tip]
 (Name)Volume
 (Desc)Gotta go fast!
-(Desc)During gameplay, your character will move more slowly if you hold the SHIFT key.
+(Desc)During gameplay, your character will move faster if you hold the SHIFT key.
 [End]
 
 [Trophy]

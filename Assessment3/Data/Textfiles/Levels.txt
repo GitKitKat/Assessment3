@@ -3,8 +3,8 @@
 (ID)[1]
 (Tile)11X111
 (Tile)110111
-(Tile)11E111
 (Tile)110111
+(Tile)11E111
 (Tile)11000Y
 (Tile)111111
 [End]

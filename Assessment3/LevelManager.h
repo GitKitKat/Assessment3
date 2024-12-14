@@ -1,10 +1,14 @@
 #ifndef LEVELMANAGER_H
 #define LEVELMANAGER_H
 
+/* Header files */
 #include "Config.h"
 #include "Play.h"
 #include "Enemy.h"
+#include "NPC.h"
 
+/* Includes:
+Standard header files */
 #include <string>
 #include <fstream>
 #include <vector>
@@ -12,14 +16,20 @@
 class LevelManager {
 
 public: 
+	/* Declarations: */
+	// Constructor
 	LevelManager();
+	// Destructor
 	~LevelManager();
 
+	/* Getter functions: */
+	// Returns the entrance and exit
 	std::vector<Play::Point2D> GetLevel();
 	std::vector<Play::Point2D> GetBoundaries();
 	void LoadLevel();
 
 	void CreateObstacles();
+	void ManageEnemies(Play::Point2D playerPos, float elapsedTime);
 
 	void SetLevel(int newLevel);
 	void SetLevel();
@@ -31,6 +41,8 @@ private:
 
 	int levelIndex;
 	int difficulty;
+	bool encounter;
+	float secondsTimer;
 
 	Play::Point2D startPos;
 	Play::Point2D endPos;
@@ -42,7 +54,7 @@ private:
 	bool isNew = true;
 	std::vector<std::string> levelTiles;
 
-	Enemy* levelEnemy = new Enemy();
+	std::vector<Enemy*> allEnemies;
 
 };
 

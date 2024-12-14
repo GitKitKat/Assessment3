@@ -1,6 +1,8 @@
 #ifndef NPC_H
 #define NPC_H
 
+/* Includes: 
+Standard header files */
 #include <string>
 
 class NPC {

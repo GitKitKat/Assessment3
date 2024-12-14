@@ -1,16 +1,25 @@
+/* Includes: 
+This file's header */
 #include "Player.h"
 
 Player::Player() {
 
-	playerPos = { 0.0f, 0.0f };
+	characterPos = { 0.0f, 0.0f };
 	posIncrease = 0.0f;
 	newPos = { 0.0f, 0.0f };
+	playerDirection = { 0.0f, 0.0f };
 
 }
 
 Player::~Player() {
 
 
+
+}
+
+Play::Point2D Player::GetPosition() {
+
+	return characterPos;
 
 }
 
@@ -37,7 +46,7 @@ void Player::CheckCollision() {
 
 			for (Play::Point2D j : tempBoundaries[i]) {
 
-				if (newPos.x >= j.x && newPos.x < j.x + secondEdge) {
+				if (newPos.x <= j.x && newPos.x > j.x - secondEdge) {
 
 					colliderCheck = false;
 
@@ -57,50 +66,16 @@ void Player::CheckCollision() {
 
 }
 
-void Player::SetBoundaries(std::vector<Play::Point2D> levelBounds) {
-
-	std::vector<Play::Point2D> tempVector;
-	tempBoundaries.clear();
-
-	for (int i = 0; i < levelBounds.size(); i++) {
-
-		for (int j = 0; j < levelBounds.size(); j++) {
-
-			if (levelBounds[j].y <= (DISPLAY_TILE * i) && levelBounds[j].y > (DISPLAY_TILE * i) - DISPLAY_TILE) {
-
-				tempVector.push_back(levelBounds[j]);
-
-			}
-
-		}
-
-		if (tempVector.size() > 0) {
-
-			tempBoundaries.insert({ i, tempVector });
-
-		}
-
-		tempVector.clear();
-
-	}
-}
-
 void Player::SetPosition(Play::Point2D userPos) {
 
-	if (userPos.y < 0) {
-		userPos.y = 0;
-	}
-	playerPos = userPos;
+	characterPos = userPos;
 
 }
 
 void Player::SetPosition(std::vector<Play::Point2D> levelExits) {
 
 	SetPosition(levelExits[0]);
-	//levelExits[1].y -= DISPLAY_TILE;
 	endPos = levelExits[1];
-
-	//tempBoundaries.clear();
 
 }
 
@@ -110,12 +85,12 @@ void Player::SetColour(std::vector<Play::Colour> colourList, int newColour) {
 
 }
 
-void Player::DrawPlayer() {
+void Player::DrawCharacter() {
 
-	Play::DrawRect(playerPos, { playerPos.x + float(DISPLAY_TILE), playerPos.y + float(DISPLAY_TILE) }, playerColour[0], true);
-	for (int i = 3; i > 0; i--) {
+	Play::DrawRect(characterPos, { characterPos.x + float(DISPLAY_TILE), characterPos.y + float(DISPLAY_TILE) }, playerColour[0], true);
+	for (int i = 8; i > 5; i--) {
 
-		Play::DrawCircle({ playerPos.x + float(DISPLAY_TILE * 0.5), playerPos.y + float(DISPLAY_TILE * 0.5) }, i, Play::cBlack);
+		Play::DrawCircle({ characterPos.x + float(DISPLAY_TILE * 0.5) + playerDirection.x, characterPos.y + float(DISPLAY_TILE * 0.5) + playerDirection.y }, i, Play::cBlack);
 
 	}
 	
@@ -123,44 +98,49 @@ void Player::DrawPlayer() {
 }
 
 bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
-
+	//Player moves faster when holding SHIFT
 	if (Play::KeyDown(Play::KEY_SHIFT)) {
-
-		posIncrease = 0.5f;
-
+		posIncrease = 1.5f;
 	}
 	else {
-
 		posIncrease = 1.0f;
-
 	}
 
+	// Player moves up
 	if (Play::KeyPressed(gameControls[1])) {
 
-		newPos = { playerPos.x, playerPos.y + (posIncrease * DISPLAY_TILE) };
+		newPos = { characterPos.x, characterPos.y + (posIncrease * DISPLAY_TILE) };
+		playerDirection = { 0.0f, DISPLAY_TILE * 0.25f };
 		CheckCollision();
 
 	}
+	// Player moves down
 	else if (Play::KeyPressed(gameControls[3])) {
 
-		newPos = { playerPos.x, playerPos.y - (posIncrease * DISPLAY_TILE) };
+		newPos = { characterPos.x, characterPos.y - (posIncrease * DISPLAY_TILE) };
+		playerDirection = { 0.0f, -DISPLAY_TILE * 0.25f };
 		CheckCollision();
 
 	}
+	// Player moves to the left
 	else if (Play::KeyPressed(gameControls[0])) {
 
-		newPos = { playerPos.x - (posIncrease * DISPLAY_TILE), playerPos.y };
+		newPos = { characterPos.x - (posIncrease * DISPLAY_TILE), characterPos.y };
+		playerDirection = { -DISPLAY_TILE * 0.25f, 0.0f };
 		CheckCollision();
 
 	}
+	// Player moves to the right
 	else if (Play::KeyPressed(gameControls[2])) {
 
-		newPos = { playerPos.x + (posIncrease * DISPLAY_TILE), playerPos.y };
+		newPos = { characterPos.x + (posIncrease * DISPLAY_TILE), characterPos.y };
+		playerDirection = { DISPLAY_TILE * 0.25f, 0.0f };
 		CheckCollision();
 
 	}
 
-	if (endPos == playerPos) {
+	// Check whether the player has reached the end of the current level
+	if (endPos == characterPos) {
 
 		return true;
 

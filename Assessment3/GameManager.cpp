@@ -1,14 +1,15 @@
-/* This file's header */
+/* Includes:
+This file's header */
 #include "GameManager.h"
 
+/* Header files */
 #include "Play.h"
 #include "LevelManager.h"
-#include <string>
-#include <vector>
 #include <fstream>
 
 GameManager::GameManager() {
-
+	/* Definitions */
+	//
 	screenTimer = 0;
 	carouselIndex = 0;
 	inactiveGame = false;
@@ -17,7 +18,7 @@ GameManager::GameManager() {
 	currentControls = true;
 
 	visibleCutscenes = true;
-	currentDifficulty = EASY;
+	currentDifficulty = 1;
 	currentPlayerColour = 1;
 
 	currentGameScreen = SPLASH;
@@ -25,6 +26,7 @@ GameManager::GameManager() {
 	currentOptionMenuOption = VOLUME;
 	currentTrophyMenuOption = TROPHY1;
 
+	// Stores colours that a user can choose from for the player
 	playerColours.push_back(Play::cCyan);
 	playerColours.push_back(Play::cMagenta);
 	playerColours.push_back(Play::cOrange);
@@ -36,15 +38,15 @@ GameManager::GameManager() {
 	currentOptionValues = { " ", "ON", "EASY", "WASD", " " };
 	gameDifficultyOptions = { "EASY", "NORMAL", "HARD" };
 
-	LoadInfo("[Tip]", 4, tipCarousel, TipMap, defVector);
+	// Reads and stores data related to game tips (tagline, description)
+	LoadInfo("[Tip]", 4, tipCarousel, TipMap);
+	// Reads and stores data related to game trophies (name, how it was achieved)
 	LoadInfo("[Trophy]", TROPHY_BACK, TrophyMenu, TrophyMap, TrophyGet);
 
 }
 
 GameManager::~GameManager() {
-
-
-
+	// Destructor
 }
 
 void GameManager::PlayGame(float elapsedTime) {
@@ -55,13 +57,15 @@ void GameManager::PlayGame(float elapsedTime) {
 	if (levelStart) {
 
 		currentPlayer->SetPosition(userPos);
+		currentLevel->CreateObstacles();
 		levelStart = false;
 
 	}
 
 	currentPlayer->SetBoundaries(currentLevel->GetBoundaries());
 	levelEnd = currentPlayer->HandleControls(gameControls);
-	currentPlayer->DrawPlayer();
+	currentLevel->ManageEnemies(currentPlayer->GetPosition(),elapsedTime);
+	currentPlayer->DrawCharacter();
 
 	screenTimer += elapsedTime;
 
@@ -73,7 +77,7 @@ void GameManager::PlayGame(float elapsedTime) {
 
 	}
 
-	Play::PresentDrawingBuffer();
+	//Play::PresentDrawingBuffer();
 
 }
 
@@ -162,7 +166,7 @@ void GameManager::LoadInfo(std::string keyword, int max, std::vector<std::string
 
 }
 
-void GameManager::DrawAdditional(std::vector<std::string> tempStr) {
+void GameManager::DrawTexts(std::vector<std::string> tempStr) {
 
 	int b = 1;
 	float z;
@@ -184,7 +188,7 @@ void GameManager::DrawAdditional(std::vector<std::string> tempStr) {
 
 	}
 
-	int a = tempStr.size() - 1;
+	int a = int(tempStr.size() - 1);
 	const char* charPtr = tempStr[a].c_str();
 	Play::DrawDebugText({ DISPLAY_TILE * 2, z - DISPLAY_TILE }, charPtr, Play::cWhite, false);
 
@@ -207,7 +211,7 @@ void GameManager::DrawOptions(std::vector<std::string> myVector) {
 
 				if (TrophyGet[currentTrophyMenuOption] == true) {
 
-					DrawAdditional(TrophyMap.at(myVector[currentTrophyMenuOption]));
+					DrawTexts(TrophyMap.at(myVector[currentTrophyMenuOption]));
 
 				}
 			}
@@ -231,7 +235,7 @@ void GameManager::DrawOptions(std::vector<std::string> myVector) {
 		Play::Point2D tempPos = { (DISPLAY_WIDTH * 0.5f) + (DISPLAY_TILE * 3), (DISPLAY_HEIGHT * 0.5f) + DISPLAY_TILE * (- PLAYER + 1.5f) };
 		Play::DrawRect(tempPos, { tempPos.x + DISPLAY_TILE, tempPos.y + DISPLAY_TILE }, Play::cWhite, false);
 		currentPlayer->SetPosition(tempPos);
-		currentPlayer->DrawPlayer();
+		currentPlayer->DrawCharacter();
 
 	}
 
@@ -247,7 +251,7 @@ void GameManager::ScreenTips(float elapsedTime) {
 
 	if (screenTimer < 6.0f) {
 
-		DrawAdditional(TipMap.at(tipCarousel[carouselIndex]));
+		DrawTexts(TipMap.at(tipCarousel[carouselIndex]));
 		screenTimer += elapsedTime;
 
 	} else {
@@ -433,23 +437,19 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
-				int i = currentDifficulty;
+				if (currentDifficulty < gameDifficultyOptions.size() + 1) {
 
-				if (i < int(HARD)) {
-
-					i++;
-					currentDifficulty = GameDifficulty(i);
+					currentDifficulty++;
 
 				}
 				else {
 
-					i = 1;
-					currentDifficulty = GameDifficulty(i);
+					currentDifficulty = 1;
 
 				}
 
-				currentLevel->SetMode(i);
-				currentOptionValues[DIFFICULTY] = gameDifficultyOptions[i - 1];
+				currentLevel->SetMode(currentDifficulty);
+				currentOptionValues[DIFFICULTY] = gameDifficultyOptions[currentDifficulty - 1];
 
 			}
 
@@ -539,15 +539,13 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			MainMenu[0] = "CONTINUE";
 			currentGameScreen = MAIN_MENU;
-			//currentMainMenuOption = START;
-			//inactiveGame = true;
 
 		}
 
 		Play::PresentDrawingBuffer();
 		break;
 	default:
-		// Invalid state, exit game.
+		// Current game state is invalid, directly exit game
 		inactiveGame = true;
 
 	}

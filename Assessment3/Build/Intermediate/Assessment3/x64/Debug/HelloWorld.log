@@ -2,29 +2,33 @@
   Enemy.cpp
   GameManager.cpp
   LevelManager.cpp
-  MainGame.cpp
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(187,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(338,83): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  NPC.cpp
-  Player.cpp
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\MainGame.cpp(40,1): warning C4715: 'MainGameUpdate': not all control paths return a value
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Player.cpp(25,26): warning C4244: '=': conversion from 'unsigned __int64' to 'float', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(26,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(342,83): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(67,12): warning C4456: declaration of 'enemyMoved' hides previous local declaration
+      C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(57,7):
+      see declaration of 'enemyMoved'
+  
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(67,12): warning C4189: 'enemyMoved': local variable is initialized but not referenced
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244: 'initializing': conversion from 'int' to '_Ty1', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         [
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:             _Ty1=const float
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         ]
-  (compiling source file 'Player.cpp')
+  (compiling source file 'Creature.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16):
       the template instantiation context (the oldest one first) is
-          C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Player.cpp(98,26):
+          C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Creature.cpp(42,26):
           see reference to function template instantiation 'std::pair<const float,std::vector<Play::Point2D,std::allocator<Play::Point2D>>>::pair<int&,std::vector<Play::Point2D,std::allocator<Play::Point2D>>&,0>(_Other1,_Other2) noexcept(false)' being compiled
           with
           [
               _Other1=int &,
               _Other2=std::vector<Play::Point2D,std::allocator<Play::Point2D>> &
           ]
-              C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Player.cpp(98,25):
-              see the first reference to 'std::pair<const float,std::vector<Play::Point2D,std::allocator<Play::Point2D>>>::pair' in 'Player::SetBoundaries'
+              C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Creature.cpp(42,25):
+              see the first reference to 'std::pair<const float,std::vector<Play::Point2D,std::allocator<Play::Point2D>>>::pair' in 'Creature::SetBoundaries'
   
+  MainGame.cpp
+  NPC.cpp
+  Player.cpp
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Player.cpp(34,26): warning C4244: '=': conversion from 'unsigned __int64' to 'float', possible loss of data
   HelloWorld.vcxproj -> C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe
