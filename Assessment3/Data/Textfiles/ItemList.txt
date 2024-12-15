@@ -72,6 +72,7 @@
 (Name)Delay
 (Desc)Huh? No response?
 (Desc)If nothing happens, try pressing the key again after a second.
+[End]
 
 [Trophy]
 (Name)[Rookie Puzzler]
@@ -106,6 +107,6 @@
 [Trophy]
 (Name)[Ka-chow!]
 (Desc)Rev those engines, McQueen! 
-(Desc)Achieved by clearing any mode in less than three minutes.
+(Desc)Achieved by clearing any mode in less than one minute.
 (Get)F
 [End]

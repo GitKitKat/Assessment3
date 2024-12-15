@@ -3,12 +3,12 @@
   GameManager.cpp
   LevelManager.cpp
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(27,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(127,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(147,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(180,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(649,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(165,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(284,64): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(147,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(127,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(180,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(634,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244: 'initializing': conversion from 'int' to '_Ty1', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         [
@@ -30,6 +30,4 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.3412
   MainGame.cpp
   NPC.cpp
   Player.cpp
-GameManager.obj : error LNK2019: unresolved external symbol "public: void __cdecl Player::SetPosition(struct Play::Vector2f)" (?SetPosition@Player@@QEAAXUVector2f@Play@@@Z) referenced in function "public: void __cdecl GameManager::DrawOptions(class std::vector<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > >)" (?DrawOptions@GameManager@@QEAAXV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z)
-Player.obj : error LNK2001: unresolved external symbol "public: void __cdecl Player::SetPosition(struct Play::Vector2f)" (?SetPosition@Player@@QEAAXUVector2f@Play@@@Z)
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe : fatal error LNK1120: 1 unresolved externals
+  HelloWorld.vcxproj -> C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe

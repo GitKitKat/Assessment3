@@ -66,7 +66,7 @@ void Player::CheckCollision() {
 
 }
 
-void Player::SetPosition(std::vector<Play::Point2D> levelExits) {
+void Player::SetExits(std::vector<Play::Point2D> levelExits) {
 
 	SetPosition(levelExits[0]);
 	endPos = levelExits[1];

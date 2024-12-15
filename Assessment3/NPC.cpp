@@ -4,8 +4,9 @@
 
 NPC::NPC() {
 
-	itemsFile = "Data\\Textfiles\\ItemList.txt";
+	itemsFile = "Data\\Textfiles\\Dialogues.txt";
 	levelComplete = false;
+	earlyExit = false;
 
 }
 
@@ -15,9 +16,9 @@ NPC::~NPC() {
 
 }
 
-void NPC::SetDialogue() {
+void NPC::SetDialogue(int increase) {
 
-	dialogueIndex++;
+	dialogueIndex += increase;
 
 }
 
@@ -33,16 +34,26 @@ std::vector<std::string> NPC::GetDialogueOptions() {
 
 }
 
-void NPC::SetDialogue(int currentLevel) {
+void NPC::ResetDialogue(int currentLevel, int increase) {
 
-	if (levelComplete) {
-		dialogueIndex = 10;
+	if (earlyExit == false && increase >= 0) {
+		SetDialogue(increase);
 	}
-	else {
+	else if (increase == -1) {
 		dialogueIndex = 0;
-	} 
+		earlyExit = false;
+		levelComplete = false;
+	}
 	LoadDialogue(currentLevel);
 
+}
+
+bool NPC::DialogueEnd() {
+	return levelComplete;
+}
+
+bool NPC::NextDialogue() {
+	return earlyExit;
 }
 
 bool NPC::CheckCollision(Play::Point2D playerPos) {
@@ -64,6 +75,8 @@ void NPC::DrawCharacter() {
 
 void NPC::LoadDialogue(int currentLevel) {
 
+	dialogueChoices.clear();
+	dialogueDesc.clear();
 	std::string newDialogue = "(ID)[" + std::to_string(dialogueIndex) + "]";
 	std::string newLevel = "(Level)[" + std::to_string(currentLevel) + "]";
 	std::ifstream inFile(itemsFile);
@@ -81,12 +94,11 @@ void NPC::LoadDialogue(int currentLevel) {
 		// This loop reads and relays a specified interaction.
 		while (std::getline(inFile, newLine)) {
 
-			if (newLine.rfind(newLevel, 0) == 0) {
+			if (newLine == newLevel) {
 
-				dialogueFound = true;
+				levelFound = true;
 
-			}
-			if (newLine.rfind(newDialogue, 0) == 0) {
+			} else if (newLine == newDialogue) {
 
 				dialogueFound = true;
 
@@ -94,9 +106,20 @@ void NPC::LoadDialogue(int currentLevel) {
 
 			if (levelFound && dialogueFound) {
 
-				if (newLine.rfind("(NPC)", 0) == 0) {
+				if (newLine.rfind("(Name)", 0) == 0) {
 
 					dialogueDesc.push_back(newLine.substr(6));
+
+				}
+				else if (newLine.rfind("(Exit)", 0) == 0) {
+
+					earlyExit = true;
+
+				}
+				else if (newLine.rfind("(Final)", 0) == 0) {
+
+					earlyExit = true;
+					levelComplete = true;
 
 				}
 				else if (newLine.rfind("(Choice)", 0) == 0) {
@@ -125,11 +148,5 @@ void NPC::LoadDialogue(int currentLevel) {
 	}
 
 	inFile.close();
-
-}
-
-void NPC::PrintDialogue() {
-
-
 
 }

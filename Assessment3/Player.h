@@ -15,9 +15,7 @@ public:
 	~Player();
 
 	Play::Point2D GetPosition();
-
-	void SetPosition(Play::Point2D userPos);
-	void SetPosition(std::vector<Play::Point2D> levelExits);
+	void SetExits(std::vector<Play::Point2D> levelExits);
 
 	void SetColour(std::vector<Play::Colour> colourList, int newColour);
 	//void SetBoundaries(std::vector<Play::Point2D> levelBounds);

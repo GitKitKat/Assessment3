@@ -62,27 +62,40 @@ GameManager::~GameManager() {
 
 void GameManager::DrawDialogue(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices) {
 
+	if (Play::KeyPressed(gameControls[0]) && interactionChoices.size() >= 1) {
+		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 1);
+	}
+	else if (Play::KeyPressed(gameControls[1]) && interactionChoices.size() >= 2) {
+		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 2);
+	}
+	else if (Play::KeyPressed(gameControls[2]) && interactionChoices.size() >= 3) {
+		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 3);
+	}
+	else if (Play::KeyPressed(gameControls[3]) && interactionChoices.size() >= 4) {
+		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 4);
+	}
+	else if (Play::KeyPressed(Play::KEY_SPACE) && interactionChoices.size() == 0) {
+		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 1);
+	}
+	interactionDesc = currentNPCs->GetDialogueDesc();
+	interactionChoices = currentNPCs->GetDialogueOptions();
+
 	Play::DrawRect({ DISPLAY_TILE, DISPLAY_HEIGHT * 0.5f }, { DISPLAY_WIDTH - DISPLAY_TILE, DISPLAY_HEIGHT - DISPLAY_TILE }, Play::cWhite, true);
 	Play::DrawRect({ DISPLAY_TILE + DISPLAY_TILE * 0.25f, DISPLAY_HEIGHT * 0.5f + DISPLAY_TILE * 0.25f }, { DISPLAY_WIDTH - (DISPLAY_TILE + DISPLAY_TILE * 0.25f), DISPLAY_HEIGHT - (DISPLAY_TILE + DISPLAY_TILE * 0.25f) }, Play::cBlack, true);
 	int a = int(interactionDesc.size());
 
 	for (int i = 0; i < a; i++) {
-		if (i == 0) {
 
-			Play::DrawFontText("32px", interactionDesc[i], { DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - 3 * DISPLAY_TILE }, Play::LEFT);
-
-		}
-		else {
-
-			const char* charPtr = interactionDesc[i].c_str();
-			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (3 + i) * DISPLAY_TILE }, charPtr, Play::cWhite, true);
-		}
+		const char* charPtr = interactionDesc[i].c_str();
+		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - ((3 + i) * DISPLAY_TILE) }, charPtr, Play::cWhite, true);
 
 	}
-
-	Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (4 + a) * DISPLAY_TILE }, "Press SPACE to continue", Play::cWhite, true);
-	Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (4 + a) * DISPLAY_TILE }, "Press X to leave", Play::cWhite, true);
-
+	if (interactionChoices.size() == 0) {
+		if (currentNPCs->NextDialogue() == false) {
+			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press SPACE to continue", Play::cWhite, true);
+		}
+	}
+	Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press X to leave", Play::cWhite, true);
 	std::vector<std::string> ctrlArr;
 
 	if (currentControls == true) {
@@ -95,22 +108,9 @@ void GameManager::DrawDialogue(std::vector<std::string> interactionDesc, std::ve
 
 		const char* choicePtr = interactionChoices[i].c_str();
 		const char* controlsPtr = ctrlArr[i].c_str();
-		Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (5 + i) * DISPLAY_TILE }, choicePtr, Play::cWhite, true);
-		Play::DrawDebugText({ (DISPLAY_WIDTH - (6 * DISPLAY_TILE)) - DISPLAY_TILE * 2, DISPLAY_HEIGHT - (5 + i) * DISPLAY_TILE }, controlsPtr, Play::cWhite, true);
+		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, choicePtr, Play::cWhite, true);
+		Play::DrawDebugText({ (DISPLAY_WIDTH * 0.5f) - DISPLAY_TILE * 2, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, controlsPtr, Play::cWhite, true);
 
-	}
-
-	if (Play::KeyPressed(gameControls[0]) && interactionChoices.size() >= 1) {
-		holdInteraction[2] = 0;
-	}
-	else if (Play::KeyPressed(gameControls[1]) && interactionChoices.size() >= 2) {
-		holdInteraction[2] = 1;
-	}
-	else if (Play::KeyPressed(gameControls[2]) && interactionChoices.size() >= 3) {
-		holdInteraction[2] = 2;
-	}
-	else if (Play::KeyPressed(gameControls[3]) && interactionChoices.size() >= 4) {
-		holdInteraction[2] = 3;
 	}
 
 }
@@ -279,15 +279,18 @@ void GameManager::InteractionManager(std::vector<std::string> interactionDesc, s
 }
 
 void GameManager::PlayGame(float elapsedTime) {
-
+	int tempInt = -1;
 	if (visibleCutscenes == false) {
 		if (currentLevel->GetLevelIndex() == 0) {
 			currentLevel->SetLevel(1);
-		} 
+		}
 		else if (currentLevel->GetLevelIndex() == 7) {
 			currentGameScreen = GAME_END;
 			return;
 		}
+	}
+	else {
+		tempInt = currentLevel->GetLevelIndex();
 	}
 	std::vector<Play::Point2D> userPos = currentLevel->GetLevel();
 	bool levelEnd = false;
@@ -295,11 +298,11 @@ void GameManager::PlayGame(float elapsedTime) {
 	if (levelStart) {
 
 		currentLevel->CreateObstacles();
-		currentPlayer->SetPosition(userPos);
-		if (currentLevel->GetLevelIndex() == 0 || currentLevel->GetLevelIndex() == 7) {
+		currentPlayer->SetExits(userPos);
+		if (tempInt == 0 || tempInt == 7) {
 			userPos[1].y -= DISPLAY_TILE;
 			currentNPCs->SetPosition(userPos[1]);
-			currentNPCs->DrawCharacter();
+			currentNPCs->LoadDialogue(tempInt);
 		}
 		levelStart = false;
 
@@ -325,7 +328,7 @@ void GameManager::PlayGame(float elapsedTime) {
 		}
 		if (Play::KeyPressed(Play::KEY_X)) {
 			if (updateInteraction[3] == true) {
-					currentLevel->ClearEnemy(characterScene[0]);
+				currentLevel->ClearEnemy(characterScene[0]);
 			}
 			updateInteraction.clear();
 			updateInteraction = { false, true, false, false };
@@ -336,28 +339,40 @@ void GameManager::PlayGame(float elapsedTime) {
 		}
 	}
 	else {
-
-		currentPlayer->SetBoundaries(currentLevel->GetBoundaries());
-		characterScene[0] = currentLevel->ManageEnemies(currentPlayer->GetPosition(), elapsedTime);
-		levelEnd = currentPlayer->HandleControls(gameControls);
-		levelStart = currentLevel->CheckTraps(currentPlayer->GetPosition());
-		currentPlayer->DrawCharacter();
+		if (tempInt == 0 || tempInt == 7) {
+			currentNPCs->DrawCharacter();
+		}
 		if (currentNPCs->CheckCollision(currentPlayer->GetPosition())) {
 			std::vector<std::string> dialogueDesc = currentNPCs->GetDialogueDesc();
 			std::vector<std::string> dialogueChoices = currentNPCs->GetDialogueOptions();
 			DrawDialogue(dialogueDesc, dialogueChoices);
 		}
-		if (levelEnd) {
-			currentLevel->ClearObstacles();
-			currentLevel->SetLevel();
-			if (currentLevel->GetLevelIndex() == (8)) {
-				currentGameScreen = GAME_END;
-				return;
+		else {
+			currentPlayer->SetBoundaries(currentLevel->GetBoundaries());
+			characterScene[0] = currentLevel->ManageEnemies(currentPlayer->GetPosition(), elapsedTime);
+			levelEnd = currentPlayer->HandleControls(gameControls);
+			if (tempInt == 0 || tempInt == 7) {
+				levelEnd = currentNPCs->DialogueEnd();
 			}
-			levelStart = true;
-			levelEnd = false;
-
+			levelStart = currentLevel->CheckTraps(currentPlayer->GetPosition());
 		}
+		if (Play::KeyPressed(Play::KEY_X)) {
+			levelStart = true;
+		}
+	}
+	currentPlayer->DrawCharacter();
+	if (levelEnd) {
+		currentLevel->ClearObstacles();
+		currentLevel->SetLevel();
+		if (currentLevel->GetLevelIndex() == (8)) {
+			currentGameScreen = GAME_END;
+			return;
+		}
+		if (tempInt + 1 == 7) {
+			currentNPCs->ResetDialogue(7, -1);
+		}
+		levelStart = true;
+		levelEnd = false;
 
 	}
 
@@ -665,6 +680,9 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 			levelStart = true;
 			updateInteraction.clear();
 			updateInteraction = { false, true, false, false };
+			if (visibleCutscenes == true) {
+				currentNPCs->ResetDialogue(0,-1);
+			}
 			holdInteraction[2] = -1;
 			characterScene[0] = -1;
 			screenTimer = 0.0f;
@@ -848,7 +866,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 		EndGame = MenuInteraction(EndGame, 1, MAIN_MENU);
 
 		TrophyGet[currentDifficulty - 1] = true;
-		if (screenTimer < 180) {
+		if (screenTimer < 60) {
 			TrophyGet[TROPHY5] = true;
 		}
 		else if (screenTimer >= 600) {

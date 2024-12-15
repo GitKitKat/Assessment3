@@ -1,162 +1,179 @@
 [Dialogue]
-(NPC)[???]
-(Level)0
+(Level)[0]
 (ID)[0]
-(Line)You're finally here.
-(Line)I've been waiting.
+(Name)[???]
+(Desc)You're finally here.
+(Desc)I've been waiting.
 (Choice)Who are you?
-(Choice)...
 [End]
 
 [Dialogue]
-(NPC)[Duck]
+(Level)[0]
 (ID)[1]
-(Line)I am the Empire's Tenth Shadow, Guardian of the White World.
-(Line)The one who requested you.
-(Choice)I saw 'Duck' on the request form.
-(Choice)...
+(Name)[???]
+(Desc)I am the Empire's Tenth Shadow, Guardian of the White World.
+(Desc)The one who requested you.
+(Choice)Duck?
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[1]
-(Line)You may refer to me as such.
-(Line)If you are curious, I can explain the intricacies behind this moniker.
-(Line)However, it will take many hours.
+(Level)[0]
+(ID)[2]
+(Name)[Duck]
+(Desc)You may refer to me as such.
+(Desc)If you are curious, I can explain the intricacies behind this moniker.
+(Desc)However, it will take many hours.
 (Choice)I've got time.
 (Choice)Nevermind.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[1]
-(Line)I was joking.
+(Level)[0]
+(ID)[3]
+(Name)[Duck]
+(Desc)I was joking.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[1]
-(Line)However, there is a small problem...
-(Line)One of the ritual's core components was stolen.
-(Line)It will take time to retrieve, and even longer to replace if it is unwhole. 
+(Level)[0]
+(ID)[4]
+(Name)[Duck]
+(Desc)There is a small problem, though...
+(Desc)One of the ritual's core components was stolen.
+(Desc)It will take time to retrieve, and even longer to replace if it is unwhole. 
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[2]
-(Line)As such, I will not hold you.
-(Line)Rest assured I will pay the cancellation fee properly.
+(Level)[0]
+(ID)[5]
+(Name)[Duck]
+(Desc)As such, I will not hold you.
+(Desc)Rest assured I will pay the cancellation fee properly.
 (Choice)Goodbye then.
 (Choice)Wait, I'll help you.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[2]
-(Line)May the Empire's light pave your way.
+(Level)[0]
+(ID)[6]
+(Exit)
+(Name)[Duck]
+(Desc)May the Empire's light pave your way.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[2]
-(Line)Very well.
-(Line)For the cost of your time, you will be rewarded in addition what we agreed on.
-(Line)I will append this to our contract promptly, so you may prepare in the meanwhile.
+(Level)[0]
+(ID)[7]
+(Name)[Duck]
+(Desc)Very well.
+(Desc)For the cost of your time, you will be rewarded in addition what we agreed on.
+(Desc)I will append this to our contract promptly, so you may prepare in the meanwhile.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[2]
-(Line)The new request is simply to retrieve the component.
-(Line)According to my tracking spell, it is currently in the depths of this ruin.
+(Level)[0]
+(ID)[8]
+(Name)[Duck]
+(Desc)The new request is simply to retrieve the component.
+(Desc)According to my tracking spell, it is currently in the depths of this ruin.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[2]
-(Line)There may be others in your path. Adventurers, researchers, fugitives...
+(Level)[0]
+(ID)[9]
+(Name)[Duck]
+(Desc)There may be others in your path. Adventurers, researchers, fugitives...
 (Choice)Is that all?
 (Choice)I understand.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[2]
-(Line)No, there's more.
-(Line)Although the Rock-Crested Ruins have been explored many a time, no one has uncovered every inch.
-(Line)Some troublesome traps may still be active.
-(Line)Beware of colourful flooring.
+(Level)[0]
+(ID)[10]
+(Name)[Duck]
+(Desc)No, there's more.
+(Desc)Although the Ruins have been explored many a time, no one has uncovered every inch.
+(Desc)Some troublesome traps may still be active. Beware of colourful flooring.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[2]
-(Line)The Empire awaits your success.
+(Level)[0]
+(ID)[11]
+(Final)
+(Name)[Duck]
+(Desc)The Empire awaits your success.
 [End]
 
 [Dialogue]
-(NPC)[???]
+(Level)[7]
 (ID)[0]
-(Line)Guhahahaha!
-(Line)The crystallization of chaos is mine!
+(Name)[???]
+(Desc)Guhahahaha!
+(Desc)The crystallization of chaos is mine!
 (Choice)Who are you?!
-(Choice)Return the orb!
 [End]
 
 [Dialogue]
-(NPC)[King Pompu]
-(ID)[0]
-(Line)You didn't even notice you were being followed by the great Pompu.
-(Line)The Empire must be getting soft!
+(Level)[7]
+(ID)[1]
+(Name)[King Pompu]
+(Desc)You didn't even notice you were being followed by the great Pompu.
+(Desc)The Empire must be getting soft!
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[0]
-(Line)It is you who is softening, 'king' Pompu.
-(Line)That is not the orb you seek.
+(Level)[7]
+(ID)[2]
+(Name)[Duck]
+(Desc)It is you who is softening, Pompu.
+(Desc)That is not the orb you seek.
 (Choice)What do you mean?
 (Choice)Then what of the request?
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[0]
-(Line)Do not worry. Your efforts will not go unrecognized.
+(Level)[7]
+(ID)[3]
+(Name)[Duck]
+(Desc)As I said, 'that' is not what you thought.
+(Desc)It is a device made to restrain dangerous individuals.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[0]
-(Line)As I said, 'that' is not what you thought.
-(Line)It is a device made to restrain dangerous individuals.
+(Level)[7]
+(ID)[4]
+(Name)[Duck]
+(Desc)Do not worry. Your efforts will not go unrecognized.
 [End]
 
 [Dialogue]
-(NPC)[King Pompu]
-(ID)[0]
-(Line)You tricked me! You shameless liar!
-(Line)Release me this instant!!
-(Choice)The pot calls the kettle black...
-(Choice)Pants on fire!
+(Level)[7]
+(ID)[5]
+(Name)[King Pompu]
+(Desc)You tricked me! You shameless liar!
+(Desc)Release me this instant!!
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[0]
-(Line)It's no use, so cease your struggles.
-(Line)As for you, mercenary, I have cleared a path to the exit.
+(Level)[7]
+(ID)[6]
+(Name)[Duck]
+(Desc)It's no use, so cease your struggles.
+(Desc)As for you, mercenary, I have cleared a path to the exit.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[0]
-(Line)May the Empire's light pave your way.
+(Level)[7]
+(ID)[7]
+(Name)[Duck]
+(Desc)May the Empire's light pave your way.
 [End]
 
 [Dialogue]
-(NPC)[Duck]
-(ID)[0]
-(Line)You have not won here, shadow.
-(Line)This is not the end!
+(Level)[7]
+(ID)[8]
+(Final)
+(Name)[King Pompu]
+(Desc)You have not won here, shadow.
+(Desc)This is not the end!
 [End]
