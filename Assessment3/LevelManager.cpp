@@ -8,7 +8,7 @@
 LevelManager::LevelManager() {
 	/* Definitions */
 	// 
-	levelIndex = 1;
+	levelIndex = 0;
 	difficulty = 1;
 	startPos = { 0.0f, 0.0f };
 	endPos = { 0.0f, 0.0f };
@@ -29,6 +29,10 @@ std::vector<Play::Point2D> LevelManager::GetBoundaries() {
 
 }
 
+int LevelManager::GetLevelIndex() {
+	return levelIndex;
+}
+
 void LevelManager::ClearObstacles() {
 
 	for (int i = 0; i < allEnemies.size(); i++) {
@@ -40,10 +44,8 @@ void LevelManager::ClearObstacles() {
 
 void LevelManager::CreateObstacles() {
 
-	if (trapPos.size() > 0) {
-
-
-
+	if (allEnemies.size() > 0 && allEnemies.size() != enemyPos.size()) {
+		ClearObstacles();
 	}
 
 	if (enemyPos.size() > 0 && allEnemies.size() == 0) {
@@ -59,6 +61,44 @@ void LevelManager::CreateObstacles() {
 		}
 
 	}
+	else if (enemyPos.size() > 0 && allEnemies.size() > 0) {
+		for (int i = 0; i < enemyPos.size(); i++) {
+			allEnemies[i]->SetInteraction(difficulty);
+		}
+	}
+
+}
+
+bool LevelManager::CheckTraps(Play::Point2D playerPos) {
+
+	if (trapPos.size() > 0) {
+
+		for (int i = 0; i < trapPos.size(); i++) {
+
+			if (trapPos[i] == playerPos) {
+
+				TrapLevel(10);
+				return true;
+
+			}
+
+		}
+	} 
+	if (keyPos.size() > 0) {
+
+		for (int i = 0; i < keyPos.size(); i++) {
+
+			if (keyPos[i] == playerPos) {
+
+				TrapLevel(-10);
+				return true;
+
+			}
+
+		}
+	}
+
+	return false;
 
 }
 
@@ -89,19 +129,16 @@ void LevelManager::ClearEnemy(int enemyIndex) {
 int LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
 	bool enemyMoved = false;
 	secondsTimer += elapsedTime;
-
 	if (allEnemies.size() > 0) {
 
 		for (int i = 0; i < allEnemies.size(); i++) {
 
-			if (secondsTimer >= 1.0f) {
+			if (secondsTimer > 1.0f) {
 				while (enemyMoved == false) {
 					if (allEnemies[i]->HandleControls(allEnemies[i]->GetRandom(4)) == true) {
-						enemyMoved = true;
 						break;
 					}
 				}
-				secondsTimer = 0.0f;
 			}
 			allEnemies[i]->DrawCharacter();
 			if (allEnemies[i]->GetPosition() == playerPos) {
@@ -115,19 +152,31 @@ int LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
 			}
 
 		}
-
+		if (secondsTimer > 1.0f) {
+			secondsTimer = 0.0f;
+		}
 	}
 	return -1;
 
 }
 
-void LevelManager::SetLevel(int newLevel) {
+void LevelManager::SetLevel(float newLevel) {
 
 	levelIndex = newLevel;
 
 }
 
+void LevelManager::TrapLevel(int increase) {
+
+	levelIndex += increase;
+
+}
+
 void LevelManager::SetLevel() {
+
+	if (levelIndex > 6) {
+		levelIndex -= 10;
+	}
 
 	levelIndex++;
 
@@ -208,64 +257,91 @@ void LevelManager::LoadLevel() {
 void LevelManager::PrintLevel() {
 
 	std::string str;
+	int tempInt;
+	if (levelTiles[0] == "MAX") {
+		startPos = { (DISPLAY_WIDTH * 0.5f) - DISPLAY_TILE, 0 };
+		endPos = { DISPLAY_WIDTH * 0.5f, (DISPLAY_HEIGHT * 0.5f) - DISPLAY_TILE };
+		for (int i = 0; i < DISPLAY_HEIGHT / DISPLAY_TILE; i++) {
 
-	for (int i = 0; i < levelTiles.size(); i++) {
+			for (int j = 0; j < DISPLAY_WIDTH / DISPLAY_TILE; j++) {
 
-		str = levelTiles[i];
-
-		for (int j = 0; j < str.length(); j++) {
-
-			if (str.at(j) == '1') {
-
-				//wall
-				Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGrey, true);
-
-			}
-			else {
-
-				if (str.at(j) == 'Y') {
-
-					//exit
-					endPos = { float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) };
-					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGreen, true);
-
+				if (i < (DISPLAY_HEIGHT / DISPLAY_TILE) * 0.5) {
+					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
 				}
-				else if (str.at(j) == 'X') {
-
-					//entrance
-					startPos = { float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i)) };
-					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cBlue, true);
-
+				else {
+					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cCyan, true);
 				}
-				else if (str.at(j) == 'E') {
-
-					//location of an enemy
-					enemyPos.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i)) });
-					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
-
-				}
-				else if (str.at(j) == 'T') {
-
-					//location of a trap
-					trapPos.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * (i)) });
-					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGreen, true);
-
-				}
-				else if (str.at(j) == '0') {
-
-					//empty space
-					Play::DrawRect({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
-
-				}
-				
 				openTiles.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) });
+			}
+
+		}
+	}
+	else {
+		for (int i = 0; i < levelTiles.size(); i++) {
+
+			str = levelTiles[i];
+			for (int j = 0; j < str.length(); j++) {
+				tempInt = (((DISPLAY_WIDTH / DISPLAY_TILE) - str.length()) * 0.5);
+				if (str.at(j) == '1') {
+
+					//wall
+					Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGrey, true);
+
+				}
+				else {
+
+					if (str.at(j) == 'Y') {
+
+						//exit
+						endPos = { (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) };
+						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGreen, true);
+
+					}
+					else if (str.at(j) == 'X') {
+
+						//entrance
+						startPos = { (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) };
+						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cBlue, true);
+
+					}
+					else if (str.at(j) == 'E') {
+
+						//location of an enemy
+						enemyPos.push_back({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) });
+						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
+
+					}
+					else if (str.at(j) == 'K') {
+
+						//location of a key
+						keyPos.push_back({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) });
+						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cMagenta, true);
+
+					}
+					else if (str.at(j) == 'T') {
+
+						//location of a trap
+						trapPos.push_back({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) });
+						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cMagenta, true);
+
+					}
+					else if (str.at(j) == '0') {
+
+						//empty space
+						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
+
+					}
+
+					openTiles.push_back({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) });
+					tempInt++;
+
+				}
 
 			}
 
 		}
 
 	}
-
 	for (int z = DISPLAY_TILE; z < DISPLAY_WIDTH; z += DISPLAY_TILE) {
 
 		Play::DrawLine({ z, 0 }, { z, DISPLAY_HEIGHT }, Play::cBlack);

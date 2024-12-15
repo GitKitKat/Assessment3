@@ -66,12 +66,6 @@ void Player::CheckCollision() {
 
 }
 
-void Player::SetPosition(Play::Point2D userPos) {
-
-	characterPos = userPos;
-
-}
-
 void Player::SetPosition(std::vector<Play::Point2D> levelExits) {
 
 	SetPosition(levelExits[0]);

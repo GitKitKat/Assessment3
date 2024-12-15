@@ -92,11 +92,6 @@ void Enemy::LoadInteraction(int difficulty, std::string interactionIndex) {
 					interactionLimit.push_back(newLine.substr(8));
 
 				}
-				else if (newLine.rfind("(Stat)", 0) == 0) {
-
-					interactionLimit.resize(stoi(newLine.substr(6)));
-
-				}
 				else if (newLine.rfind("(Desc)", 0) == 0) {
 
 					enemyInteraction.push_back(newLine.substr(6));
@@ -129,16 +124,8 @@ std::vector<std::string> Enemy::GetInteraction() {
 
 int Enemy::InteractionChoice() {
 
-	if (interactionLimit.size() == 6) {
+	return GetRandom(interactionLimit.size());
 
-		return GetRandom(2);
-
-	}
-	else {
-
-		return GetRandom(interactionLimit.size());
-
-	}
 }
 
 std::vector<std::string> Enemy::InteractionLimit() {
@@ -151,6 +138,7 @@ void Enemy::SetInteraction(int difficulty) {
 
 	std::string i = std::to_string(GetRandom(4) + 1);
 	enemyInteraction.clear();
+	interactionLimit.clear();
 	LoadInteraction(difficulty, i);
 
 }

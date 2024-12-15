@@ -5,20 +5,33 @@
 Standard header files */
 #include <string>
 
-class NPC {
+#include "Creature.h"
+
+class NPC : public Creature {
 
 public:
 	NPC();
 	~NPC();
 
-	void LoadDialogue();
+	std::vector<std::string> GetDialogueDesc();
+	std::vector<std::string> GetDialogueOptions();
 
-	void SetName();
+	void SetDialogue();
+	void SetDialogue(int currentLevel);
+	void LoadDialogue(int currentLevel);
 	void PrintDialogue();
+
+	bool CheckCollision(Play::Point2D playerPos);
+	void DrawCharacter() override;
 
 private:
 
-	std::string name;
+	int dialogueIndex;
+	std::string itemsFile;
+	std::vector<std::string> dialogueDesc;
+	std::vector<std::string> dialogueChoices;
+	bool levelComplete;
+	std::vector<Play::Point2D> NPCPos;
 
 };
 

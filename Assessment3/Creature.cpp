@@ -4,7 +4,8 @@ This file's header */
 
 Creature::Creature() {
 
-
+	characterPos = { 0.0f, 0.0f };
+	newPos = { 0.0f, 0.0f };
 
 }
 

@@ -3,10 +3,12 @@
   GameManager.cpp
   LevelManager.cpp
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(27,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(139,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(89,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(113,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(545,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(165,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(284,64): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(147,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(127,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(180,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(634,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244: 'initializing': conversion from 'int' to '_Ty1', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         [
@@ -15,17 +17,19 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.3412
   (compiling source file 'Creature.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16):
       the template instantiation context (the oldest one first) is
-          C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Creature.cpp(42,26):
+          C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Creature.cpp(43,26):
           see reference to function template instantiation 'std::pair<const float,std::vector<Play::Point2D,std::allocator<Play::Point2D>>>::pair<int&,std::vector<Play::Point2D,std::allocator<Play::Point2D>>&,0>(_Other1,_Other2) noexcept(false)' being compiled
           with
           [
               _Other1=int &,
               _Other2=std::vector<Play::Point2D,std::allocator<Play::Point2D>> &
           ]
-              C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Creature.cpp(42,25):
+              C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Creature.cpp(43,25):
               see the first reference to 'std::pair<const float,std::vector<Play::Point2D,std::allocator<Play::Point2D>>>::pair' in 'Creature::SetBoundaries'
   
   MainGame.cpp
   NPC.cpp
   Player.cpp
-  HelloWorld.vcxproj -> C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe
+GameManager.obj : error LNK2019: unresolved external symbol "public: void __cdecl Player::SetPosition(struct Play::Vector2f)" (?SetPosition@Player@@QEAAXUVector2f@Play@@@Z) referenced in function "public: void __cdecl GameManager::DrawOptions(class std::vector<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > >)" (?DrawOptions@GameManager@@QEAAXV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Z)
+Player.obj : error LNK2001: unresolved external symbol "public: void __cdecl Player::SetPosition(struct Play::Vector2f)" (?SetPosition@Player@@QEAAXUVector2f@Play@@@Z)
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe : fatal error LNK1120: 1 unresolved externals

@@ -1,5 +1,6 @@
 [Dialogue]
-(NPC)[Duck]
+(NPC)[???]
+(Level)0
 (ID)[0]
 (Line)You're finally here.
 (Line)I've been waiting.
@@ -10,7 +11,6 @@
 [Dialogue]
 (NPC)[Duck]
 (ID)[1]
-(Stat)+
 (Line)I am the Empire's Tenth Shadow, Guardian of the White World.
 (Line)The one who requested you.
 (Choice)I saw 'Duck' on the request form.
@@ -95,7 +95,7 @@
 [End]
 
 [Dialogue]
-(NPC)[King Pompu]
+(NPC)[???]
 (ID)[0]
 (Line)Guhahahaha!
 (Line)The crystallization of chaos is mine!

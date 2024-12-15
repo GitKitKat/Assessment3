@@ -11,6 +11,7 @@ Standard header files */
 #include "Config.h"
 #include "LevelManager.h"
 #include "Player.h"
+#include "NPC.h"
 
 //! @brief Each number represents a different screen displayed in the game window.
 enum GameScreen {
@@ -69,10 +70,15 @@ enum OptionScreen {
 //! @brief Excluding the last (back to previous screen), each number represents a different collectible achievement in the game.
 enum TrophyScreen {
 	// The trophy enums are used to register the user's current choice and the displayed achievement (if achieved during a game).
+	//! @brief Leads to the EASY mode trophy.
 	TROPHY1,
+	//! @brief Leads to the NORMAL mode trophy.
 	TROPHY2,
+	//! @brief Leads to the HARD mode trophy.
 	TROPHY3,
+	//! @brief Leads to the SLOW trophy.
 	TROPHY4,
+	//! @brief Leads to the FAST trophy.
 	TROPHY5,
 	//! @brief Returns the user to the previous screen (MAIN_MENU).
 	TROPHY_BACK
@@ -95,7 +101,7 @@ public:
 	// Handles user interaction (option selection, moving between options) before a game starts
 	int MenuInteraction(int optionValue, int maxValue);
 	// Handles user interaction on the main screen, as it is the only screen that leads to other screens
-	void MenuInteraction(int optionValue, int maxValue, GameScreen newScreen);
+	int MenuInteraction(int optionValue, int maxValue, GameScreen newScreen);
 	// Draws visual elements based on the current screen
 	void DrawOptions(std::vector<std::string> myVector);
 	// Draws text elements (loaded from the ItemList file) based on the current screen
@@ -109,6 +115,7 @@ public:
 	void PlayGame(float elapsedTime);
 	void DrawInteraction(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
 	void InteractionManager(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
+	void DrawDialogue(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
 
 private:
 	/* Variables related to:
@@ -145,6 +152,8 @@ private:
 	LevelManager* currentLevel = new LevelManager;
 	// Handles the player (player colour, position, controls)
 	Player* currentPlayer = new Player;
+	NPC* currentNPCs = new NPC;
+	//bool NPCInteraction;
 
 	/* Displayed game screen */
 	GameScreen currentGameScreen;
@@ -164,6 +173,9 @@ private:
 	std::vector<std::string> TrophyMenu;
 	std::vector<bool> TrophyGet;
 	std::string itemsFile;
+
+	std::vector<std::string> EndMenu;
+	int EndGame;
 
 };
 

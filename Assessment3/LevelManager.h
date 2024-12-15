@@ -32,12 +32,13 @@ public:
 	int GetEnemyChoice(int enemyIndex);
 	void ClearEnemy(int enemyIndex);
 	void ClearObstacles();
-
+	int GetLevelIndex();
 	void CreateObstacles();
 	int ManageEnemies(Play::Point2D playerPos, float elapsedTime);
 	std::vector<std::string> GetEnemyInteraction(int enemyIndex);
-
-	void SetLevel(int newLevel);
+	bool CheckTraps(Play::Point2D playerPos);
+	void SetLevel(float newLevel);
+	void TrapLevel(int increase);
 	void SetLevel();
 	void SetMode(int newDifficulty);
 	
@@ -54,6 +55,7 @@ private:
 	Play::Point2D endPos;
 	std::vector<Play::Point2D> enemyPos;
 	std::vector<Play::Point2D> trapPos;
+	std::vector<Play::Point2D> keyPos;
 	std::vector<Play::Point2D> openTiles;
 
 	std::string TextFile;

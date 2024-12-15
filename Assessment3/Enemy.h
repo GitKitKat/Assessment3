@@ -11,7 +11,7 @@ public:
 	Enemy();
 	~Enemy();
 
-	void CheckCollision() override;
+	void CheckCollision();
 	void DrawCharacter() override;
 
 	bool GetState();

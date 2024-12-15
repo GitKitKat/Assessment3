@@ -22,12 +22,9 @@ public:
 
 	void SetPosition(Play::Point2D designatedPos);
 	void SetBoundaries(std::vector<Play::Point2D> levelBounds);
-
-	virtual void CheckCollision() = 0;
 	virtual void DrawCharacter() = 0;
 
 protected:
-	int stamina;
 
 	float posIncrease;
 	Play::Point2D newPos;

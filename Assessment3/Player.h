@@ -23,7 +23,7 @@ public:
 	//void SetBoundaries(std::vector<Play::Point2D> levelBounds);
 
 	// Check whether or not the player bumps into a wall
-	void CheckCollision() override;
+	void CheckCollision();
 	void DrawCharacter() override;
 
 	bool HandleControls(std::vector<Play::KeyboardButton> gameControls);
