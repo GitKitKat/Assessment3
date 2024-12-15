@@ -74,7 +74,7 @@ void Enemy::LoadInteraction(int difficulty, std::string interactionIndex) {
 				modeFound = true;
 
 			}
-			if (newLine.rfind(newInteraction, 0) == 0) {
+			if (modeFound == true && newLine.rfind(newInteraction, 0) == 0) {
 
 				interactionFound = true;
 

@@ -188,6 +188,15 @@ void LevelManager::SetMode(int newDifficulty) {
 
 }
 
+int LevelManager::GetRandom(int numLimit) {
+	// Get a new random number
+	srand(time(0));
+
+	// Return a random number between 0 and the limit given
+	return int(rand() % numLimit);
+
+}
+
 void LevelManager::LoadLevel() {
 
 	std::string newLevel = "(ID)[" + std::to_string(levelIndex) + "]";
@@ -212,7 +221,7 @@ void LevelManager::LoadLevel() {
 				modeFound = true;
 
 			}
-			if (newLine.rfind(newLevel, 0) == 0) {
+			if (modeFound == true && newLine.rfind(newLevel, 0) == 0) {
 
 				levelFound = true;
 
@@ -282,6 +291,12 @@ void LevelManager::PrintLevel() {
 			str = levelTiles[i];
 			for (int j = 0; j < str.length(); j++) {
 				tempInt = (((DISPLAY_WIDTH / DISPLAY_TILE) - str.length()) * 0.5);
+				if (str.at(j) == 'R') {
+					// Generate a wall or open tile
+					std::string randInt = std::to_string(GetRandom(2));
+					const char* pchar = randInt.c_str();
+					str.at(j) = *pchar;
+				}
 				if (str.at(j) == '1') {
 
 					//wall

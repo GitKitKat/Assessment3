@@ -27,13 +27,8 @@ public:
 	bool HandleControls(int randomNum);
 	Play::Point2D GetPosition();
 
-	//void SetPosition(Play::Point2D designatedPos);
-	//void SetPosition(std::vector<Play::Point2D> enemyPos);
-
 private:
 
-	std::vector<Play::Point2D> enemyPositions;
-//	Play::Point2D enemyPos;
 	std::vector<std::string> interactionLimit;
 	std::vector<std::string> enemyInteraction;
 	bool enemyCleared;

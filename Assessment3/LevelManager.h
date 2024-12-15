@@ -39,6 +39,7 @@ public:
 	bool CheckTraps(Play::Point2D playerPos);
 	void SetLevel(float newLevel);
 	void TrapLevel(int increase);
+	int GetRandom(int numLimit);
 	void SetLevel();
 	void SetMode(int newDifficulty);
 	

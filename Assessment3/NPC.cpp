@@ -98,7 +98,8 @@ void NPC::LoadDialogue(int currentLevel) {
 
 				levelFound = true;
 
-			} else if (newLine == newDialogue) {
+			}
+			if (levelFound == true && newLine == newDialogue) {
 
 				dialogueFound = true;
 
@@ -149,4 +150,41 @@ void NPC::LoadDialogue(int currentLevel) {
 
 	inFile.close();
 
+}
+
+int NPC::PrintDialogue(bool currentControls) {
+
+	Play::DrawRect({ DISPLAY_TILE, DISPLAY_HEIGHT * 0.5f }, { DISPLAY_WIDTH - DISPLAY_TILE, DISPLAY_HEIGHT - DISPLAY_TILE }, Play::cWhite, true);
+	Play::DrawRect({ DISPLAY_TILE + DISPLAY_TILE * 0.25f, DISPLAY_HEIGHT * 0.5f + DISPLAY_TILE * 0.25f }, { DISPLAY_WIDTH - (DISPLAY_TILE + DISPLAY_TILE * 0.25f), DISPLAY_HEIGHT - (DISPLAY_TILE + DISPLAY_TILE * 0.25f) }, Play::cBlack, true);
+	int a = int(dialogueDesc.size());
+
+	for (int i = 0; i < a; i++) {
+
+		const char* charPtr = dialogueDesc[i].c_str();
+		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - ((3 + i) * DISPLAY_TILE) }, charPtr, Play::cWhite, true);
+
+	}
+	if (dialogueChoices.size() == 0) {
+		if (earlyExit == false) {
+			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press SPACE to continue", Play::cWhite, true);
+		}
+	}
+	Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press X to leave", Play::cWhite, true);
+	std::vector<std::string> ctrlArr;
+
+	if (currentControls == true) {
+		ctrlArr = { "A", "W", "D", "S" };
+	}
+	else {
+		ctrlArr = { "LEFT", "UP", "RIGHT", "DOWN" };
+	}
+	for (int i = 0; i < dialogueChoices.size(); i++) {
+
+		const char* choicePtr = dialogueChoices[i].c_str();
+		const char* controlsPtr = ctrlArr[i].c_str();
+		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, choicePtr, Play::cWhite, true);
+		Play::DrawDebugText({ (DISPLAY_WIDTH * 0.5f) - DISPLAY_TILE * 2, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, controlsPtr, Play::cWhite, true);
+
+	}
+	return dialogueChoices.size();
 }

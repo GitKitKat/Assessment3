@@ -44,6 +44,98 @@
 (Choice)BLUE
 [End]
 
+[Enemy]
+(ID)[1]
+(Mode)[2]
+(Name)[Rock, Paper, Scissors]
+(Desc)A game of rock, paper and scissors.
+(Desc)Choose one of the three to counter the opponent.
+(Desc)If you succeed twice, you win.
+(Choice)ROCK
+(Choice)PAPER
+(Choice)SCISSORS
+[End]
+
+[Enemy]
+(ID)[2]
+(Mode)[2]
+(Name)[Coin Flip]
+(Desc)A game of flipping coins.
+(Desc)Predict the next flip, between heads and tails.
+(Desc)If you succeed twice, you win.
+(Choice)HEADS
+(Choice)TAILS
+[End]
+
+[Enemy]
+(ID)[3]
+(Mode)[2]
+(Name)[Higher or Lower]
+(Desc)A game in which a six-sided die is rolled.
+(Desc)Guess whether the next number will be higher or lower than 3.
+(Desc)If you guess correctly twice, you win.
+(Choice)LOWER
+(Choice)HIGHER
+[End]
+
+[Enemy]
+(ID)[4]
+(Mode)[2]
+(Name)[Blue or Yellow]
+(Desc)A game of choice.
+(Desc)If both players choose blue, you win.
+(Desc)If one player chooses yellow, you lose.
+(Desc)If both players choose yellow, you win.
+(Choice)YELLOW
+(Choice)BLUE
+[End]
+
+[Enemy]
+(ID)[1]
+(Mode)[3]
+(Name)[Rock, Paper, Scissors]
+(Desc)A game of rock, paper and scissors.
+(Desc)Choose one of the three to counter the opponent.
+(Desc)If you succeed twice, you win.
+(Choice)ROCK
+(Choice)PAPER
+(Choice)SCISSORS
+[End]
+
+[Enemy]
+(ID)[2]
+(Mode)[3]
+(Name)[Coin Flip]
+(Desc)A game of flipping coins.
+(Desc)Predict the next flip, between heads and tails.
+(Desc)If you succeed twice, you win.
+(Choice)HEADS
+(Choice)TAILS
+[End]
+
+[Enemy]
+(ID)[3]
+(Mode)[3]
+(Name)[Higher or Lower]
+(Desc)A game in which a six-sided die is rolled.
+(Desc)Guess whether the next number will be higher or lower than 3.
+(Desc)If you guess correctly twice, you win.
+(Choice)LOWER
+(Choice)HIGHER
+[End]
+
+[Enemy]
+(ID)[4]
+(Mode)[3]
+(Name)[Blue or Yellow]
+(Desc)A game of choice.
+(Desc)If both players choose blue, you win.
+(Desc)If one player chooses yellow, you lose.
+(Desc)If both players choose yellow, you win.
+(Choice)YELLOW
+(Choice)BLUE
+[End]
+
 [Tip]
 (Name)Controls
 (Desc)Lefty or Righty?

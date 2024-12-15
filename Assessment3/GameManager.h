@@ -115,7 +115,7 @@ public:
 	void PlayGame(float elapsedTime);
 	void DrawInteraction(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
 	void InteractionManager(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
-	void DrawDialogue(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
+	void DrawDialogue();
 
 private:
 	/* Variables related to:

@@ -60,57 +60,24 @@ GameManager::~GameManager() {
 	// Destructor
 }
 
-void GameManager::DrawDialogue(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices) {
+void GameManager::DrawDialogue() {
 
-	if (Play::KeyPressed(gameControls[0]) && interactionChoices.size() >= 1) {
+	int tempInt = currentNPCs->PrintDialogue(currentControls);
+
+	if (Play::KeyPressed(gameControls[0]) && tempInt >= 1) {
 		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 1);
 	}
-	else if (Play::KeyPressed(gameControls[1]) && interactionChoices.size() >= 2) {
+	else if (Play::KeyPressed(gameControls[1]) && tempInt >= 2) {
 		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 2);
 	}
-	else if (Play::KeyPressed(gameControls[2]) && interactionChoices.size() >= 3) {
+	else if (Play::KeyPressed(gameControls[2]) && tempInt >= 3) {
 		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 3);
 	}
-	else if (Play::KeyPressed(gameControls[3]) && interactionChoices.size() >= 4) {
+	else if (Play::KeyPressed(gameControls[3]) && tempInt >= 4) {
 		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 4);
 	}
-	else if (Play::KeyPressed(Play::KEY_SPACE) && interactionChoices.size() == 0) {
+	else if (Play::KeyPressed(Play::KEY_SPACE) && tempInt == 0) {
 		currentNPCs->ResetDialogue(currentLevel->GetLevelIndex(), 1);
-	}
-	interactionDesc = currentNPCs->GetDialogueDesc();
-	interactionChoices = currentNPCs->GetDialogueOptions();
-
-	Play::DrawRect({ DISPLAY_TILE, DISPLAY_HEIGHT * 0.5f }, { DISPLAY_WIDTH - DISPLAY_TILE, DISPLAY_HEIGHT - DISPLAY_TILE }, Play::cWhite, true);
-	Play::DrawRect({ DISPLAY_TILE + DISPLAY_TILE * 0.25f, DISPLAY_HEIGHT * 0.5f + DISPLAY_TILE * 0.25f }, { DISPLAY_WIDTH - (DISPLAY_TILE + DISPLAY_TILE * 0.25f), DISPLAY_HEIGHT - (DISPLAY_TILE + DISPLAY_TILE * 0.25f) }, Play::cBlack, true);
-	int a = int(interactionDesc.size());
-
-	for (int i = 0; i < a; i++) {
-
-		const char* charPtr = interactionDesc[i].c_str();
-		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - ((3 + i) * DISPLAY_TILE) }, charPtr, Play::cWhite, true);
-
-	}
-	if (interactionChoices.size() == 0) {
-		if (currentNPCs->NextDialogue() == false) {
-			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press SPACE to continue", Play::cWhite, true);
-		}
-	}
-	Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press X to leave", Play::cWhite, true);
-	std::vector<std::string> ctrlArr;
-
-	if (currentControls == true) {
-		ctrlArr = { "A", "W", "D", "S" };
-	}
-	else {
-		ctrlArr = { "LEFT", "UP", "RIGHT", "DOWN" };
-	}
-	for (int i = 0; i < interactionChoices.size(); i++) {
-
-		const char* choicePtr = interactionChoices[i].c_str();
-		const char* controlsPtr = ctrlArr[i].c_str();
-		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, choicePtr, Play::cWhite, true);
-		Play::DrawDebugText({ (DISPLAY_WIDTH * 0.5f) - DISPLAY_TILE * 2, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, controlsPtr, Play::cWhite, true);
-
 	}
 
 }
@@ -299,10 +266,10 @@ void GameManager::PlayGame(float elapsedTime) {
 
 		currentLevel->CreateObstacles();
 		currentPlayer->SetExits(userPos);
-		if (tempInt == 0 || tempInt == 7) {
+		if (visibleCutscenes == true && (tempInt == 0 || tempInt == 7)) {
 			userPos[1].y -= DISPLAY_TILE;
 			currentNPCs->SetPosition(userPos[1]);
-			currentNPCs->LoadDialogue(tempInt);
+			currentNPCs->ResetDialogue(0, -1);
 		}
 		levelStart = false;
 
@@ -343,9 +310,7 @@ void GameManager::PlayGame(float elapsedTime) {
 			currentNPCs->DrawCharacter();
 		}
 		if (currentNPCs->CheckCollision(currentPlayer->GetPosition())) {
-			std::vector<std::string> dialogueDesc = currentNPCs->GetDialogueDesc();
-			std::vector<std::string> dialogueChoices = currentNPCs->GetDialogueOptions();
-			DrawDialogue(dialogueDesc, dialogueChoices);
+			DrawDialogue();
 		}
 		else {
 			currentPlayer->SetBoundaries(currentLevel->GetBoundaries());
@@ -680,9 +645,6 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 			levelStart = true;
 			updateInteraction.clear();
 			updateInteraction = { false, true, false, false };
-			if (visibleCutscenes == true) {
-				currentNPCs->ResetDialogue(0,-1);
-			}
 			holdInteraction[2] = -1;
 			characterScene[0] = -1;
 			screenTimer = 0.0f;
@@ -750,7 +712,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
-				if (currentDifficulty < gameDifficultyOptions.size() + 1) {
+				if (currentDifficulty < gameDifficultyOptions.size()) {
 
 					currentDifficulty++;
 

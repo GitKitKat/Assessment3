@@ -21,6 +21,7 @@ public:
 	bool DialogueEnd();
 	bool NextDialogue();
 	void LoadDialogue(int currentLevel);
+	int PrintDialogue(bool currentControls);
 
 	bool CheckCollision(Play::Point2D playerPos);
 	void DrawCharacter() override;
