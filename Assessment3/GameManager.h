@@ -107,6 +107,8 @@ public:
 
 	// Handles interactions between the current active level and player
 	void PlayGame(float elapsedTime);
+	void DrawInteraction(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
+	void InteractionManager(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
 
 private:
 	/* Variables related to:
@@ -135,6 +137,10 @@ private:
 	/* Gameplay */
 	// Check whether or not a new level was entered (if true, resets character positions)
 	bool levelStart;
+	int characterScene[1];
+	Play::Point2D playerOldPos;
+	std::vector<bool> updateInteraction;
+	int holdInteraction[3];
 	// Handles the game level (displayed level, enemies, NPCs, positions of entrance, exit, and traps)
 	LevelManager* currentLevel = new LevelManager;
 	// Handles the player (player colour, position, controls)
@@ -157,6 +163,7 @@ private:
 	std::map<std::string, std::vector<std::string>> TrophyMap;
 	std::vector<std::string> TrophyMenu;
 	std::vector<bool> TrophyGet;
+	std::string itemsFile;
 
 };
 

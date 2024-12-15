@@ -14,7 +14,16 @@ public:
 	void CheckCollision() override;
 	void DrawCharacter() override;
 
-	int GetDirection();
+	bool GetState();
+	void SetState();
+
+	std::vector<std::string> GetInteraction();
+	int InteractionChoice();
+	std::vector<std::string> InteractionLimit();
+
+	void SetInteraction(int difficulty);
+	void LoadInteraction(int difficulty, std::string interactionIndex);
+	int GetRandom(int numLimit);
 	bool HandleControls(int randomNum);
 	Play::Point2D GetPosition();
 
@@ -25,9 +34,12 @@ private:
 
 	std::vector<Play::Point2D> enemyPositions;
 //	Play::Point2D enemyPos;
+	std::vector<std::string> interactionLimit;
+	std::vector<std::string> enemyInteraction;
 	bool enemyCleared;
 	bool enemyMovement;
 	Play::Colour enemyColours[2] = { Play::cRed, Play::cGreen };
+	std::string itemsFile;
 
 };
 

@@ -2,13 +2,11 @@
   Enemy.cpp
   GameManager.cpp
   LevelManager.cpp
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(26,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(342,83): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(67,12): warning C4456: declaration of 'enemyMoved' hides previous local declaration
-      C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(57,7):
-      see declaration of 'enemyMoved'
-  
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(67,12): warning C4189: 'enemyMoved': local variable is initialized but not referenced
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(27,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(139,41): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(89,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(113,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(545,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244: 'initializing': conversion from 'int' to '_Ty1', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         [
@@ -30,5 +28,4 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.3412
   MainGame.cpp
   NPC.cpp
   Player.cpp
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Player.cpp(34,26): warning C4244: '=': conversion from 'unsigned __int64' to 'float', possible loss of data
   HelloWorld.vcxproj -> C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe

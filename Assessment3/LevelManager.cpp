@@ -14,6 +14,7 @@ LevelManager::LevelManager() {
 	endPos = { 0.0f, 0.0f };
 	encounter = false;
 	secondsTimer = 0.0f;
+	TextFile = "Data\\Textfiles\\Levels.txt";
 
 }
 
@@ -24,9 +25,16 @@ LevelManager::~LevelManager() {
 std::vector<Play::Point2D> LevelManager::GetBoundaries() {
 
 	std::vector<Play::Point2D> tempVector = openTiles;
-	//openTiles.clear();
-
 	return tempVector;
+
+}
+
+void LevelManager::ClearObstacles() {
+
+	for (int i = 0; i < allEnemies.size(); i++) {
+		delete allEnemies[i];
+	}
+	allEnemies.clear();
 
 }
 
@@ -38,13 +46,14 @@ void LevelManager::CreateObstacles() {
 
 	}
 
-	if (enemyPos.size() > 0) {
+	if (enemyPos.size() > 0 && allEnemies.size() == 0) {
 
 		for (int i = 0; i < enemyPos.size(); i++) {
 
 			Enemy* roamingEnemy = new Enemy();
 			roamingEnemy->SetBoundaries(GetBoundaries());
 			roamingEnemy->SetPosition(enemyPos[i]);
+			roamingEnemy->SetInteraction(difficulty);
 			allEnemies.push_back(roamingEnemy);
 
 		}
@@ -53,7 +62,31 @@ void LevelManager::CreateObstacles() {
 
 }
 
-void LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
+std::vector<std::string> LevelManager::GetEnemyInteraction(int enemyIndex) {
+
+	return allEnemies[enemyIndex]->GetInteraction();
+
+}
+
+std::vector<std::string> LevelManager::GetInteractionLimit(int enemyIndex) {
+
+	return allEnemies[enemyIndex]->InteractionLimit();
+
+}
+
+int LevelManager::GetEnemyChoice(int enemyIndex) {
+
+	return allEnemies[enemyIndex]->InteractionChoice();
+
+}
+
+void LevelManager::ClearEnemy(int enemyIndex) {
+
+	allEnemies[enemyIndex]->SetState();
+
+}
+
+int LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
 	bool enemyMoved = false;
 	secondsTimer += elapsedTime;
 
@@ -63,23 +96,28 @@ void LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
 
 			if (secondsTimer >= 1.0f) {
 				while (enemyMoved == false) {
-					if (allEnemies[i]->HandleControls(allEnemies[i]->GetDirection()) == true) {
-						bool enemyMoved = true;
+					if (allEnemies[i]->HandleControls(allEnemies[i]->GetRandom(4)) == true) {
+						enemyMoved = true;
 						break;
 					}
 				}
 				secondsTimer = 0.0f;
 			}
+			allEnemies[i]->DrawCharacter();
 			if (allEnemies[i]->GetPosition() == playerPos) {
 
-				encounter = true;
+				if (allEnemies[i]->GetState() == false) {
 
+					return i;
+
+				}
+				
 			}
-			allEnemies[i]->DrawCharacter();
 
 		}
 
 	}
+	return -1;
 
 }
 
@@ -104,7 +142,7 @@ void LevelManager::SetMode(int newDifficulty) {
 void LevelManager::LoadLevel() {
 
 	std::string newLevel = "(ID)[" + std::to_string(levelIndex) + "]";
-	std::string newMode = "(ID)[" + std::to_string(difficulty) + "]";
+	std::string newMode = "(Mode)[" + std::to_string(difficulty) + "]";
 	std::ifstream inFile(TextFile);
 	std::string newLine;
 	bool levelFound = false;
@@ -230,8 +268,8 @@ void LevelManager::PrintLevel() {
 
 	for (int z = DISPLAY_TILE; z < DISPLAY_WIDTH; z += DISPLAY_TILE) {
 
-		Play::DrawLine({ z, 0 }, { z, DISPLAY_HEIGHT }, Play::cGrey);
-		Play::DrawLine({ 0, z }, { DISPLAY_WIDTH, z }, Play::cGrey);
+		Play::DrawLine({ z, 0 }, { z, DISPLAY_HEIGHT }, Play::cBlack);
+		Play::DrawLine({ 0, z }, { DISPLAY_WIDTH, z }, Play::cBlack);
 
 	}
 
@@ -241,7 +279,7 @@ void LevelManager::PrintLevel() {
 
 std::vector<Play::Point2D> LevelManager::GetLevel() {
 
-	Play::ClearDrawingBuffer(Play::cBlack);
+	Play::ClearDrawingBuffer(Play::cGrey);
 
 	LoadLevel();
 	PrintLevel();

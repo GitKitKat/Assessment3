@@ -27,8 +27,6 @@ public:
 	virtual void DrawCharacter() = 0;
 
 protected:
-	int health;
-	int physAtk;
 	int stamina;
 
 	float posIncrease;

@@ -95,49 +95,6 @@
 [End]
 
 [Dialogue]
-(NPC)[Betting Guard]
-(ID)[0]
-(Line)Hold it right there.
-(Line)I've got an odd feeling about you. Why's that?
-(Choice)We've met before.
-(Choice)I want to pass.
-[End]
-
-[Dialogue]
-(NPC)[Betting Guard]
-(ID)[1.1]
-(Line)Uh-huh, and I'm Robin Hood.
-[End]
-
-[Dialogue]
-(NPC)[Betting Guard]
-(ID)[1.2]
-(Line)No can do.
-[End]
-
-[Dialogue]
-(NPC)[Betting Guard]
-(ID)[2.1]
-(Line)Scram.
-[End]
-
-[Dialogue]
-(NPC)[Betting Guard]
-(ID)[2.2]
-(Line)Hm.
-(Line)Hmm...
-[End]
-
-[Dialogue]
-(NPC)[Betting Guard]
-(ID)[2.2]
-(Line)Your coin pouch looks a little heavy...
-(Line)Lemme help with that.
-(Choice)Gamble with the guard.
-(Choice)Leave.
-[End]
-
-[Dialogue]
 (NPC)[King Pompu]
 (ID)[0]
 (Line)Guhahahaha!

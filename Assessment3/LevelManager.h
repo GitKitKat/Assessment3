@@ -28,8 +28,14 @@ public:
 	std::vector<Play::Point2D> GetBoundaries();
 	void LoadLevel();
 
+	std::vector<std::string> GetInteractionLimit(int enemyIndex);
+	int GetEnemyChoice(int enemyIndex);
+	void ClearEnemy(int enemyIndex);
+	void ClearObstacles();
+
 	void CreateObstacles();
-	void ManageEnemies(Play::Point2D playerPos, float elapsedTime);
+	int ManageEnemies(Play::Point2D playerPos, float elapsedTime);
+	std::vector<std::string> GetEnemyInteraction(int enemyIndex);
 
 	void SetLevel(int newLevel);
 	void SetLevel();
@@ -50,7 +56,7 @@ private:
 	std::vector<Play::Point2D> trapPos;
 	std::vector<Play::Point2D> openTiles;
 
-	std::string TextFile = "Data\\Textfiles\\Levels.txt";
+	std::string TextFile;
 	bool isNew = true;
 	std::vector<std::string> levelTiles;
 

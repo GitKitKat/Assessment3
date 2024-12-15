@@ -12,6 +12,7 @@ Enemy::Enemy() {
 	newPos = { 0.0f, 0.0f };
 	enemyCleared = false;
 	enemyMovement = false;
+	itemsFile = "Data\\Textfiles\\ItemList.txt";
 
 }
 
@@ -21,18 +22,136 @@ Enemy::~Enemy() {
 
 }
 
-int Enemy::GetDirection() {
+int Enemy::GetRandom(int numLimit) {
 	// Get a new random number
 	srand(time(0));
 
-	// Return a random number between 0 and 3 (including)
-	return rand() % 4;
+	// Return a random number between 0 and the limit given
+	return int(rand() % numLimit);
 
 }
 
 Play::Point2D Enemy::GetPosition() {
 
 	return characterPos;
+
+}
+
+void Enemy::SetState() {
+
+	enemyCleared = true;
+
+
+}
+
+bool Enemy::GetState() {
+
+	return enemyCleared;
+
+}
+
+void Enemy::LoadInteraction(int difficulty, std::string interactionIndex) {
+
+	std::string newInteraction = "(ID)[" + interactionIndex + "]";
+	std::string newMode = "(Mode)[" + std::to_string(difficulty) + "]";
+	std::ifstream inFile(itemsFile);
+	std::string newLine;
+	bool interactionFound = false;
+	bool modeFound = false;
+
+	if (!inFile.is_open()) {
+
+		return;
+
+	}
+	else {
+
+		// This loop reads and relays a specified interaction.
+		while (std::getline(inFile, newLine)) {
+
+			if (newLine.rfind(newMode, 0) == 0) {
+
+				modeFound = true;
+
+			}
+			if (newLine.rfind(newInteraction, 0) == 0) {
+
+				interactionFound = true;
+
+			}
+
+			if (modeFound && interactionFound) {
+
+				if (newLine.rfind("(Name)", 0) == 0) {
+
+					enemyInteraction.push_back(newLine.substr(6));
+					
+				}
+				else if (newLine.rfind("(Choice)", 0) == 0) {
+
+					interactionLimit.push_back(newLine.substr(8));
+
+				}
+				else if (newLine.rfind("(Stat)", 0) == 0) {
+
+					interactionLimit.resize(stoi(newLine.substr(6)));
+
+				}
+				else if (newLine.rfind("(Desc)", 0) == 0) {
+
+					enemyInteraction.push_back(newLine.substr(6));
+
+				}
+
+				else if (newLine == "[End]") {
+
+					modeFound = false;
+					interactionFound = false;
+					break;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	inFile.close();
+
+}
+
+std::vector<std::string> Enemy::GetInteraction() {
+
+	return enemyInteraction;
+
+}
+
+int Enemy::InteractionChoice() {
+
+	if (interactionLimit.size() == 6) {
+
+		return GetRandom(2);
+
+	}
+	else {
+
+		return GetRandom(interactionLimit.size());
+
+	}
+}
+
+std::vector<std::string> Enemy::InteractionLimit() {
+
+	return interactionLimit;
+
+}
+
+void Enemy::SetInteraction(int difficulty) {
+
+	std::string i = std::to_string(GetRandom(4) + 1);
+	enemyInteraction.clear();
+	LoadInteraction(difficulty, i);
 
 }
 

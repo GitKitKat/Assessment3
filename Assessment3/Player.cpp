@@ -31,12 +31,12 @@ void Player::CheckCollision() {
 	float z;
 	if (itr->first == 0) {
 
-		z = tempBoundaries.size();
+		z = float(tempBoundaries.size());
 
 	}
 	else {
 
-		z = tempBoundaries.size() + itr->first;
+		z = float(tempBoundaries.size() + itr->first);
 
 	}
 
@@ -100,7 +100,7 @@ void Player::DrawCharacter() {
 bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
 	//Player moves faster when holding SHIFT
 	if (Play::KeyDown(Play::KEY_SHIFT)) {
-		posIncrease = 1.5f;
+		posIncrease = 2.0f;
 	}
 	else {
 		posIncrease = 1.0f;
