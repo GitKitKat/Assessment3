@@ -53,7 +53,6 @@ bool Enemy::GetState() {
 void Enemy::LoadInteraction(int difficulty, std::string interactionIndex) {
 
 	std::string newInteraction = "(ID)[" + interactionIndex + "]";
-	std::string newMode = "(Mode)[" + std::to_string(difficulty) + "]";
 	std::ifstream inFile(itemsFile);
 	std::string newLine;
 	bool interactionFound = false;
@@ -69,10 +68,14 @@ void Enemy::LoadInteraction(int difficulty, std::string interactionIndex) {
 		// This loop reads and relays a specified interaction.
 		while (std::getline(inFile, newLine)) {
 
-			if (newLine.rfind(newMode, 0) == 0) {
+			if (newLine.rfind("(Mode)", 0) == 0) {
+				std::string newMode = newLine.substr(7);
+				newMode.pop_back();
+				if (difficulty >= stoi(newMode)) {
 
-				modeFound = true;
+					modeFound = true;
 
+				}
 			}
 			if (modeFound == true && newLine.rfind(newInteraction, 0) == 0) {
 
@@ -136,7 +139,7 @@ std::vector<std::string> Enemy::InteractionLimit() {
 
 void Enemy::SetInteraction(int difficulty) {
 
-	std::string i = std::to_string(GetRandom(4) + 1);
+	std::string i = std::to_string(GetRandom(difficulty + 1) + 1);
 	enemyInteraction.clear();
 	interactionLimit.clear();
 	LoadInteraction(difficulty, i);

@@ -13,75 +13,56 @@ Standard header files */
 #include "Player.h"
 #include "NPC.h"
 
-//! @brief Each number represents a different screen displayed in the game window.
+// Each number represents a different screen displayed in the game window.
 enum GameScreen {
-	//! @brief The opening screen. Non-interactive, displays the game title.
+	// The opening screen. Non-interactive, displays the game title.
 	SPLASH,
-	//! @brief Interactive screen after the SPLASH, leads to the OPTION, TROPHY and PLAY screens.
+	// Interactive screen after the SPLASH, leads to the OPTION, TROPHY and PLAY screens.
 	MAIN_MENU,
-	//! @brief Interactive. Leads to the OptionScreen enum. Displays game and player controls.
+	// Interactive. Leads to the OptionScreen enum. Displays game and player controls.
 	OPTION_MENU,
-	//! @brief Interactive. Leads to the TrophyScreen enum. Displays game achievements.
+	// Interactive. Leads to the TrophyScreen enum. Displays game achievements.
 	TROPHY_MENU,
-	//! @brief Leads to the interactive game.
+	// Leads to the interactive game.
 	PLAY,
-	//! @brief Leads to the conclusion screen after a game ends. 
+	// Leads to the conclusion screen after a game ends. 
 	GAME_END,
-	//! @brief Leads to closing the game window.
+	// Leads to closing the game window.
 	GAME_EXIT
 
 };
 
 // Within the 'MAIN_MENU' screen, accessible from the GameScreen enum.
-//! @brief Each number represents an interactive element related to the game.
+// Each number represents an interactive element related to the game.
 enum MainMenuScreen {
-	//! @brief Only appears after a game has been entered once. Leads a user to continue from where they stopped.
+	// Only appears after a game has been entered once. Leads a user to continue from where they stopped.
 	CONTINUE,
-	//! @brief Leads to creating a new game with reset positions.
+	// Leads to creating a new game with reset positions.
 	START,
-	//! @brief Leads to the OPTIONS_MENU screen.
+	// Leads to the OPTIONS_MENU screen.
 	OPTIONS,
-	//! @brief Leads to the TROPHY_MENU screen.
+	// Leads to the TROPHY_MENU screen.
 	TROPHIES,
-	//! @brief Leads to the GAME_EXIT screen.
+	// Leads to the GAME_EXIT screen.
 	EXIT
 
 };
 
 // Within the 'OPTIONS' screen, accessible from the MainMenuScreen enum.
-//! @brief Excluding the last (back to previous screen), each number represents the current audio & visual settings of the game (can be changed).
+// Excluding the last (back to previous screen), each number represents the current audio & visual settings of the game (can be changed).
 enum OptionScreen {
-	//! @brief Leads to changing the current sound output.
+	// Leads to changing the current sound output.
 	VOLUME,
-	//! @brief Leads to changing the display (on/off) of character dialogues.
+	// Leads to changing the display (on/off) of character dialogues.
 	CUTSCENES,
-	//! @brief Leads to changing the game difficulty.
+	// Leads to changing the game difficulty.
 	DIFFICULTY,
-	//! @brief Leads to changing the game controls (input keys).
+	// Leads to changing the game controls (input keys).
 	CONTROLS,
-	//! @brief Leads to chaning the player's visuals.
+	// Leads to chaning the player's visuals.
 	PLAYER,
-	//! @brief Returns the user to the previous screen (MAIN_MENU).
+	// Returns the user to the previous screen (MAIN_MENU).
 	OPTION_BACK
-
-};
-
-// Within the 'TROPHIES' screen, accessible from the MainMenuScreen enum.
-//! @brief Excluding the last (back to previous screen), each number represents a different collectible achievement in the game.
-enum TrophyScreen {
-	// The trophy enums are used to register the user's current choice and the displayed achievement (if achieved during a game).
-	//! @brief Leads to the EASY mode trophy.
-	TROPHY1,
-	//! @brief Leads to the NORMAL mode trophy.
-	TROPHY2,
-	//! @brief Leads to the HARD mode trophy.
-	TROPHY3,
-	//! @brief Leads to the SLOW trophy.
-	TROPHY4,
-	//! @brief Leads to the FAST trophy.
-	TROPHY5,
-	//! @brief Returns the user to the previous screen (MAIN_MENU).
-	TROPHY_BACK
 
 };
 
@@ -95,7 +76,8 @@ public:
 	~GameManager();
 
 	// Reads and stores data from the ItemList text file in respective variables
-	void LoadInfo(std::string keyword, int max, std::vector<std::string>& existingVector, std::map<std::string, std::vector<std::string>>& existingMap, std::vector<bool> myVector = { true });
+	void LoadInfo(std::string keyword, std::string file, int max, std::vector<std::string>& existingVector, std::map<std::string, std::vector<std::string>>& existingMap, std::vector<bool> myVector = { true });
+	void PrintInfo(std::string keyword, std::string file, std::vector<std::string> itemName, std::map<std::string, std::vector<std::string>> itemMap, std::vector<bool> itemGotten);
 
 	/* UI functions: */
 	// Handles user interaction (option selection, moving between options) before a game starts
@@ -168,11 +150,12 @@ private:
 	std::vector<std::string> currentOptionValues;
 	std::vector<std::string> gameDifficultyOptions;
 
-	TrophyScreen currentTrophyMenuOption;
+	int currentTrophyMenuOption;
 	std::map<std::string, std::vector<std::string>> TrophyMap;
 	std::vector<std::string> TrophyMenu;
 	std::vector<bool> TrophyGet;
 	std::string itemsFile;
+	std::string trophyFile;
 
 	std::vector<std::string> EndMenu;
 	int EndGame;

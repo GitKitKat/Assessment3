@@ -31,7 +31,7 @@ private:
 	//Play::Point2D playerPos;
 	Play::Point2D endPos;
 	Play::Point2D playerDirection;
-	Play::Colour playerColour[1] = { Play::cWhite };
+	Play::Colour playerColour[1] = { Play::cBlue };
 	
 };
 

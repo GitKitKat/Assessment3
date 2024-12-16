@@ -27,32 +27,33 @@ GameManager::GameManager() {
 
 	visibleCutscenes = true;
 	currentDifficulty = 1;
-	currentPlayerColour = 1;
+	currentPlayerColour = 0;
 	characterScene[0] = -1 ;
 
 	currentGameScreen = SPLASH;
 	currentMainMenuOption = START;
 	currentOptionMenuOption = VOLUME;
-	currentTrophyMenuOption = TROPHY1;
+	currentTrophyMenuOption = 0;
 	EndGame = 0;
 
 	// Stores colours that a user can choose from for the player
-	playerColours = { Play::cCyan, Play::cMagenta, Play::cOrange };
+	playerColours = { Play::cBlue, Play::cBlack, Play::cWhite, Play::cCyan, Play::cOrange };
 
 	gameControls = { Play::KEY_A, Play::KEY_W, Play::KEY_D, Play::KEY_S };
 	MainMenu = { " ", "NEW GAME", "OPTIONS", "TROPHIES", "EXIT" };
 	OptionMenu = { "VOLUME", "CUTSCENES", "DIFFICULTY", "CONTROLS", "PLAYER" };
 	EndMenu = { "PLAY AGAIN", "EXIT" };
 
-	currentOptionValues = { " ", "ON", "EASY", "WASD", " " };
+	currentOptionValues = { std::to_string(int(gameVolume) * 100) + "%", "ON", "EASY", "WASD", " " };
 	gameDifficultyOptions = { "EASY", "NORMAL", "HARD" };
 
 	itemsFile = "Data\\Textfiles\\ItemList.txt";
+	trophyFile = "Data\\Textfiles\\TrophyList.txt";
 
 	// Reads and stores data related to game tips (tagline, description)
-	LoadInfo("[Tip]", 5, tipCarousel, TipMap);
+	LoadInfo("[Tip]", itemsFile, 5, tipCarousel, TipMap);
 	// Reads and stores data related to game trophies (name, how it was achieved)
-	LoadInfo("[Trophy]", TROPHY_BACK, TrophyMenu, TrophyMap, TrophyGet);
+	LoadInfo("[Trophy]", trophyFile, 6, TrophyMenu, TrophyMap, TrophyGet);
 
 }
 
@@ -269,7 +270,7 @@ void GameManager::PlayGame(float elapsedTime) {
 		if (visibleCutscenes == true && (tempInt == 0 || tempInt == 7)) {
 			userPos[1].y -= DISPLAY_TILE;
 			currentNPCs->SetPosition(userPos[1]);
-			currentNPCs->ResetDialogue(0, -1);
+			//currentNPCs->ResetDialogue(0, -1);
 		}
 		levelStart = false;
 
@@ -332,8 +333,7 @@ void GameManager::PlayGame(float elapsedTime) {
 		if (currentLevel->GetLevelIndex() == (8)) {
 			currentGameScreen = GAME_END;
 			return;
-		}
-		if (tempInt + 1 == 7) {
+		} if (currentLevel->GetLevelIndex() == 1 && visibleCutscenes == true) {
 			currentNPCs->ResetDialogue(7, -1);
 		}
 		levelStart = true;
@@ -345,9 +345,37 @@ void GameManager::PlayGame(float elapsedTime) {
 
 }
 
-void GameManager::LoadInfo(std::string keyword, int max, std::vector<std::string>& existingVector, std::map<std::string, std::vector<std::string>>& existingMap, std::vector<bool> myVector) {
+void GameManager::PrintInfo(std::string keyword, std::string file, std::vector<std::string> itemName, std::map<std::string, std::vector<std::string>> itemMap, std::vector<bool> itemGotten) {
 
-	std::ifstream inFile(itemsFile);
+	std::ofstream outFile(file);
+	if (!outFile.is_open()) {
+		return;
+	}
+	else {
+		for (int i = 0; i < itemMap.size(); i++) {
+
+			outFile << keyword << std::endl;
+			outFile << "(Name)" << itemName[i] << std::endl;
+			for (std::string j : itemMap.at(itemName[i])) {
+				outFile << "(Desc)" << j << std::endl;
+			}
+			if (itemGotten[i] == true) {
+				outFile << "(Get)" << "T" << std::endl;
+			}
+			else {
+				outFile << "(Get)" << "F" << std::endl;
+			}
+			outFile << "[End]" << std::endl;
+			outFile << "\n";
+
+		}
+	}
+
+}
+
+void GameManager::LoadInfo(std::string keyword, std::string file, int max, std::vector<std::string>& existingVector, std::map<std::string, std::vector<std::string>>& existingMap, std::vector<bool> myVector) {
+
+	std::ifstream inFile(file);
 	std::string newLine;
 	std::string holdItemName;
 	std::vector<std::string> holdItemDesc;
@@ -471,7 +499,7 @@ void GameManager::DrawOptions(std::vector<std::string> myVector) {
 				myVector[i] = "???";
 
 			}
-			if (currentTrophyMenuOption != TROPHY_BACK) {
+			if (currentTrophyMenuOption < TrophyMap.size()) {
 
 				if (TrophyGet[currentTrophyMenuOption] == true) {
 
@@ -497,7 +525,7 @@ void GameManager::DrawOptions(std::vector<std::string> myVector) {
 	if (currentGameScreen == OPTION_MENU) {
 
 		Play::Point2D tempPos = { (DISPLAY_WIDTH * 0.5f) + (DISPLAY_TILE * 3), (DISPLAY_HEIGHT * 0.5f) + DISPLAY_TILE * (- PLAYER + 1.5f) };
-		Play::DrawRect(tempPos, { tempPos.x + DISPLAY_TILE, tempPos.y + DISPLAY_TILE }, Play::cWhite, false);
+		Play::DrawRect({ tempPos.x - 1, tempPos.y - 1 }, { tempPos.x + DISPLAY_TILE, tempPos.y + DISPLAY_TILE }, Play::cWhite, false);
 		currentPlayer->SetPosition(tempPos);
 		currentPlayer->DrawCharacter();
 
@@ -645,6 +673,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 			levelStart = true;
 			updateInteraction.clear();
 			updateInteraction = { false, true, false, false };
+			currentNPCs->ResetDialogue(0, -1);
 			holdInteraction[2] = -1;
 			characterScene[0] = -1;
 			screenTimer = 0.0f;
@@ -689,6 +718,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 					gameVolume = 1.0f;
 
 				}
+				currentOptionValues[VOLUME] = std::to_string(int(gameVolume) * 100) + "%";
 
 			}
 
@@ -755,7 +785,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
-				if (currentPlayerColour < 2) {
+				if (currentPlayerColour < playerColours.size() - 1) {
 
 					currentPlayerColour++;
 
@@ -791,9 +821,9 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 		Play::DrawFontText("72px", "TROPHIES", { DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT * 0.5f + 200 }, Play::CENTRE);
 		DrawOptions(TrophyMenu);
 
-		currentTrophyMenuOption = TrophyScreen(MenuInteraction(int(currentTrophyMenuOption), int(TROPHY_BACK)));
+		currentTrophyMenuOption = MenuInteraction(int(currentTrophyMenuOption), int(TrophyMap.size()));
 
-		if (currentTrophyMenuOption == TROPHY_BACK) {
+		if (currentTrophyMenuOption == TrophyMap.size()) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
@@ -829,12 +859,13 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 		TrophyGet[currentDifficulty - 1] = true;
 		if (screenTimer < 60) {
-			TrophyGet[TROPHY5] = true;
+			TrophyGet[TrophyMap.size() - 1] = true;
 		}
 		else if (screenTimer >= 600) {
-			TrophyGet[TROPHY4] = true;
+			TrophyGet[TrophyMap.size() - 2] = true;
 		}
 		MainMenu[0] = " ";
+		PrintInfo("[Trophy]",trophyFile,TrophyMenu, TrophyMap, TrophyGet);
 
 		Play::PresentDrawingBuffer();
 		break;

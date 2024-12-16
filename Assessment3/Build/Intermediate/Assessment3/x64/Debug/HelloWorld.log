@@ -2,14 +2,14 @@
   Enemy.cpp
   GameManager.cpp
   LevelManager.cpp
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(27,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(127,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(165,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(193,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(115,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(293,64): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(114,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(147,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(614,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(148,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(27,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(642,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(130,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244: 'initializing': conversion from 'int' to '_Ty1', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         [
@@ -32,4 +32,5 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.3412
   NPC.cpp
   Player.cpp
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\NPC.cpp(189,29): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Player.cpp(29,8): warning C4189: 'secondEdge': local variable is initialized but not referenced
   HelloWorld.vcxproj -> C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe

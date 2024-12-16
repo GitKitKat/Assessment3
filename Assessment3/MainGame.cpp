@@ -13,7 +13,7 @@ void MainGameEntry(PLAY_IGNORE_COMMAND_LINE);
 bool MainGameUpdate(float elapsedTime);
 int MainGameExit();
 
-//! @brief A gloabl pointer to the GameManager, where the content within a game window is decided.
+// A gloabl pointer to the GameManager, where the content within a game window is decided.
 GameManager* newGame = new GameManager();
 
 // The entry point for a PlayBuffer program

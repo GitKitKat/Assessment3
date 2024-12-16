@@ -42,11 +42,11 @@ void Player::CheckCollision() {
 
 	for (float i = itr->first; i < z; i++) {
 
-		if (newPos.y <= (DISPLAY_TILE * i) && newPos.y > (DISPLAY_TILE * i) - secondEdge) {
+		if (newPos.y <= (DISPLAY_TILE * i) && newPos.y > (DISPLAY_TILE * i) - DISPLAY_TILE) {
 
 			for (Play::Point2D j : tempBoundaries[i]) {
 
-				if (newPos.x <= j.x && newPos.x > j.x - secondEdge) {
+				if (newPos.x >= j.x && newPos.x < j.x + DISPLAY_TILE) {
 
 					colliderCheck = false;
 
@@ -83,9 +83,12 @@ void Player::DrawCharacter() {
 
 	Play::DrawRect(characterPos, { characterPos.x + float(DISPLAY_TILE), characterPos.y + float(DISPLAY_TILE) }, playerColour[0], true);
 	for (int i = 8; i > 5; i--) {
-
-		Play::DrawCircle({ characterPos.x + float(DISPLAY_TILE * 0.5) + playerDirection.x, characterPos.y + float(DISPLAY_TILE * 0.5) + playerDirection.y }, i, Play::cBlack);
-
+		if (playerColour[0].blue == 0 && playerColour[0].red == 0 && playerColour[0].green == 0) {
+			Play::DrawCircle({ characterPos.x + float(DISPLAY_TILE * 0.5) + playerDirection.x, characterPos.y + float(DISPLAY_TILE * 0.5) + playerDirection.y }, i, Play::cWhite);
+		}
+		else {
+			Play::DrawCircle({ characterPos.x + float(DISPLAY_TILE * 0.5) + playerDirection.x, characterPos.y + float(DISPLAY_TILE * 0.5) + playerDirection.y }, i, Play::cBlack);
+		}
 	}
 	
 

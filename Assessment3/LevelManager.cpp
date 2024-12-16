@@ -174,7 +174,7 @@ void LevelManager::TrapLevel(int increase) {
 
 void LevelManager::SetLevel() {
 
-	if (levelIndex > 6) {
+	if (levelIndex > 8) {
 		levelIndex -= 10;
 	}
 
@@ -276,11 +276,11 @@ void LevelManager::PrintLevel() {
 
 				if (i < (DISPLAY_HEIGHT / DISPLAY_TILE) * 0.5) {
 					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
+					openTiles.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) });
 				}
 				else {
 					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGrey, true);
 				}
-				openTiles.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) });
 			}
 
 		}
@@ -316,7 +316,7 @@ void LevelManager::PrintLevel() {
 
 						//entrance
 						startPos = { (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) };
-						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cBlue, true);
+						Play::DrawRect({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) }, { (DISPLAY_TILE * j) + ((tempInt + 1) * DISPLAY_TILE), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
 
 					}
 					else if (str.at(j) == 'E') {
