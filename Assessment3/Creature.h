@@ -14,8 +14,10 @@ Standard header files */
 class Creature {
 
 public:
-
+	/* Declarations: */
+	// Constructor
 	Creature();
+	// Destructor
 	~Creature();
 
 	//virtual void SetColour(int newColour);

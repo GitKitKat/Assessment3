@@ -129,13 +129,12 @@ private:
 	int characterScene[1];
 	Play::Point2D playerOldPos;
 	std::vector<bool> updateInteraction;
-	int holdInteraction[3];
+	std::vector<int> holdInteraction;
 	// Handles the game level (displayed level, enemies, NPCs, positions of entrance, exit, and traps)
 	LevelManager* currentLevel = new LevelManager;
 	// Handles the player (player colour, position, controls)
 	Player* currentPlayer = new Player;
 	NPC* currentNPCs = new NPC;
-	//bool NPCInteraction;
 
 	/* Displayed game screen */
 	GameScreen currentGameScreen;
@@ -144,21 +143,23 @@ private:
 	std::map<std::string, std::vector<std::string>> TipMap;
 	std::vector<std::string> tipCarousel;
 	int carouselIndex;
-
+	std::vector<std::string> EndMenu;
+	// Used to handle the 'currently selected' option for the GAME_END screen
+	int currentEndGameOption;
+	// Stores the file path for the ItemsList file (data stored: Enemy interactions, game tips' names and descriptions)
+	std::string itemsFile;
 	OptionScreen currentOptionMenuOption;
 	std::vector<std::string> OptionMenu;
 	std::vector<std::string> currentOptionValues;
 	std::vector<std::string> gameDifficultyOptions;
 
-	int currentTrophyMenuOption;
 	std::map<std::string, std::vector<std::string>> TrophyMap;
 	std::vector<std::string> TrophyMenu;
 	std::vector<bool> TrophyGet;
-	std::string itemsFile;
+	// Used to handle the 'currently selected' option for the TROPHY screen
+	int currentTrophyMenuOption;
+	// Stores the file path for the TrophyList file (data stored: trophy names and descriptions)
 	std::string trophyFile;
-
-	std::vector<std::string> EndMenu;
-	int EndGame;
 
 };
 

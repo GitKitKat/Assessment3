@@ -14,45 +14,35 @@ GameManager::GameManager() {
 	/* Definitions */
 	//
 	screenTimer = 0;
-	carouselIndex = 0;
+	currentEndGameOption = 0;
 	inactiveGame = false;
+	carouselIndex = 0;
 	gameVolume = 1.0f;
 	levelStart = true;
 	currentControls = true;
 	updateInteraction = { false, true, false, false };
-	//NPCInteraction = false;
-	holdInteraction[0] = 0;
-	holdInteraction[1] = 0;
-	holdInteraction[2] = -1;
-
+	holdInteraction = { 0, 0, -1 };
 	visibleCutscenes = true;
 	currentDifficulty = 1;
 	currentPlayerColour = 0;
 	characterScene[0] = -1 ;
-
 	currentGameScreen = SPLASH;
 	currentMainMenuOption = START;
 	currentOptionMenuOption = VOLUME;
 	currentTrophyMenuOption = 0;
-	EndGame = 0;
-
-	// Stores colours that a user can choose from for the player
 	playerColours = { Play::cBlue, Play::cBlack, Play::cWhite, Play::cCyan, Play::cOrange };
-
 	gameControls = { Play::KEY_A, Play::KEY_W, Play::KEY_D, Play::KEY_S };
 	MainMenu = { " ", "NEW GAME", "OPTIONS", "TROPHIES", "EXIT" };
 	OptionMenu = { "VOLUME", "CUTSCENES", "DIFFICULTY", "CONTROLS", "PLAYER" };
 	EndMenu = { "PLAY AGAIN", "EXIT" };
-
 	currentOptionValues = { std::to_string(int(gameVolume) * 100) + "%", "ON", "EASY", "WASD", " " };
 	gameDifficultyOptions = { "EASY", "NORMAL", "HARD" };
-
 	itemsFile = "Data\\Textfiles\\ItemList.txt";
 	trophyFile = "Data\\Textfiles\\TrophyList.txt";
 
-	// Reads and stores data related to game tips (tagline, description)
+	// Reads and stores data related to game tips. Number of tips loaded form file: 5
 	LoadInfo("[Tip]", itemsFile, 5, tipCarousel, TipMap);
-	// Reads and stores data related to game trophies (name, how it was achieved)
+	// Reads and stores data related to game trophies. Number of trophies loaded from file: 6
 	LoadInfo("[Trophy]", trophyFile, 6, TrophyMenu, TrophyMap, TrophyGet);
 
 }
@@ -270,7 +260,6 @@ void GameManager::PlayGame(float elapsedTime) {
 		if (visibleCutscenes == true && (tempInt == 0 || tempInt == 7)) {
 			userPos[1].y -= DISPLAY_TILE;
 			currentNPCs->SetPosition(userPos[1]);
-			//currentNPCs->ResetDialogue(0, -1);
 		}
 		levelStart = false;
 
@@ -591,7 +580,17 @@ int GameManager::MenuInteraction(int optionValue, int maxValue, GameScreen newSc
 
 	if (Play::KeyPressed(gameControls[1]) && optionValue != 0) {
 
-		optionValue--;
+		if (currentGameScreen == MAIN_MENU) {
+			if (optionValue == 1 && MainMenu[0] != " ") {
+				optionValue--;
+			}
+			else if (optionValue > 1) {
+				optionValue--;
+			}
+		}
+		else {
+			optionValue--;
+		}
 
 	}
 	else if (Play::KeyPressed(gameControls[3]) && optionValue != maxValue) {
@@ -855,7 +854,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 		Play::DrawFontText("72px", "GAME OVER", { DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT * 0.5f + 200 }, Play::CENTRE);
 		DrawOptions(EndMenu);
-		EndGame = MenuInteraction(EndGame, 1, MAIN_MENU);
+		currentEndGameOption = MenuInteraction(currentEndGameOption, 1, MAIN_MENU);
 
 		TrophyGet[currentDifficulty - 1] = true;
 		if (screenTimer < 60) {

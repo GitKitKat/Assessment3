@@ -108,17 +108,17 @@
 (Level)[7]
 (ID)[0]
 (Name)[???]
-(Desc)Guhahahaha!
-(Desc)The crystallization of chaos is mine!
-(Choice)Who are you?!
+(Desc)Guhahahaha.
+(Desc)The crystallization of chaos is mine.
+(Choice)Who are you?
 [End]
 
 [Dialogue]
 (Level)[7]
 (ID)[1]
 (Name)[King Pompu]
-(Desc)You didn't even notice you were being followed by the great Pompu.
-(Desc)The Empire must be getting soft!
+(Desc)You didn't even notice you were being followed by the great Pompu...
+(Desc)The Empire must be getting soft.
 [End]
 
 [Dialogue]
@@ -128,14 +128,14 @@
 (Desc)It is you who is softening, Pompu.
 (Desc)That is not the orb you seek.
 (Choice)What do you mean?
-(Choice)Then what of the request?
+(Choice)What of the request?
 [End]
 
 [Dialogue]
 (Level)[7]
 (ID)[3]
 (Name)[Duck]
-(Desc)As I said, 'that' is not what you thought.
+(Desc)As I said, that is not what you thought.
 (Desc)It is a device made to restrain dangerous individuals.
 [End]
 
@@ -150,8 +150,8 @@
 (Level)[7]
 (ID)[5]
 (Name)[King Pompu]
-(Desc)You tricked me! You shameless liar!
-(Desc)Release me this instant!!
+(Desc)You tricked me.
+(Desc)Release me... this instant.
 [End]
 
 [Dialogue]
@@ -175,5 +175,5 @@
 (Final)
 (Name)[King Pompu]
 (Desc)You have not won here, shadow.
-(Desc)This is not the end!
+(Desc)This is not the end.
 [End]
