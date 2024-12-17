@@ -293,7 +293,6 @@ void GameManager::PlayGame(float elapsedTime) {
 			updateInteraction = { false, true, false, false };
 			holdInteraction[2] = -1;
 			characterScene[0] = -1;
-			levelStart = true;
 
 		}
 	}
@@ -537,9 +536,8 @@ void GameManager::DrawOptions(std::vector<std::string> myVector) {
 
 void GameManager::ScreenTips(float elapsedTime) {
 
-	if (screenTimer < 6.0f) {
+	if (screenTimer < 5.0f) {
 
-		DrawTexts(TipMap.at(tipCarousel[carouselIndex]));
 		screenTimer += elapsedTime;
 
 	} else {
@@ -554,10 +552,10 @@ void GameManager::ScreenTips(float elapsedTime) {
 			carouselIndex = 0;
 
 		}
-
 		screenTimer = 0.0f;
 
 	}
+	DrawTexts(TipMap.at(tipCarousel[carouselIndex]));
 
 }
 

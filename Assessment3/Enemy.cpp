@@ -161,50 +161,6 @@ void Enemy::DrawCharacter() {
 
 }
 
-void Enemy::CheckCollision() {
-
-	bool colliderCheck = true;
-	float secondEdge = DISPLAY_TILE * posIncrease;
-	auto itr = tempBoundaries.begin();
-	int z;
-	if (itr->first == 0) {
-
-		z = int(tempBoundaries.size());
-
-	}
-	else {
-
-		z = int(tempBoundaries.size() + itr->first);
-
-	}
-
-	for (float i = itr->first; i < z; i++) {
-
-		if (newPos.y <= (DISPLAY_TILE * i) && newPos.y > (DISPLAY_TILE * i) - secondEdge) {
-
-			for (Play::Point2D j : tempBoundaries[i]) {
-
-				if (newPos.x >= j.x && newPos.x < j.x + secondEdge) {
-
-					colliderCheck = false;
-
-				}
-
-			}
-
-		}
-
-	}
-
-	if (!colliderCheck) {
-
-		enemyMovement = true;
-		SetPosition(newPos);
-
-	}
-
-}
-
 bool Enemy::HandleControls(int randomNum) {
 	// Enemy moves up
 	if (randomNum == 1) {

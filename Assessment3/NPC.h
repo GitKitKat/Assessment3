@@ -24,7 +24,7 @@ public:
 	int PrintDialogue(bool currentControls);
 
 	bool CheckCollision(Play::Point2D playerPos);
-	void DrawCharacter() override;
+	void DrawCharacter();
 
 private:
 

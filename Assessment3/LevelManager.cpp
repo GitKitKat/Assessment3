@@ -126,18 +126,13 @@ void LevelManager::ClearEnemy(int enemyIndex) {
 }
 
 int LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
-	bool enemyMoved = false;
 	secondsTimer += elapsedTime;
 	if (allEnemies.size() > 0) {
 
 		for (int i = 0; i < allEnemies.size(); i++) {
 
 			if (secondsTimer > 1.0f) {
-				while (enemyMoved == false) {
-					if (allEnemies[i]->HandleControls(allEnemies[i]->GetRandom(4)) == true) {
-						break;
-					}
-				}
+				allEnemies[i]->HandleControls(allEnemies[i]->GetRandom(4));
 			}
 			allEnemies[i]->DrawCharacter();
 			if (allEnemies[i]->GetPosition() == playerPos) {

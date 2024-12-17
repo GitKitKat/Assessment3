@@ -18,11 +18,7 @@ public:
 	void SetExits(std::vector<Play::Point2D> levelExits);
 
 	void SetColour(std::vector<Play::Colour> colourList, int newColour);
-	//void SetBoundaries(std::vector<Play::Point2D> levelBounds);
-
-	// Check whether or not the player bumps into a wall
-	void CheckCollision();
-	void DrawCharacter() override;
+	void DrawCharacter();
 
 	bool HandleControls(std::vector<Play::KeyboardButton> gameControls);
 

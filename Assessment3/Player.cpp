@@ -23,49 +23,6 @@ Play::Point2D Player::GetPosition() {
 
 }
 
-void Player::CheckCollision() {
-
-	bool colliderCheck = true;
-	float secondEdge = DISPLAY_TILE * posIncrease;
-	auto itr = tempBoundaries.begin();
-	float z;
-	if (itr->first == 0) {
-
-		z = float(tempBoundaries.size());
-
-	}
-	else {
-
-		z = float(tempBoundaries.size() + itr->first);
-
-	}
-
-	for (float i = itr->first; i < z; i++) {
-
-		if (newPos.y <= (DISPLAY_TILE * i) && newPos.y > (DISPLAY_TILE * i) - DISPLAY_TILE) {
-
-			for (Play::Point2D j : tempBoundaries[i]) {
-
-				if (newPos.x >= j.x && newPos.x < j.x + DISPLAY_TILE) {
-
-					colliderCheck = false;
-
-				}
-
-			}
-
-		}
-
-	}
-
-	if (!colliderCheck) {
-
-		SetPosition(newPos);
-
-	}
-
-}
-
 void Player::SetExits(std::vector<Play::Point2D> levelExits) {
 
 	SetPosition(levelExits[0]);

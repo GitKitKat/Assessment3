@@ -20,11 +20,10 @@ public:
 	// Destructor
 	~Creature();
 
-	//virtual void SetColour(int newColour);
-
 	void SetPosition(Play::Point2D designatedPos);
 	void SetBoundaries(std::map<float, std::vector<Play::Point2D>> levelBounds);
-	virtual void DrawCharacter() = 0;
+	// Check whether or not the creature bumps into a wall
+	void CheckCollision();
 
 protected:
 
