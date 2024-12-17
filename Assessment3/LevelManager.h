@@ -25,7 +25,7 @@ public:
 	/* Getter functions: */
 	// Returns the entrance and exit
 	std::vector<Play::Point2D> GetLevel();
-	std::vector<Play::Point2D> GetBoundaries();
+	std::map<float, std::vector<Play::Point2D>> GetBoundaries();
 	void LoadLevel();
 
 	std::vector<std::string> GetInteractionLimit(int enemyIndex);
@@ -57,7 +57,7 @@ private:
 	std::vector<Play::Point2D> enemyPos;
 	std::vector<Play::Point2D> trapPos;
 	std::vector<Play::Point2D> keyPos;
-	std::vector<Play::Point2D> openTiles;
+	std::map<float, std::vector<Play::Point2D>> openTiles;
 
 	std::string TextFile;
 	bool isNew = true;

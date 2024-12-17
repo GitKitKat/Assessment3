@@ -22,10 +22,9 @@ LevelManager::~LevelManager() {
 	// Destructor
 }
 
-std::vector<Play::Point2D> LevelManager::GetBoundaries() {
+std::map<float, std::vector<Play::Point2D>> LevelManager::GetBoundaries() {
 
-	std::vector<Play::Point2D> tempVector = openTiles;
-	return tempVector;
+	return openTiles;
 
 }
 
@@ -162,18 +161,21 @@ int LevelManager::ManageEnemies(Play::Point2D playerPos, float elapsedTime) {
 
 void LevelManager::SetLevel(float newLevel) {
 
+	Play::PlayAudio("level");
 	levelIndex = newLevel;
 
 }
 
 void LevelManager::TrapLevel(int increase) {
 
+	Play::PlayAudio("trap");
 	levelIndex += increase;
 
 }
 
 void LevelManager::SetLevel() {
 
+	Play::PlayAudio("level");
 	if (levelIndex > 8) {
 		levelIndex -= 10;
 	}
@@ -235,6 +237,7 @@ void LevelManager::LoadLevel() {
 
 						levelTiles.clear();
 						trapPos.clear();
+						keyPos.clear();
 						enemyPos.clear();
 						openTiles.clear();
 						isNew = true;
@@ -267,6 +270,7 @@ void LevelManager::PrintLevel() {
 
 	std::string str;
 	int tempInt;
+	std::vector<Play::Point2D> tempVector;
 	if (levelTiles[0] == "MAX") {
 		startPos = { (DISPLAY_WIDTH * 0.5f) - DISPLAY_TILE, 0 };
 		endPos = { DISPLAY_WIDTH * 0.5f, (DISPLAY_HEIGHT * 0.5f) - DISPLAY_TILE };
@@ -276,13 +280,16 @@ void LevelManager::PrintLevel() {
 
 				if (i < (DISPLAY_HEIGHT / DISPLAY_TILE) * 0.5) {
 					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cYellow, true);
-					openTiles.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) });
+					tempVector.push_back({ float(DISPLAY_TILE * j), float(DISPLAY_TILE * i) });
 				}
 				else {
 					Play::DrawRect({ (DISPLAY_TILE * j), (DISPLAY_TILE * i) }, { DISPLAY_TILE + (DISPLAY_TILE * j), DISPLAY_TILE + (DISPLAY_TILE * i) }, Play::cGrey, true);
 				}
 			}
-
+			if (tempVector.size() > 0) {
+				openTiles.insert({ i, tempVector });
+				tempVector.clear();
+			}
 		}
 	}
 	else {
@@ -347,13 +354,16 @@ void LevelManager::PrintLevel() {
 
 					}
 
-					openTiles.push_back({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) });
+					tempVector.push_back({ (DISPLAY_TILE * j) + (tempInt * DISPLAY_TILE), (DISPLAY_TILE * i) });
 					tempInt++;
 
 				}
 
 			}
-
+			if (tempVector.size() > 0) {
+				openTiles.insert({ i, tempVector });
+				tempVector.clear();
+			}
 		}
 
 	}

@@ -63,6 +63,15 @@
 
 [Dialogue]
 (Level)[0]
+(ID)[106]
+(Name)[Duck]
+(Desc)Have you changed your mind?
+(Choice)Yes.
+(Choice)No.
+[End]
+
+[Dialogue]
+(Level)[0]
 (ID)[7]
 (Name)[Duck]
 (Desc)Very well.
@@ -94,6 +103,21 @@
 (Desc)No, there's more.
 (Desc)Although the Ruins have been explored many a time, no one has uncovered every inch.
 (Desc)Some troublesome traps may still be active. Beware of colourful flooring.
+[End]
+
+[Dialogue]
+(Level)[0]
+(ID)[11]
+(Name)[Duck]
+(Desc)The Empire awaits your success.
+[End]
+
+[Dialogue]
+(Level)[0]
+(ID)[12]
+(Final)
+(Name)[X]
+(Desc)X
 [End]
 
 [Dialogue]
@@ -166,7 +190,7 @@
 (Level)[7]
 (ID)[7]
 (Name)[Duck]
-(Desc)May the Empire's light pave your way.
+(Desc)May today's success shine a light on tomorrow's trials.
 [End]
 
 [Dialogue]
@@ -176,4 +200,12 @@
 (Name)[King Pompu]
 (Desc)You have not won here, shadow.
 (Desc)This is not the end.
+[End]
+
+[Dialogue]
+(Level)[7]
+(ID)[9]
+(Final)
+(Name)[X]
+(Desc)X
 [End]

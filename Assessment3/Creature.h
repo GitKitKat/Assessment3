@@ -23,7 +23,7 @@ public:
 	//virtual void SetColour(int newColour);
 
 	void SetPosition(Play::Point2D designatedPos);
-	void SetBoundaries(std::vector<Play::Point2D> levelBounds);
+	void SetBoundaries(std::map<float, std::vector<Play::Point2D>> levelBounds);
 	virtual void DrawCharacter() = 0;
 
 protected:

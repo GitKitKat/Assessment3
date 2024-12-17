@@ -45,9 +45,15 @@
 [End]
 
 [Tip]
+(Name)Utility
+(Desc)Confirm, exit
+(Desc)Select an option with SPACE key. Exit the game with ESC key.
+[End]
+
+[Tip]
 (Name)Controls
 (Desc)Lefty or Righty?
-(Desc)In the OPTIONS menu, change controls to WASD or ARROW keys. Select with SPACE key.
+(Desc)In the OPTIONS menu, change controls to WASD or ARROW keys.
 [End]
 
 [Tip]

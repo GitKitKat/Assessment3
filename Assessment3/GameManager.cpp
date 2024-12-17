@@ -17,7 +17,7 @@ GameManager::GameManager() {
 	currentEndGameOption = 0;
 	inactiveGame = false;
 	carouselIndex = 0;
-	gameVolume = 1.0f;
+	gameVolume = 0.5f;
 	levelStart = true;
 	currentControls = true;
 	updateInteraction = { false, true, false, false };
@@ -35,13 +35,13 @@ GameManager::GameManager() {
 	MainMenu = { " ", "NEW GAME", "OPTIONS", "TROPHIES", "EXIT" };
 	OptionMenu = { "VOLUME", "CUTSCENES", "DIFFICULTY", "CONTROLS", "PLAYER" };
 	EndMenu = { "PLAY AGAIN", "EXIT" };
-	currentOptionValues = { std::to_string(int(gameVolume) * 100) + "%", "ON", "EASY", "WASD", " " };
+	currentOptionValues = { std::to_string(int(gameVolume * 100)) + "%", "ON", "EASY", "WASD", " " };
 	gameDifficultyOptions = { "EASY", "NORMAL", "HARD" };
 	itemsFile = "Data\\Textfiles\\ItemList.txt";
 	trophyFile = "Data\\Textfiles\\TrophyList.txt";
 
 	// Reads and stores data related to game tips. Number of tips loaded form file: 5
-	LoadInfo("[Tip]", itemsFile, 5, tipCarousel, TipMap);
+	LoadInfo("[Tip]", itemsFile, 6, tipCarousel, TipMap);
 	// Reads and stores data related to game trophies. Number of trophies loaded from file: 6
 	LoadInfo("[Trophy]", trophyFile, 6, TrophyMenu, TrophyMap, TrophyGet);
 
@@ -244,6 +244,7 @@ void GameManager::PlayGame(float elapsedTime) {
 		}
 		else if (currentLevel->GetLevelIndex() == 7) {
 			currentGameScreen = GAME_END;
+			Play::PlayAudio("end");
 			return;
 		}
 	}
@@ -254,18 +255,19 @@ void GameManager::PlayGame(float elapsedTime) {
 	bool levelEnd = false;
 
 	if (levelStart) {
-
 		currentLevel->CreateObstacles();
 		currentPlayer->SetExits(userPos);
 		if (visibleCutscenes == true && (tempInt == 0 || tempInt == 7)) {
 			userPos[1].y -= DISPLAY_TILE;
 			currentNPCs->SetPosition(userPos[1]);
+			if (currentNPCs->NextDialogue() == true) {
+				currentNPCs->ResetDialogue(tempInt, 1);
+			}
 		}
 		levelStart = false;
 
 	}
 	if (characterScene[0] != -1) {
-		currentPlayer->DrawCharacter();
 		std::vector<std::string> interactionDesc = currentLevel->GetEnemyInteraction(characterScene[0]);
 		std::vector<std::string> interactionChoices = currentLevel->GetInteractionLimit(characterScene[0]);
 
@@ -296,21 +298,25 @@ void GameManager::PlayGame(float elapsedTime) {
 		}
 	}
 	else {
-		if (tempInt == 0 || tempInt == 7) {
+		if (visibleCutscenes == true && tempInt == 0 || tempInt == 7) {
 			currentNPCs->DrawCharacter();
-		}
-		if (currentNPCs->CheckCollision(currentPlayer->GetPosition())) {
-			DrawDialogue();
+			if (currentNPCs->CheckCollision(currentPlayer->GetPosition())) {
+				DrawDialogue();
+			}
+			else {
+				levelEnd = currentPlayer->HandleControls(gameControls);
+			}
+			levelEnd = currentNPCs->DialogueEnd();
 		}
 		else {
-			currentPlayer->SetBoundaries(currentLevel->GetBoundaries());
 			characterScene[0] = currentLevel->ManageEnemies(currentPlayer->GetPosition(), elapsedTime);
-			levelEnd = currentPlayer->HandleControls(gameControls);
-			if (tempInt == 0 || tempInt == 7) {
-				levelEnd = currentNPCs->DialogueEnd();
+			if (characterScene[0] != -1) {
+				Play::PlayAudio("encounter");
 			}
 			levelStart = currentLevel->CheckTraps(currentPlayer->GetPosition());
+			levelEnd = currentPlayer->HandleControls(gameControls);
 		}
+		currentPlayer->SetBoundaries(currentLevel->GetBoundaries());
 		if (Play::KeyPressed(Play::KEY_X)) {
 			levelStart = true;
 		}
@@ -319,11 +325,13 @@ void GameManager::PlayGame(float elapsedTime) {
 	if (levelEnd) {
 		currentLevel->ClearObstacles();
 		currentLevel->SetLevel();
-		if (currentLevel->GetLevelIndex() == (8)) {
-			currentGameScreen = GAME_END;
-			return;
-		} if (currentLevel->GetLevelIndex() == 1 && visibleCutscenes == true) {
+		if (currentLevel->GetLevelIndex() == 1 && visibleCutscenes == true) {
 			currentNPCs->ResetDialogue(7, -1);
+		}
+		if (currentLevel->GetLevelIndex() == 8) {
+			currentGameScreen = GAME_END;
+			Play::PlayAudio("end");
+			return;
 		}
 		levelStart = true;
 		levelEnd = false;
@@ -449,29 +457,28 @@ void GameManager::LoadInfo(std::string keyword, std::string file, int max, std::
 
 void GameManager::DrawTexts(std::vector<std::string> tempStr) {
 
-	int b = 1;
-	float z;
+	int b;
 	if (currentGameScreen == MAIN_MENU) {
 
-		z = (DISPLAY_HEIGHT * 0.5f + DISPLAY_TILE) - ( 3 * DISPLAY_TILE * b);
+		b = 8;
 
 	}
 	else {
 
-		z = (DISPLAY_HEIGHT * 0.5f + DISPLAY_TILE) - (DISPLAY_TILE * b);
+		b = 10;
 
 	}
 
 	for (int a = 0; a < tempStr.size() - 1; a++) {
 
-		Play::DrawFontText("32px", tempStr[a], { DISPLAY_TILE * 2, z }, Play::LEFT);
-		b++;
+		Play::DrawFontText("32px", tempStr[a], { DISPLAY_TILE * 2, b * DISPLAY_TILE }, Play::LEFT);
+		b--;
 
 	}
 
 	int a = int(tempStr.size() - 1);
 	const char* charPtr = tempStr[a].c_str();
-	Play::DrawDebugText({ DISPLAY_TILE * 2, z - DISPLAY_TILE }, charPtr, Play::cWhite, false);
+	Play::DrawDebugText({ DISPLAY_TILE * 2, b * DISPLAY_TILE }, charPtr, Play::cWhite, false);
 
 }
 
@@ -615,12 +622,20 @@ int GameManager::MenuInteraction(int optionValue, int maxValue, GameScreen newSc
 			currentPlayer = nullptr;
 			currentNPCs = nullptr;
 			inactiveGame = true;
+			Play::StopAudio("menu");
 
 		}
 		else {
 
 			playerOldPos = currentPlayer->GetPosition();
 			currentGameScreen = newScreen;
+			if (newScreen == PLAY) {
+				Play::StopAudio("menu");
+			}
+			if (newScreen == MAIN_MENU) {
+				Play::Audio::StartSound("menu", true, gameVolume);
+				currentLevel->SetLevel(0);
+			}
 
 		}
 	
@@ -649,6 +664,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			currentGameScreen = MAIN_MENU;
 			screenTimer = 0.0f;
+			Play::Audio::StartSound("menu", true, gameVolume);
 
 		}
 
@@ -707,6 +723,7 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 
 			if (Play::KeyPressed(Play::KEY_SPACE)) {
 
+				Play::StopAudio("menu");
 				if (gameVolume > 0.25f) {
 
 					gameVolume -= 0.25f;
@@ -717,7 +734,8 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 					gameVolume = 1.0f;
 
 				}
-				currentOptionValues[VOLUME] = std::to_string(int(gameVolume) * 100) + "%";
+				currentOptionValues[VOLUME] = std::to_string(int(gameVolume * 100)) + "%";
+				Play::Audio::StartSound("menu", true, gameVolume);
 
 			}
 
@@ -839,12 +857,11 @@ bool GameManager::ScreenUpdate(float elapsedTime) {
 		PlayGame(elapsedTime);
 
 		if (Play::KeyPressed(Play::KEY_ESCAPE)) {
-			
 			Play::ClearDrawingBuffer(Play::cBlack);
 
 			MainMenu[0] = "CONTINUE";
 			currentGameScreen = MAIN_MENU;
-
+			Play::Audio::StartSound("menu", true, gameVolume);
 		}
 
 		Play::PresentDrawingBuffer();

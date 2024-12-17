@@ -2,14 +2,14 @@
 (Name)[Rookie Puzzler]
 (Desc)You've taken your first steps!
 (Desc)Achieved after completing the game on EASY mode.
-(Get)F
+(Get)T
 [End]
 
 [Trophy]
 (Name)[Aspiring Adventurer]
 (Desc)You'd be great with crosswords.
 (Desc)Achieved after completing the game on NORMAL mode.
-(Get)F
+(Get)T
 [End]
 
 [Trophy]
@@ -17,7 +17,7 @@
 (Desc)Now you're a 2D graduate.
 (Desc)Try a rubics cube!
 (Desc)Achieved after completing the game on HARD mode.
-(Get)F
+(Get)T
 [End]
 
 [Trophy]
@@ -39,6 +39,6 @@
 (Name)[Ka-chow!]
 (Desc)Rev those engines, McQueen!
 (Desc)Achieved by clearing any mode in less than one minute.
-(Get)F
+(Get)T
 [End]
 

@@ -1,6 +1,6 @@
 #include "NPC.h"
 
-#include "Play.h"
+//#include "Play.h"
 
 NPC::NPC() {
 
@@ -37,12 +37,26 @@ std::vector<std::string> NPC::GetDialogueOptions() {
 void NPC::ResetDialogue(int currentLevel, int increase) {
 
 	if (earlyExit == false && increase >= 0) {
-		SetDialogue(increase);
+		if (dialogueIndex < 100) {
+			SetDialogue(increase);
+		}
+		else {
+			if (increase == 1) {
+				SetDialogue(-99);
+			}
+			else {
+				SetDialogue(-100);
+			}
+		}
 	}
 	else if (increase == -1) {
 		dialogueIndex = 0;
 		earlyExit = false;
 		levelComplete = false;
+	}
+	else if (earlyExit == true && increase == 1) {
+		earlyExit = false;
+		SetDialogue(100);
 	}
 	LoadDialogue(currentLevel);
 
@@ -119,7 +133,6 @@ void NPC::LoadDialogue(int currentLevel) {
 				}
 				else if (newLine.rfind("(Final)", 0) == 0) {
 
-					earlyExit = true;
 					levelComplete = true;
 
 				}
@@ -167,6 +180,9 @@ int NPC::PrintDialogue(bool currentControls) {
 	if (dialogueChoices.size() == 0) {
 		if (earlyExit == false) {
 			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press SPACE to continue", Play::cWhite, true);
+		}
+		else {
+			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press ESC to quit", Play::cWhite, true);
 		}
 	}
 	Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press X to leave", Play::cWhite, true);
