@@ -60,7 +60,6 @@ private:
 	std::map<float, std::vector<Play::Point2D>> openTiles;
 
 	std::string TextFile;
-	bool isNew = true;
 	std::vector<std::string> levelTiles;
 
 	std::vector<Enemy*> allEnemies;

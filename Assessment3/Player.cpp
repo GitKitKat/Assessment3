@@ -3,7 +3,8 @@ This file's header */
 #include "Player.h"
 
 Player::Player() {
-
+	/* Definitions: */
+	// 
 	characterPos = { 0.0f, 0.0f };
 	posIncrease = 0.0f;
 	newPos = { 0.0f, 0.0f };
@@ -12,15 +13,7 @@ Player::Player() {
 }
 
 Player::~Player() {
-
-
-
-}
-
-Play::Point2D Player::GetPosition() {
-
-	return characterPos;
-
+	// Destructor
 }
 
 void Player::SetExits(std::vector<Play::Point2D> levelExits) {

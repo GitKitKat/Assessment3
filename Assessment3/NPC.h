@@ -10,7 +10,10 @@ Standard header files */
 class NPC : public Creature {
 
 public:
+	/* Declarations: */
+	// Constructor
 	NPC();
+	// Destructor
 	~NPC();
 
 	std::vector<std::string> GetDialogueDesc();
@@ -23,7 +26,9 @@ public:
 	void LoadDialogue(int currentLevel);
 	int PrintDialogue(bool currentControls);
 
+	// Check whether the NPC is in the same tile as the player
 	bool CheckCollision(Play::Point2D playerPos);
+	// Draws the NPC as a 2D rectangle in the game window
 	void DrawCharacter();
 
 private:

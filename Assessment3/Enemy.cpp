@@ -6,7 +6,8 @@ This file's header */
 #include <cstdlib>
 
 Enemy::Enemy() {
-
+	/* Definitions: */
+	// 
 	characterPos = { 0.0f, 0.0f };
 	posIncrease = 1.0f;
 	newPos = { 0.0f, 0.0f };
@@ -17,9 +18,7 @@ Enemy::Enemy() {
 }
 
 Enemy::~Enemy() {
-
-
-
+	// Destructor
 }
 
 int Enemy::GetRandom(int numLimit) {
@@ -28,12 +27,6 @@ int Enemy::GetRandom(int numLimit) {
 
 	// Return a random number between 0 and the limit given
 	return int(rand() % numLimit);
-
-}
-
-Play::Point2D Enemy::GetPosition() {
-
-	return characterPos;
 
 }
 

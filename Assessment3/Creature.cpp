@@ -3,15 +3,20 @@ This file's header */
 #include "Creature.h"
 
 Creature::Creature() {
-
+	/* Definitions: */
+	// 
 	characterPos = { 0.0f, 0.0f };
 	newPos = { 0.0f, 0.0f };
 
 }
 
 Creature::~Creature() {
+	// Destructor
+}
 
+Play::Point2D Creature::GetPosition() {
 
+	return characterPos;
 
 }
 

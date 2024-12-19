@@ -75,7 +75,7 @@
 (ID)[7]
 (Name)[Duck]
 (Desc)Very well.
-(Desc)For the cost of your time, you will be rewarded in addition what we agreed on.
+(Desc)For the cost of your time, you will be rewarded in addition to what we agreed on.
 (Desc)I will append this to our contract promptly, so you may prepare in the meanwhile.
 [End]
 
@@ -102,13 +102,14 @@
 (Name)[Duck]
 (Desc)No, there's more.
 (Desc)Although the Ruins have been explored many a time, no one has uncovered every inch.
-(Desc)Some troublesome traps may still be active. Beware of colourful flooring.
+(Desc)Some troublesome traps may still be active. Beware of PINK flooring.
 [End]
 
 [Dialogue]
 (Level)[0]
 (ID)[11]
 (Name)[Duck]
+(Desc)Your goal lies beyond the GREEN doors. 
 (Desc)The Empire awaits your success.
 [End]
 

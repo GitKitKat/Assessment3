@@ -2,14 +2,14 @@
   Enemy.cpp
   GameManager.cpp
   LevelManager.cpp
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(27,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(130,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(26,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Enemy.cpp(123,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(161,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(190,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(285,64): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(105,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(138,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(160,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(190,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(654,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(295,64): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\GameManager.cpp(669,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244: 'initializing': conversion from 'int' to '_Ty1', possible loss of data
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         with
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16): warning C4244:         [
@@ -18,18 +18,18 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.3412
   (compiling source file 'LevelManager.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\utility(247,16):
       the template instantiation context (the oldest one first) is
-          C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(285,22):
+          C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(275,22):
           see reference to function template instantiation 'std::pair<const float,std::vector<Play::Point2D,std::allocator<Play::Point2D>>>::pair<int&,std::vector<Play::Point2D,std::allocator<Play::Point2D>>&,0>(_Other1,_Other2) noexcept(false)' being compiled
           with
           [
               _Other1=int &,
               _Other2=std::vector<Play::Point2D,std::allocator<Play::Point2D>> &
           ]
-              C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(285,21):
+              C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\LevelManager.cpp(275,21):
               see the first reference to 'std::pair<const float,std::vector<Play::Point2D,std::allocator<Play::Point2D>>>::pair' in 'LevelManager::PrintLevel'
   
   MainGame.cpp
   NPC.cpp
   Player.cpp
-C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\NPC.cpp(205,29): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\NPC.cpp(204,29): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   HelloWorld.vcxproj -> C:\Mac\Home\Documents\CGCode\Assessment3\Assessment3\Build\x64\Debug\Assessment3.exe

@@ -3,7 +3,8 @@
 //#include "Play.h"
 
 NPC::NPC() {
-
+	/* Definitions: */
+	// 
 	itemsFile = "Data\\Textfiles\\Dialogues.txt";
 	levelComplete = false;
 	earlyExit = false;
@@ -11,9 +12,7 @@ NPC::NPC() {
 }
 
 NPC::~NPC() {
-
-
-
+	// Destructor
 }
 
 void NPC::SetDialogue(int increase) {
@@ -179,13 +178,13 @@ int NPC::PrintDialogue(bool currentControls) {
 	}
 	if (dialogueChoices.size() == 0) {
 		if (earlyExit == false) {
-			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press SPACE to continue", Play::cWhite, true);
+			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press SPACE to continue", Play::cCyan, true);
 		}
 		else {
-			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press ESC to quit", Play::cWhite, true);
+			Play::DrawDebugText({ 6 * DISPLAY_TILE, DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press ESC to quit", Play::cCyan, true);
 		}
 	}
-	Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press X to leave", Play::cWhite, true);
+	Play::DrawDebugText({ DISPLAY_WIDTH - (6 * DISPLAY_TILE), DISPLAY_HEIGHT - (5 + a) * DISPLAY_TILE }, "Press X to leave", Play::cCyan, true);
 	std::vector<std::string> ctrlArr;
 
 	if (currentControls == true) {
@@ -198,8 +197,8 @@ int NPC::PrintDialogue(bool currentControls) {
 
 		const char* choicePtr = dialogueChoices[i].c_str();
 		const char* controlsPtr = ctrlArr[i].c_str();
-		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, choicePtr, Play::cWhite, true);
-		Play::DrawDebugText({ (DISPLAY_WIDTH * 0.5f) - DISPLAY_TILE * 2, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, controlsPtr, Play::cWhite, true);
+		Play::DrawDebugText({ DISPLAY_WIDTH * 0.5f, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, choicePtr, Play::cCyan, true);
+		Play::DrawDebugText({ (DISPLAY_WIDTH * 0.5f) - DISPLAY_TILE * 2, DISPLAY_HEIGHT - (7 + i) * DISPLAY_TILE }, controlsPtr, Play::cCyan, true);
 
 	}
 	return dialogueChoices.size();

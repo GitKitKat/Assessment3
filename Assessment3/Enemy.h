@@ -8,9 +8,13 @@ Base class */
 class Enemy : public Creature {
 
 public:
+	/* Declarations: */
+	// Constructor
 	Enemy();
+	// Destructor
 	~Enemy();
 
+	// Draws the NPC as a 2D rectangle in the game window
 	void DrawCharacter();
 
 	bool GetState();
@@ -24,7 +28,6 @@ public:
 	void LoadInteraction(int difficulty, std::string interactionIndex);
 	int GetRandom(int numLimit);
 	bool HandleControls(int randomNum);
-	Play::Point2D GetPosition();
 
 private:
 

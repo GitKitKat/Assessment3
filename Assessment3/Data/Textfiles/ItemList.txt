@@ -69,6 +69,12 @@
 [End]
 
 [Tip]
+(Name)Actions
+(Desc)E? Space?
+(Desc)Navigate on top of a tile, enemy or exit to activate it.
+[End]
+
+[Tip]
 (Name)Volume
 (Desc)Gotta go fast!
 (Desc)During gameplay, your character will jump over spaces if you hold the SHIFT key.

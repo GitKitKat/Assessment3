@@ -75,8 +75,9 @@ public:
 	// Destructor
 	~GameManager();
 
-	// Reads and stores data from the ItemList text file in respective variables
+	// Reads and stores data from the passed text file in respective variables
 	void LoadInfo(std::string keyword, std::string file, int max, std::vector<std::string>& existingVector, std::map<std::string, std::vector<std::string>>& existingMap, std::vector<bool> myVector = { true });
+	// Prints stored data into a text file, overwriting the previous save
 	void PrintInfo(std::string keyword, std::string file, std::vector<std::string> itemName, std::map<std::string, std::vector<std::string>> itemMap, std::vector<bool> itemGotten);
 
 	/* UI functions: */
@@ -95,9 +96,11 @@ public:
 
 	// Handles interactions between the current active level and player
 	void PlayGame(float elapsedTime);
+	// Prints NPC dialogue (name, 1-3 lines of dialogue, possible user choices) in white text on a black screen
+	void DrawDialogue();
+	// Prints 
 	void DrawInteraction(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
 	void InteractionManager(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
-	void DrawDialogue();
 
 private:
 	/* Variables related to:

@@ -15,6 +15,7 @@ LevelManager::LevelManager() {
 	encounter = false;
 	secondsTimer = 0.0f;
 	TextFile = "Data\\Textfiles\\Levels.txt";
+	LoadLevel();
 
 }
 
@@ -158,6 +159,7 @@ void LevelManager::SetLevel(float newLevel) {
 
 	Play::PlayAudio("level");
 	levelIndex = newLevel;
+	LoadLevel();
 
 }
 
@@ -165,17 +167,15 @@ void LevelManager::TrapLevel(int increase) {
 
 	Play::PlayAudio("trap");
 	levelIndex += increase;
+	LoadLevel();
 
 }
 
 void LevelManager::SetLevel() {
-
+	
 	Play::PlayAudio("level");
-	if (levelIndex > 8) {
-		levelIndex -= 10;
-	}
-
 	levelIndex++;
+	LoadLevel();
 
 }
 
@@ -196,6 +196,7 @@ int LevelManager::GetRandom(int numLimit) {
 
 void LevelManager::LoadLevel() {
 
+	levelTiles.clear();
 	std::string newLevel = "(ID)[" + std::to_string(levelIndex) + "]";
 	std::string newMode = "(Mode)[" + std::to_string(difficulty) + "]";
 	std::ifstream inFile(TextFile);
@@ -227,17 +228,6 @@ void LevelManager::LoadLevel() {
 			if (modeFound && levelFound) {
 
 				if (newLine.rfind("(Tile)", 0) == 0) {
-
-					if (isNew == false) {
-
-						levelTiles.clear();
-						trapPos.clear();
-						keyPos.clear();
-						enemyPos.clear();
-						openTiles.clear();
-						isNew = true;
-
-					}
 
 					levelTiles.push_back(newLine.substr(6));
 
@@ -369,15 +359,15 @@ void LevelManager::PrintLevel() {
 
 	}
 
-	isNew = false;
-
 }
 
 std::vector<Play::Point2D> LevelManager::GetLevel() {
 
 	Play::ClearDrawingBuffer(Play::cGrey);
-
-	LoadLevel();
+	trapPos.clear();
+	keyPos.clear();
+	enemyPos.clear();
+	openTiles.clear();
 	PrintLevel();
 
 	return std::vector<Play::Point2D> { startPos, endPos };
