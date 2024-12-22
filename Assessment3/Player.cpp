@@ -5,10 +5,10 @@ This file's header */
 Player::Player() {
 	/* Definitions: */
 	// 
-	characterPos = { 0.0f, 0.0f };
-	posIncrease = 0.0f;
+	creaturePos = { 0.0f, 0.0f }; 
 	newPos = { 0.0f, 0.0f };
-	playerDirection = { 0.0f, 0.0f };
+	playerDirection = { 0.0f, 0.0f }; 
+	posIncrease = 1.0f; // default movement is one tile at a time
 
 }
 
@@ -24,24 +24,7 @@ void Player::SetExits(std::vector<Play::Point2D> levelExits) {
 }
 
 void Player::SetColour(std::vector<Play::Colour> colourList, int newColour) {
-
 	playerColour[0] = colourList[newColour];
-
-}
-
-void Player::DrawCharacter() {
-
-	Play::DrawRect(characterPos, { characterPos.x + float(DISPLAY_TILE), characterPos.y + float(DISPLAY_TILE) }, playerColour[0], true);
-	for (int i = 8; i > 5; i--) {
-		if (playerColour[0].blue == 0 && playerColour[0].red == 0 && playerColour[0].green == 0) {
-			Play::DrawCircle({ characterPos.x + float(DISPLAY_TILE * 0.5) + playerDirection.x, characterPos.y + float(DISPLAY_TILE * 0.5) + playerDirection.y }, i, Play::cWhite);
-		}
-		else {
-			Play::DrawCircle({ characterPos.x + float(DISPLAY_TILE * 0.5) + playerDirection.x, characterPos.y + float(DISPLAY_TILE * 0.5) + playerDirection.y }, i, Play::cBlack);
-		}
-	}
-	
-
 }
 
 bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
@@ -56,7 +39,7 @@ bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
 	// Player moves up
 	if (Play::KeyPressed(gameControls[1])) {
 
-		newPos = { characterPos.x, characterPos.y + (posIncrease * DISPLAY_TILE) };
+		newPos = { creaturePos.x, creaturePos.y + (posIncrease * DISPLAY_TILE) };
 		playerDirection = { 0.0f, DISPLAY_TILE * 0.25f };
 		CheckCollision();
 
@@ -64,7 +47,7 @@ bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
 	// Player moves down
 	else if (Play::KeyPressed(gameControls[3])) {
 
-		newPos = { characterPos.x, characterPos.y - (posIncrease * DISPLAY_TILE) };
+		newPos = { creaturePos.x, creaturePos.y - (posIncrease * DISPLAY_TILE) };
 		playerDirection = { 0.0f, -DISPLAY_TILE * 0.25f };
 		CheckCollision();
 
@@ -72,7 +55,7 @@ bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
 	// Player moves to the left
 	else if (Play::KeyPressed(gameControls[0])) {
 
-		newPos = { characterPos.x - (posIncrease * DISPLAY_TILE), characterPos.y };
+		newPos = { creaturePos.x - (posIncrease * DISPLAY_TILE), creaturePos.y };
 		playerDirection = { -DISPLAY_TILE * 0.25f, 0.0f };
 		CheckCollision();
 
@@ -80,22 +63,33 @@ bool Player::HandleControls(std::vector<Play::KeyboardButton> gameControls) {
 	// Player moves to the right
 	else if (Play::KeyPressed(gameControls[2])) {
 
-		newPos = { characterPos.x + (posIncrease * DISPLAY_TILE), characterPos.y };
+		newPos = { creaturePos.x + (posIncrease * DISPLAY_TILE), creaturePos.y };
 		playerDirection = { DISPLAY_TILE * 0.25f, 0.0f };
 		CheckCollision();
 
 	}
 
 	// Check whether the player has reached the end of the current level
-	if (endPos == characterPos) {
-
+	if (endPos == creaturePos) {
 		return true;
-
 	}
 	else {
-
 		return false;
+	}
 
+}
+
+void Player::DrawCharacter() {
+
+	Play::DrawRect(creaturePos, { creaturePos.x + (DISPLAY_TILE), creaturePos.y + (DISPLAY_TILE) }, playerColour[0], true);
+	// Draws a circle on the player to note its current direction
+	for (int i = 8; i > 5; i--) { // Changes the colour of the circle if the player's colour is dark (i.e. blue or black)
+		if (playerColour[0].red == 0 && playerColour[0].green == 0) {
+			Play::DrawCircle({ creaturePos.x + (DISPLAY_TILE * 0.5f) + playerDirection.x, creaturePos.y + (DISPLAY_TILE * 0.5f) + playerDirection.y }, i, Play::cWhite);
+		}
+		else {
+			Play::DrawCircle({ creaturePos.x + (DISPLAY_TILE * 0.5f) + playerDirection.x, creaturePos.y + (DISPLAY_TILE * 0.5f) + playerDirection.y }, i, Play::cBlack);
+		}
 	}
 
 }

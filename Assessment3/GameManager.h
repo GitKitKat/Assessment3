@@ -3,12 +3,9 @@
 
 /* Includes:
 Standard header files */
-#include <string>
 #include <map>
-#include <vector>
 
 /* Header files */
-#include "Config.h"
 #include "LevelManager.h"
 #include "Player.h"
 #include "NPC.h"
@@ -32,7 +29,7 @@ enum GameScreen {
 
 };
 
-// Within the 'MAIN_MENU' screen, accessible from the GameScreen enum.
+// Within the MAIN_MENU screen, accessible from the GameScreen enum.
 // Each number represents an interactive element related to the game.
 enum MainMenuScreen {
 	// Only appears after a game has been entered once. Leads a user to continue from where they stopped.
@@ -48,7 +45,7 @@ enum MainMenuScreen {
 
 };
 
-// Within the 'OPTIONS' screen, accessible from the MainMenuScreen enum.
+// Within the OPTIONS screen, accessible from the MainMenuScreen enum.
 // Excluding the last (back to previous screen), each number represents the current audio & visual settings of the game (can be changed).
 enum OptionScreen {
 	// Leads to changing the current sound output.
@@ -67,7 +64,6 @@ enum OptionScreen {
 };
 
 class GameManager {
-
 public:
 	/* Declarations: */
 	// Constructor
@@ -80,11 +76,11 @@ public:
 	// Prints stored data into a text file, overwriting the previous save
 	void PrintInfo(std::string keyword, std::string file, std::vector<std::string> itemName, std::map<std::string, std::vector<std::string>> itemMap, std::vector<bool> itemGotten);
 
-	/* UI functions: */
-	// Handles user interaction (option selection, moving between options) before a game starts
-	int MenuInteraction(int optionValue, int maxValue);
-	// Handles user interaction on the main screen, as it is the only screen that leads to other screens
-	int MenuInteraction(int optionValue, int maxValue, GameScreen newScreen);
+	/* Regarding pre-game UI */
+	// Handles user encounter (option selection, moving between options) before a game starts
+	int MenuEncounter(int optionValue, int maxValue);
+	// Handles user encounter on a screen that leads to other screens
+	int MenuEncounter(int optionValue, int maxValue, GameScreen newScreen);
 	// Draws visual elements based on the current screen
 	void DrawOptions(std::vector<std::string> myVector);
 	// Draws text elements (loaded from the ItemList file) based on the current screen
@@ -94,13 +90,15 @@ public:
 	// Displays hints related to the game (if the main menu screen is active)
 	void ScreenTips(float elapsedTime);
 
-	// Handles interactions between the current active level and player
+	/* Regarding the game/gameplay */
+	// Handles encounters between the current active level and player
 	void PlayGame(float elapsedTime);
 	// Prints NPC dialogue (name, 1-3 lines of dialogue, possible user choices) in white text on a black screen
 	void DrawDialogue();
-	// Prints 
-	void DrawInteraction(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
-	void InteractionManager(std::vector<std::string> interactionDesc, std::vector<std::string> interactionChoices);
+	// Prints text related to an enemy encounter (introduction, player and enemy choices)
+	void DrawEncounter(std::vector<std::string> encounterDesc, std::vector<std::string> encounterChoices);
+	// Handles player inputs, processes and displays results in an enemy encounter
+	void EncounterManager(std::vector<std::string> encounterDesc, std::vector<std::string> encounterChoices);
 
 private:
 	/* Variables related to:
@@ -109,7 +107,7 @@ private:
 	float screenTimer;
 	// Check whether or not the game window should be open (if true, close window)
 	bool inactiveGame;
-	
+
 	/* Game Controls */
 	// Determines whether or not character dialogues are displayed (displayed if true)
 	bool visibleCutscenes;
@@ -125,42 +123,60 @@ private:
 	int currentPlayerColour;
 	// Determines the level of sound output
 	float gameVolume;
-	
+
 	/* Gameplay */
-	// Check whether or not a new level was entered (if true, resets character positions)
+	// Check whether a level will be drawn for the first time (if true, resets character positions)
 	bool levelStart;
+	// Stores the index of an ancountered enemy
 	int characterScene[1];
+	// Stores the player's old position if the player is moved (not by the user) (e.g. when displaying the Options menu)
 	Play::Point2D playerOldPos;
-	std::vector<bool> updateInteraction;
-	std::vector<int> holdInteraction;
+	// Used to check various changes during an enemy encounter
+	std::vector<bool> updateEncounter;
+	// Stores the choices made by both enemy and player during an encounter
+	std::vector<int> holdEncounterChoices;
 	// Handles the game level (displayed level, enemies, NPCs, positions of entrance, exit, and traps)
 	LevelManager* currentLevel = new LevelManager;
 	// Handles the player (player colour, position, controls)
 	Player* currentPlayer = new Player;
+	// Handles the NPC (NPC position, dialogue)
 	NPC* currentNPCs = new NPC;
 
 	/* Displayed game screen */
+	// Stores the value corresponding to the currently displayed game screen (e.g. MAIN_MENU, TROPHY_MENU, PLAY, GAME_END) 
 	GameScreen currentGameScreen;
+	// Stores the value corresponding to the currently selected MAIN_MENU option
 	MainMenuScreen currentMainMenuOption;
-	std::vector<std::string> MainMenu;
-	std::map<std::string, std::vector<std::string>> TipMap;
-	std::vector<std::string> tipCarousel;
-	int carouselIndex;
-	std::vector<std::string> EndMenu;
-	// Used to handle the 'currently selected' option for the GAME_END screen
-	int currentEndGameOption;
-	// Stores the file path for the ItemsList file (data stored: Enemy interactions, game tips' names and descriptions)
-	std::string itemsFile;
+	// Stores the value corresponding to the currently selected OPTION_MENU option
 	OptionScreen currentOptionMenuOption;
-	std::vector<std::string> OptionMenu;
-	std::vector<std::string> currentOptionValues;
-	std::vector<std::string> gameDifficultyOptions;
-
-	std::map<std::string, std::vector<std::string>> TrophyMap;
-	std::vector<std::string> TrophyMenu;
-	std::vector<bool> TrophyGet;
-	// Used to handle the 'currently selected' option for the TROPHY screen
+	// Stores the value corresponding to the currently selected TROPHY_MENU option
 	int currentTrophyMenuOption;
+	// Stores the value corresponding to the currently selected GAME_END menu option
+	int currentEndGameOption;
+	// Stores the value corresponding to the currently displayed Tip
+	int carouselIndex;
+	// Stores the displayed titles corresponding to each option in the MAIN_MENU screen
+	std::vector<std::string> MainMenu;
+	// Stores the displayed information corresponding to each tip shown on the MAIN_MENU screen (tagline, description)
+	std::map<std::string, std::vector<std::string>> TipMap;
+	// Stores the displayed titles corresponding to each tip shown on the MAIN_MENU screen
+	std::vector<std::string> tipCarousel;
+	// Stores the displayed titles corresponding to each option in the OPTION_MENU screen
+	std::vector<std::string> OptionMenu;
+	// Stores the displayed states corresponding to each option in the OPTION_MENU screen (e.g. current volume percentage, current player colour)
+	std::vector<std::string> currentOptionValues;
+	// Stores the displayed state corresponding to each difficulty setting in the OPTION_MENU screen (e.g. 1 is displayed as EASY)
+	std::vector<std::string> gameDifficultyOptions;
+	// Stores the displayed information corresponding to each trophy in the TROPHY_MENU screen (tagline, description)
+	std::map<std::string, std::vector<std::string>> TrophyMap;
+	// Stores the displayed titles corresponding to each trophy in the TROPHY_MENU screen
+	std::vector<std::string> TrophyMenu;
+	// Stores the status of each trophy (i.e. whether or not the trophy has been achieved)
+	std::vector<bool> TrophyGet;
+	// Stores the displayed titles corresponding to each option in the GAME_END screen
+	std::vector<std::string> EndMenu;
+	// Stores the file path for the ItemsList file (data stored: Enemy encounters, game tips' names and descriptions)
+	std::string itemsFile;
 	// Stores the file path for the TrophyList file (data stored: trophy names and descriptions)
 	std::string trophyFile;
 

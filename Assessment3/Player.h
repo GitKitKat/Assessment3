@@ -2,14 +2,10 @@
 #define PLAYER_H
 
 /* Includes: 
-Header files */
-#include "Config.h"
-
-/* Base class */
+Base class */
 #include "Creature.h"
 
 class Player : public Creature {
-
 public: 
 	/* Declarations: */
 	// Constructor
@@ -17,20 +13,21 @@ public:
 	// Destructor
 	~Player();
 
-
+	// Updates the player with the starting position and position of the exit
 	void SetExits(std::vector<Play::Point2D> levelExits);
-
+	// Updates the player's colour
 	void SetColour(std::vector<Play::Colour> colourList, int newColour);
-	// Draws the NPC as a 2D rectangle in the game window
+	// Handles the player's movement through user input
+	bool HandleControls(std::vector<Play::KeyboardButton> gameControls);
+	// Draws the player as a 2D rectangle in the game window
 	void DrawCharacter();
 
-	bool HandleControls(std::vector<Play::KeyboardButton> gameControls);
-
 private: 
-
-	//Play::Point2D playerPos;
+	// Stores the location of the level's exit
 	Play::Point2D endPos;
+	// Stores the direction the player last moved in 
 	Play::Point2D playerDirection;
+	// Stores the player's current colour
 	Play::Colour playerColour[1] = { Play::cBlue };
 	
 };

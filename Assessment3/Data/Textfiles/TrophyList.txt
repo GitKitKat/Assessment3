@@ -1,14 +1,14 @@
 [Trophy]
 (Name)[Rookie Puzzler]
-(Desc)You've taken your first steps!
-(Desc)Achieved after completing the game on EASY mode.
+(Desc)Taken your first steps!
+(Desc)Completed the game on EASY mode.
 (Get)F
 [End]
 
 [Trophy]
 (Name)[Aspiring Adventurer]
-(Desc)You'd be great with crosswords.
-(Desc)Achieved after completing the game on NORMAL mode.
+(Desc)Keep 'em coming!
+(Desc)Completed the game on NORMAL mode.
 (Get)F
 [End]
 
@@ -16,14 +16,28 @@
 (Name)[Maze Whisperer]
 (Desc)Now you're a 2D graduate.
 (Desc)Try a rubics cube!
-(Desc)Achieved after completing the game on HARD mode.
+(Desc)Completed the game on HARD mode.
 (Get)F
 [End]
 
 [Trophy]
 (Name)[Secret Message]
-(Desc)How do I translate this again?
-(Desc)Achieved by encountering the flipped 5th floor in HARD mode.
+(Desc)How do I translate this?
+(Desc)Encountered the flipped 5th floor in HARD mode.
+(Get)F
+[End]
+
+[Trophy]
+(Name)[True Pacifist]
+(Desc)Was it luck or mercy?
+(Desc)Defeated no enemies throughout the game.
+(Get)F
+[End]
+
+[Trophy]
+(Name)[Leaderless Ruins]
+(Desc)The path is a little clearer.
+(Desc)Defeated all the enemies on at least seven floors.
 (Get)F
 [End]
 
@@ -31,14 +45,14 @@
 (Name)[10,000 Deciseconds]
 (Desc)Slowly~ steadily~
 (Desc)You've mastered this game~
-(Desc)Achieved by clearing any mode in 10 minutes or more.
+(Desc)Cleared any mode in 10 minutes or more.
 (Get)F
 [End]
 
 [Trophy]
-(Name)[Ka-chow!]
+(Name)[Ka-chow]
 (Desc)Rev those engines, McQueen!
-(Desc)Achieved by clearing any mode in less than one minute.
+(Desc)Cleared any mode in less than one minute.
 (Get)F
 [End]
 

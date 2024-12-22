@@ -45,15 +45,15 @@
 [End]
 
 [Tip]
-(Name)Utility
-(Desc)Confirm, exit
-(Desc)Select an option with SPACE key. Exit the game with ESC key.
-[End]
-
-[Tip]
 (Name)Controls
 (Desc)Lefty or Righty?
 (Desc)In the OPTIONS menu, change controls to WASD or ARROW keys.
+[End]
+
+[Tip]
+(Name)Utility
+(Desc)Confirm, exit
+(Desc)Select an option with SPACE key. Exit the game with ESC key.
 [End]
 
 [Tip]
@@ -70,14 +70,20 @@
 
 [Tip]
 (Name)Actions
-(Desc)E? Space?
+(Desc)Interaction
 (Desc)Navigate on top of a tile, enemy or exit to activate it.
 [End]
 
 [Tip]
-(Name)Volume
+(Name)Movement
 (Desc)Gotta go fast!
 (Desc)During gameplay, your character will jump over spaces if you hold the SHIFT key.
+[End]
+
+[Tip]
+(Name)Reset
+(Desc)Now you see me...
+(Desc)During gameplay, reset your characters position with X key.
 [End]
 
 [Tip]
